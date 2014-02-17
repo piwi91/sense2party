@@ -1,0 +1,21 @@
+# HWIO Oauth Bundle
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+# Homepage
+homepage:
+    pattern:  /
+    defaults: { _controller: PiwiDstDashboardBundle:Default:index }
+
+# Default
+piwi_dst_dashboard:
+    resource: "@PiwiDstDashboardBundle/Resources/config/routing.yml"
+    prefix:   /dashboard
+
+# System
+piwi_system_user:
+    resource: "@PiwiSystemUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# App

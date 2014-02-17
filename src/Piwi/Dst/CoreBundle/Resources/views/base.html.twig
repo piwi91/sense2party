@@ -1,0 +1,118 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+{% extends 'MopaBootstrapBundle::base' ~ theme_type|default('')~ '.html.twig' %}
+
+{% block head_style %}
+    {% stylesheets output="css/core.css" combine=true filter="cssrewrite"
+    '../src/Piwi/Dst/CoreBundle/Resources/private/less/core.less'
+
+    '../src/Piwi/Dst/CoreBundle/Resources/private/js/uploadify/uploadify.css'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock head_style %}
+
+{% block head_bottom %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="{% block metaDescription %}{% endblock %}">
+<meta name="author" content="{% block metaAuthor %}BlueTea{% endblock %}" />
+{% endblock %}
+
+{% block title %}Sense 2 Party v4.0{% endblock %}
+
+{% block body_tag %}
+<body data-spy="scroll" data-target="#navbar-example">
+{% endblock body_tag %}
+
+{% block body_start %}
+    {% block wrap_div_start %}<div id="wrap">{% endblock %}
+{% endblock body_start %}
+
+{% block navbar %}
+    {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true } %}
+        {% block brand %}
+            <a class="navbar-brand" href="#">Sense 2 Party - v4.0</a>
+        {% endblock %}
+
+        {% block menu %}
+            {{ mopa_bootstrap_menu('PiwiDstCoreBundle:MainBuilder:menu') }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block container %}
+    {% block container_div_start %}<div class="{% block container_class %}container{% endblock container_class %}">{% endblock container_div_start %}
+
+    {% block header %}
+    {% endblock header %}
+
+    {% block content_div_start %}<div class="content">{% endblock content_div_start %}
+
+    {% block page_header %}
+        <div class="page-header">
+            <h1>{% block headline %}{% endblock headline %}</h1>
+        </div>
+    {% endblock page_header %}
+
+    {% block flashes %}
+        {% if app.session.flashbag.peekAll|length > 0 %}
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ session_flash() }}
+                </div>
+            </div>
+        {% endif %}
+    {% endblock flashes %}
+
+    {% block content_row %}
+        <div class="row">
+            {% block content %}
+                <div class="col-sm-9">
+                    {% block content_content %}
+                        <strong>Hier könnte Ihre Werbung stehen ... </strong>
+                    {% endblock content_content %}
+                </div>
+                <div class="col-sm-3">
+                    {% block content_sidebar %}
+                        <h2>Sidebar</h2>
+                    {% endblock content_sidebar %}
+                </div>
+            {% endblock content %}
+        </div>
+    {% endblock content_row %}
+
+    {% block content_div_end %}</div>{% endblock content_div_end %}
+
+    {% block container_div_end %}</div></div><!-- /container -->{% endblock container_div_end %}
+
+
+{% endblock container %}
+
+{% block body_end_before_js %}
+    {% block wrap_div_end %}</div><!-- /wrap -->{% endblock %}
+
+    {% block footer_tag_start %}
+        <footer class="footer">
+    {% endblock footer_tag_start %}
+
+    {% block footer %}
+        <div class="container">
+            <p class="text-muted ">&copy; Sense 2 Party 2014</p>
+        </div>
+    {% endblock footer %}
+
+    {% block footer_tag_end %}
+        </footer>
+    {% endblock footer_tag_end %}
+{% endblock body_end_before_js %}
+
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts output="js/core.js" combine=true
+    '../src/Piwi/Dst/CoreBundle/Resources/private/js/uploadify/jquery.uploadify.min.js'
+
+    '../src/Piwi/Dst/CoreBundle/Resources/private/js/core.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
