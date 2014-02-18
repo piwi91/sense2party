@@ -89,9 +89,10 @@ class FOSUBUserProvider extends BaseClass
 
             // Save profile picture
             $profilePictureFs = $this->filesystem->get('profile_pictures');
-            $profilePictureFs->write($username . '.jpg', file_get_contents(
-                $fullResponse['picture']['data']['url']
-            ));
+            if (!$profilePictureFs->has($username . '.jpg'))
+                $profilePictureFs->write($username . '.jpg', file_get_contents(
+                    $fullResponse['picture']['data']['url']
+                ));
             return $user;
         }
 

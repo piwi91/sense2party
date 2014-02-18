@@ -36,6 +36,26 @@
 
         {% block menu %}
             {{ mopa_bootstrap_menu('PiwiDstCoreBundle:MainBuilder:menu') }}
+            <ul class="nav navbar-nav navbar-right profile">
+                {% if app.user %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="/uploads/profile_pictures/{{ app.user.username }}.jpg" alt="{{ app.user }}"> &nbsp;
+                        {{ app.user }}
+                        &nbsp; <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">{{ 'My profile'|trans }}</a></li>
+                        <li><a href="#">{{ 'My events'|trans }}</a></li>
+                        <li><a href="#">{{ 'Privacy settings'|trans }}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">{{ 'Log out'|trans }}</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                    <li><a href="#">Login</a></li>
+                {% endif %}
+            </ul>
         {% endblock %}
     {% endembed %}
 {% endblock %}
@@ -107,12 +127,12 @@
 {% endblock body_end_before_js %}
 
 {% block foot_script_assetic %}
-    {{ parent() }}
     {% javascripts output="js/core.js" combine=true
-    '../src/Piwi/Dst/CoreBundle/Resources/private/js/uploadify/jquery.uploadify.min.js'
-
+    '../src/Piwi/Dst/CoreBundle/Resources/private/js/jquery/jquery.min.js'
     '../src/Piwi/Dst/CoreBundle/Resources/private/js/core.js'
+    '../src/Piwi/Dst/CoreBundle/Resources/private/js/uploadify/jquery.uploadify.min.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    {{ parent() }}
 {% endblock %}

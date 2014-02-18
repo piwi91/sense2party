@@ -9,8 +9,9 @@ class MainBuilder extends ContainerAware
     public function menu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root', array(
-            'navbar' => true,
+            'navbar' => true
         ));
+        $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
         $menu->addChild('Home',
             array(

@@ -6,3 +6,10 @@ services:
         class: "%piwi_user_provider.class%"
         #this is the place where the properties are passed to the UserProvider - see config.yml
         arguments: [ @knp_gaufrette.filesystem_map, @fos_user.user_manager, { facebook: facebookId } ]
+
+    piwi_user.loginlistener:
+        class: Piwi\System\UserBundle\EventListener\LoginListener
+        arguments: [@security.context, @router]
+        tags:
+            - { name: kernel.event_listener, event: security.authentication.success, method: handle }
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
