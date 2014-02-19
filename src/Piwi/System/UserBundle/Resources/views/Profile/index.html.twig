@@ -1,0 +1,14 @@
+{% extends 'PiwiSystemUserBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.system.user.profile.index.title'|trans }}{% endblock %}
+
+{% block content %}
+    {% if app.user %}
+        <div class="col-sm-12">
+        <h3>Welcome {{ app.user }}!</h3>
+        <p><img src="/uploads/profile_pictures/{{ app.user.username }}.jpg" alt="{{ app.user }}"></p>
+    {% else %}
+        <p><a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" alt="Sign in with Facebook">Sign in with Facebook</a></p>
+        </div>
+    {% endif %}
+{% endblock %}

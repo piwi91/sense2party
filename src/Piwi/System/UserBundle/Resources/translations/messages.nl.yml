@@ -1,0 +1,7 @@
+piwi:
+    system:
+        user:
+            profile:
+                index:
+                    title: Wijzig profiel
+                    headline: Wijzig profiel
