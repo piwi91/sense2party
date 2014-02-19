@@ -39,6 +39,12 @@ class User extends BaseUser
     /** @ORM\Column(name="facebook_link", type="string", length=255, nullable=true) */
     protected $facebookLink;
 
+    /** @ORM\Column(name="privacy_show_email", type="boolean") */
+    protected $showEmail = true;
+
+    /** @ORM\Column(name="privacy_show_birthday", type="boolean") */
+    protected $showBirthday = true;
+
     public function __construct()
     {
         parent::__construct();
@@ -90,7 +96,8 @@ class User extends BaseUser
      */
     public function getBirthday()
     {
-        return $this->birthday;
+        if ($this->getShowBirthday())
+            return $this->birthday;
     }
 
     /**
@@ -155,6 +162,44 @@ class User extends BaseUser
     public function getLocale()
     {
         return $this->locale;
+    }
+
+    /**
+     * @param mixed $showBirthday
+     */
+    public function setShowBirthday($showBirthday)
+    {
+        $this->showBirthday = $showBirthday;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShowBirthday()
+    {
+        return $this->showBirthday;
+    }
+
+    /**
+     * @param mixed $showEmail
+     */
+    public function setShowEmail($showEmail)
+    {
+        $this->showEmail = $showEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShowEmail()
+    {
+        return $this->showEmail;
+    }
+
+    public function getEmail()
+    {
+        if ($this->getShowEmail())
+            return parent::getEmail();
     }
 
     function __toString()

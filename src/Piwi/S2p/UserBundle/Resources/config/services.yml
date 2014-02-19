@@ -1,0 +1,7 @@
+parameters:
+#    piwi_s2p_user.example.class: Piwi\S2p\UserBundle\Example
+
+services:
+#    piwi_s2p_user.example:
+#        class: %piwi_s2p_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

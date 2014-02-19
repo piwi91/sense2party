@@ -1,0 +1,47 @@
+{% extends 'PiwiS2pUserBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.user.profile.index.title'|trans({'%name%': user}) }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.user.profile.index.headline'|trans({'%name%': user}) }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row profile-heading">
+                    <div class="col-sm-12">
+                        <div class="pull-left">
+                            <img src="/uploads/profile_pictures/{{ user.username }}.jpg" alt="{{ user }}">
+                        </div>
+                        <div class="pull-left profile-name">
+                            <p>{{ user }}</p>
+                        </div>
+                    </div>
+                </div>
+                <dl>
+                    {% if user.email is not null %}
+                        <dt>{{ 'piwi.s2p.user.profile.index.emailaddress'|trans }}</dt>
+                        <dd><a href="mailto:{{ user.email }}">{{ user.email }}</a></dd>
+                    {% endif %}
+                    <dt>{{ 'piwi.s2p.user.profile.index.last_login'|trans }}</dt>
+                    <dd>{{ user.lastLogin|date("d F Y H:i") }}</dd>
+                    {% if user.birthday is not null %}
+                        <dt>{{ 'piwi.s2p.user.profile.index.birthday'|trans }}</dt>
+                        <dd>{{ user.birthday|date("d F") }}</dd>
+                    {% endif %}
+                    {#<dt>{{ 'piwi.s2p.user.profile.index.'|trans }}</dt>#}
+                    {#<dd></dd>#}
+                    {#<dt>{{ 'piwi.s2p.user.profile.index.'|trans }}</dt>#}
+                    {#<dd></dd>#}
+                    {#<dt>{{ 'piwi.s2p.user.profile.index.'|trans }}</dt>#}
+                    {#<dd></dd>#}
+                </dl>
+            </div>
+            <div class="col-md-9">
+                <h3>{{ 'piwi.s2p.user.profile.index.events'|trans }}</h3>
+                <h3>{{ 'piwi.s2p.user.profile.index.replies'|trans }}</h3>
+                <h3>{{ 'piwi.s2p.user.profile.index.others'|trans }}</h3>
+            </div>
+        </div>
+    </div>
+{% endblock %}

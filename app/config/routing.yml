@@ -6,12 +6,16 @@ hwi_oauth_redirect:
 # Homepage
 homepage:
     pattern:  /
-    defaults: { _controller: PiwiDstDashboardBundle:Default:index }
+    defaults: { _controller: PiwiS2pDashboardBundle:Default:index }
 
-# Default
-piwi_dst_dashboard:
-    resource: "@PiwiDstDashboardBundle/Resources/config/routing.yml"
+# S2p app
+piwi_s2p_dashboard:
+    resource: "@PiwiS2pDashboardBundle/Resources/config/routing.yml"
     prefix:   /dashboard
+
+piwi_s2p_user:
+    resource: "@PiwiS2pUserBundle/Resources/config/routing.yml"
+    prefix:   /profile
 
 # System
 piwi_system_user:

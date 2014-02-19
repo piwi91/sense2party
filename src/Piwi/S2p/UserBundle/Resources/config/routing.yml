@@ -1,0 +1,12 @@
+# PiwiSystemUserBundle implementation
+piwi_s2p_user_profile:
+    pattern:  /{username}
+    defaults: { _controller: PiwiS2pUserBundle:Profile:index }
+
+piwi_s2p_user_profile_edit:
+    pattern:  /edit
+    defaults: { _controller: PiwiS2pUserBundle:Profile:edit }
+
+piwi_s2p_user_profile_delete:
+    pattern:  /delete
+    defaults: { _controller: PiwiS2pUserBundle:Profile:delete }

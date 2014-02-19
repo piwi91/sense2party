@@ -32,11 +32,12 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
 
             # System
+            new Piwi\System\CoreBundle\PiwiSystemCoreBundle(),
             new Piwi\System\UserBundle\PiwiSystemUserBundle(),
 
-            # App
-            new Piwi\Dst\CoreBundle\PiwiDstCoreBundle(),
-            new Piwi\Dst\DashboardBundle\PiwiDstDashboardBundle(),
+            # S2p App
+            new Piwi\S2p\DashboardBundle\PiwiS2pDashboardBundle(),
+            new Piwi\S2p\UserBundle\PiwiS2pUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,0 +1,15 @@
+piwi:
+    s2p:
+        user:
+            exception:
+                user_not_found: De gebruiker kon niet worden gevonden
+            profile:
+                index:
+                    title: Profiel van %name%
+                    headline: Profiel van %name%
+                    emailaddress: E-mailadres
+                    last_login: Laatste keer ingelogd
+                    birthday: Verjaardag
+                    events: Evenementen
+                    replies: Reacties
+                    others: Overige

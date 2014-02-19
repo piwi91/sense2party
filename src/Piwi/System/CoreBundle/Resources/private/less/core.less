@@ -1,0 +1,51 @@
+@import "../../../../../../../vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/public/less/mopabootstrapbundle";
+@import "../../../../../../../vendor/bmatzner/fontawesome-bundle/Bmatzner/FontAwesomeBundle/Resources/public/less/font-awesome";
+@import "theme";
+@import "variables";
+
+html,
+body {
+  height: 100%;
+}
+
+.navbar-collapse .profile {
+  img {
+    height: 20px;
+  }
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -60px;
+  padding: 0 0 60px;
+
+  > .container {
+    padding-top: 60px;
+  }
+}
+
+.page-header {
+  background: @gray-darker;
+  margin-top: 10px;
+  padding: 5px 15px 5px 15px;
+  border: none;
+  h1 {
+    text-align: right;
+    margin: 0px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+  }
+}
+
+/* Set the fixed height of the footer here */
+footer {
+  height: 60px;
+  background-color: #f5f5f5;
+
+  p {
+    margin: 20px 0;
+  }
+}

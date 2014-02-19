@@ -1,0 +1,15 @@
+piwi:
+    s2p:
+        user:
+            exception:
+                user_not_found: The user couldn't be found
+            profile:
+                index:
+                    title: %name%'s profile
+                    headline: %name%'s profile
+                    emailaddress: E-mailaddress
+                    last_login: Last login
+                    birthday: Birthday
+                    events: Events
+                    replies: Replies
+                    others: Others

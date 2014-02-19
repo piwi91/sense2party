@@ -1,0 +1,6 @@
+piwi:
+    s2p:
+        dashboard:
+            index:
+                title: Dashboard
+                headline: Dashboard

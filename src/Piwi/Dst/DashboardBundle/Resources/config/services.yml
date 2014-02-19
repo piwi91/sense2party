@@ -1,7 +1,0 @@
-parameters:
-#    piwi_dst_dashboard.example.class: Piwi\Dst\DashboardBundle\Example
-
-services:
-#    piwi_dst_dashboard.example:
-#        class: %piwi_dst_dashboard.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
