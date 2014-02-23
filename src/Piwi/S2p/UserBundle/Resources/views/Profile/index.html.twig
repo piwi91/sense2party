@@ -28,13 +28,13 @@
                 </ul>
                 {% endif %}
                 <dl>
-                    {% if user.email is not null %}
+                    {% if user.showEmail %}
                         <dt>{{ 'piwi.s2p.user.profile.index.emailaddress'|trans }}</dt>
                         <dd><a href="mailto:{{ user.email }}">{{ user.email }}</a></dd>
                     {% endif %}
                     <dt>{{ 'piwi.s2p.user.profile.index.last_login'|trans }}</dt>
                     <dd>{{ user.lastLogin|date("d F Y H:i") }}</dd>
-                    {% if user.birthday is not null %}
+                    {% if user.showBirthday %}
                         <dt>{{ 'piwi.s2p.user.profile.index.birthday'|trans }}</dt>
                         <dd>{{ user.birthday|date("d F") }}</dd>
                     {% endif %}

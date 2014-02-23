@@ -96,8 +96,7 @@ class User extends BaseUser
      */
     public function getBirthday()
     {
-        if ($this->getShowBirthday())
-            return $this->birthday;
+        return $this->birthday;
     }
 
     /**
@@ -194,12 +193,6 @@ class User extends BaseUser
     public function getShowEmail()
     {
         return $this->showEmail;
-    }
-
-    public function getEmail()
-    {
-        if ($this->getShowEmail())
-            return parent::getEmail();
     }
 
     function __toString()

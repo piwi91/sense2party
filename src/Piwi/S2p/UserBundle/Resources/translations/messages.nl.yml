@@ -36,6 +36,7 @@ piwi:
                     emailaddress: E-mailadres
                     last_login: Laatste keer ingelogd
                     attended_events: Deelgenomen evenementen
+                    privacy: Niet zichtbaar i.v.m. privacy instelling
             privacy:
                 edit:
                     title: Privacy instellingen
