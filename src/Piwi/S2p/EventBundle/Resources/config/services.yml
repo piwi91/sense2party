@@ -1,0 +1,7 @@
+parameters:
+#    piwi_s2p_event.example.class: Piwi\S2p\EventBundle\Example
+
+services:
+#    piwi_s2p_event.example:
+#        class: %piwi_s2p_event.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

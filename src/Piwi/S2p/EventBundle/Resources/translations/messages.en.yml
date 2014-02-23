@@ -1,0 +1,10 @@
+piwi:
+    s2p:
+        event:
+            event:
+                list:
+                    title: Events
+                    headline: Events
+                index:
+                    title: Events
+                    headline: Events

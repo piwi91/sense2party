@@ -18,6 +18,11 @@ class MainBuilder extends ContainerAware
                 'route' => 'homepage'
             )
         );
+        $menu->addChild('menu.events',
+            array(
+                'route' => 'piwi_s2p_event_event_list'
+            )
+        );
         $menu->addChild('menu.members',
             array(
                 'route' => 'piwi_s2p_user_profile_list'

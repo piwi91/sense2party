@@ -1,0 +1,14 @@
+{% extends 'PiwiSystemCoreBundle::default.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+    '../src/Piwi/S2p/EventBundle/Resources/private/less/core.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}{% endblock %}

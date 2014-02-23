@@ -31,6 +31,10 @@ piwi_s2p_user:
     resource: "@PiwiS2pUserBundle/Resources/config/routing.yml"
     prefix:   /user
 
+piwi_s2p_event:
+    resource: "@PiwiS2pEventBundle/Resources/config/routing.yml"
+    prefix:   /events
+
 # System
 piwi_system_user:
     resource: "@PiwiSystemUserBundle/Resources/config/routing.yml"
