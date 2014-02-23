@@ -1,0 +1,7 @@
+menu:
+    home: Home
+    members: Ledenlijst
+    profile:
+        profile: Mijn profiel
+        privacy: Privacy instellingen
+        logout: Log uit

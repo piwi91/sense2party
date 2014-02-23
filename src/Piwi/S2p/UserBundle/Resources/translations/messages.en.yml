@@ -1,0 +1,47 @@
+piwi:
+    s2p:
+        user:
+            exception:
+                user_not_found: The user couldn't be found
+            login:
+                title: Login
+                headline: Login
+                text: Log in with your facebook account
+                facebook: Log in with your facebook account
+                flashbag:
+                    error: Login failed. Please try again.
+            profile:
+                index:
+                    title: %name%'s profile
+                    headline: %name%'s profile
+                    edit: Edit profile
+                    emailaddress: E-mailaddress
+                    last_login: Last login
+                    birthday: Birthday
+                    events: Events
+                    replies: Replies
+                    others: Others
+                edit:
+                    title: Edit profile
+                    headline: Edit profile
+                    firstname: First name
+                    lastname: Last name
+                    birthday: Birthday
+                    save: Save
+                    flashbag:
+                        success: The profile is saved
+                list:
+                    title: Memberlist
+                    headline: Memberlist
+                    emailaddress: E-mailaddress
+                    last_login: Last time logged in
+                    attended_events: Attended events
+            privacy:
+                edit:
+                    title: Privacy settings
+                    headline: Edit privacy settings
+                    show_email: Show emailaddress
+                    show_birthday: Show birthday
+                    save: Save
+                    flashbag:
+                        success: The privacy settings are saved

@@ -1,0 +1,41 @@
+{% extends 'PiwiS2pUserBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.user.profile.list.title'|trans }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.user.profile.list.headline'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+            <ul class="list-unstyled">
+                {% for user in users %}
+                <li>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="pull-left profile-picture">
+                                <img src="{{ asset('/uploads/profile_pictures/' ~ app.user.username ~ '.jpg')|imagine_filter('profile_picture') }}" alt="{{ user }}">
+                            </div>
+                            <div class="pull-left profile-details">
+                                <h3><a href="{{ path('piwi_s2p_user_profile', {'username': user.username}) }}">{{ user }}</a></h3>
+                                <dl class="dl-horizontal">
+                                    <dt>{{ 'piwi.s2p.user.profile.list.emailaddress'|trans }}</dt>
+                                    <dd>
+                                        {% if user.showEmail %}
+                                            <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+                                        {% else %}
+                                            <em>{{ 'piwi.s2p.user.profile.list.privacy'|trans }}</em>
+                                        {% endif %}
+                                    </dd>
+                                    <dt>{{ 'piwi.s2p.user.profile.list.last_login'|trans }}</dt>
+                                    <dd>{{ user.lastLogin|date("d F Y H:i") }}</dd>
+                                    <dt>{{ 'piwi.s2p.user.profile.list.attended_events'|trans }}</dt>
+                                    <dd>Yet to come...</dd>
+                                    {#<dd>{{ user.attendedEvents }}</dd>#}
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+    </div>
+{% endblock %}

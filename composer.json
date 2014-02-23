@@ -30,6 +30,7 @@
 
         "knplabs/gaufrette": "0.2.*@dev",
         "knplabs/knp-gaufrette-bundle": "0.2.*@dev",
+        "liip/imagine-bundle": "dev-master",
 
         "stfalcon/tinymce-bundle": "0.3.*@dev",
         "jms/serializer-bundle": "0.13.*@dev",

@@ -1,0 +1,69 @@
+{% extends 'PiwiS2pUserBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.user.profile.index.title'|trans({'%name%': user}) }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.user.profile.index.headline'|trans({'%name%': user}) }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row profile-heading">
+                    <div class="col-sm-12">
+                        <div class="pull-left">
+                            <img src="/uploads/profile_pictures/{{ user.username }}.jpg" alt="{{ user }}">
+                        </div>
+                        <div class="pull-left profile-name">
+                            <p>{{ user }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% if app.user == user %}
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{ path('piwi_s2p_user_profile_edit', {'username': user.username}) }}">
+                            {{ 'piwi.s2p.user.profile.index.edit'|trans }}
+                        </a>
+                    </li>
+                </ul>
+                {% endif %}
+                <dl>
+                    {% if user.showEmail %}
+                        <dt>{{ 'piwi.s2p.user.profile.index.emailaddress'|trans }}</dt>
+                        <dd><a href="mailto:{{ user.email }}">{{ user.email }}</a></dd>
+                    {% endif %}
+                    <dt>{{ 'piwi.s2p.user.profile.index.last_login'|trans }}</dt>
+                    <dd>{{ user.lastLogin|date("d F Y H:i") }}</dd>
+                    {% if user.showBirthday %}
+                        <dt>{{ 'piwi.s2p.user.profile.index.birthday'|trans }}</dt>
+                        <dd>{{ user.birthday|date("d F") }}</dd>
+                    {% endif %}
+                    {#<dt>{{ 'piwi.s2p.user.profile.index.'|trans }}</dt>#}
+                    {#<dd></dd>#}
+                    {#<dt>{{ 'piwi.s2p.user.profile.index.'|trans }}</dt>#}
+                    {#<dd></dd>#}
+                    {#<dt>{{ 'piwi.s2p.user.profile.index.'|trans }}</dt>#}
+                    {#<dd></dd>#}
+                </dl>
+            </div>
+            <div class="col-md-9">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a href="#events" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.events'|trans }}</a></li>
+                    <li><a href="#replies" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.replies'|trans }}</a></li>
+                    <li><a href="#others" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.others'|trans }}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="events">
+
+                    </div>
+                    <div class="tab-pane" id="replies">
+
+                    </div>
+                    <div class="tab-pane" id="others">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

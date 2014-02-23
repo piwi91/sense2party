@@ -75,6 +75,7 @@ swiftmailer:
 # Mopa Bootstrap
 mopa_bootstrap:
     menu: ~
+    form: ~
 
 # Menu configuration by KnpMenu
 knp_menu:
@@ -104,7 +105,7 @@ hwi_oauth:
             client_id:           "%facebook_client_id%"
             client_secret:       "%facebook_client_secret%"
             scope:               "email"
-            infos_url:     "https://graph.facebook.com/me?fields=first_name,last_name,link,locale,email,birthday,picture.type(square)"
+            infos_url:     "https://graph.facebook.com/me?fields=first_name,last_name,link,locale,email,birthday,picture.type(large)"
             options:
                 display: popup #dialog is optimized for popup window
 
@@ -124,3 +125,16 @@ knp_gaufrette:
               adapter:    profile_pictures
           photos:
               adapter:    photos
+
+# Liip Imagine Bundle
+liip_imagine:
+    filter_sets:
+        profile_picture:
+            filters:
+                thumbnail: { size: [120, 120], mode: outbound }
+        profile_picture_xs:
+            filters:
+                thumbnail: { size: [20, 20], mode: outbound }
+        profile_picture_s:
+            filters:
+                thumbnail: { size: [60, 60], mode: outbound }

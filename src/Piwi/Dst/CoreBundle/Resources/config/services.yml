@@ -1,9 +1,0 @@
-parameters:
-#    piwi_dst_core.example.class: Piwi\Dst\CoreBundle\Example
-
-services:
-    piwi_dst_core.locale_listener:
-        class: Piwi\Dst\CoreBundle\EventListener\LocaleListener
-        arguments: ["%kernel.default_locale%"]
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

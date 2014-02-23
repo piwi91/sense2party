@@ -1,0 +1,21 @@
+# PiwiSystemUserBundle implementation
+# Login routing is in app/config/routing.yml file
+piwi_s2p_user_profile_list:
+    pattern:  /list
+    defaults: { _controller: PiwiS2pUserBundle:Profile:list }
+
+piwi_s2p_user_profile:
+    pattern:  /{username}
+    defaults: { _controller: PiwiS2pUserBundle:Profile:index }
+
+piwi_s2p_user_profile_edit:
+    pattern:  /{username}/edit
+    defaults: { _controller: PiwiS2pUserBundle:Profile:edit }
+
+piwi_s2p_user_profile_delete:
+    pattern:  /{username}/delete
+    defaults: { _controller: PiwiS2pUserBundle:Profile:delete }
+
+piwi_s2p_user_privacy_edit:
+    pattern:  /{username}/privacy
+    defaults: { _controller: PiwiS2pUserBundle:Privacy:edit }

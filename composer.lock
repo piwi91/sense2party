@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a1c0ad32e70b6b8753e79e3714343001",
+    "hash": "2751db1cbf92cb65017a021a09b90630",
     "packages": [
         {
             "name": "bmatzner/fontawesome-bundle",
@@ -807,12 +807,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "2e2e1e98908060f53960cc3172261134c4db4ede"
+                "reference": "4b6ac2e8c40ef6ad2a76f0c206b29594c078470f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/2e2e1e98908060f53960cc3172261134c4db4ede",
-                "reference": "2e2e1e98908060f53960cc3172261134c4db4ede",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/4b6ac2e8c40ef6ad2a76f0c206b29594c078470f",
+                "reference": "4b6ac2e8c40ef6ad2a76f0c206b29594c078470f",
                 "shasum": ""
             },
             "require": {
@@ -876,7 +876,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2014-02-09 15:56:45"
+            "time": "2014-02-23 01:16:41"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -885,12 +885,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "23d15ad680fe5b695df1565e7854342e608bc483"
+                "reference": "815055bcb1936a0bba0af93cf1b44fddf98a64b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/23d15ad680fe5b695df1565e7854342e608bc483",
-                "reference": "23d15ad680fe5b695df1565e7854342e608bc483",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/815055bcb1936a0bba0af93cf1b44fddf98a64b5",
+                "reference": "815055bcb1936a0bba0af93cf1b44fddf98a64b5",
                 "shasum": ""
             },
             "require": {
@@ -945,7 +945,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-01-26 23:20:11"
+            "time": "2014-02-21 12:52:40"
         },
         {
             "name": "helios-ag/fm-elfinder-bundle",
@@ -1162,6 +1162,58 @@
                 "yandex"
             ],
             "time": "2014-02-07 11:44:56"
+        },
+        {
+            "name": "imagine/imagine",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "f64ec666baaa800edcbf237db41121a569230709"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/f64ec666baaa800edcbf237db41121a569230709",
+                "reference": "f64ec666baaa800edcbf237db41121a569230709",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2013-07-10 17:25:36"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1868,6 +1920,61 @@
             "time": "2013-05-19 03:41:15"
         },
         {
+            "name": "liip/imagine-bundle",
+            "version": "dev-master",
+            "target-dir": "Liip/ImagineBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liip/LiipImagineBundle.git",
+                "reference": "ac6794887fb8e6bcdd1867260760834a91fd8140"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/ac6794887fb8e6bcdd1867260760834a91fd8140",
+                "reference": "ac6794887fb8e6bcdd1867260760834a91fd8140",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "0.5.*",
+                "php": ">=5.3.2",
+                "symfony/filesystem": ">=2.0.16,~2.0",
+                "symfony/finder": ">=2.0.16,~2.0",
+                "symfony/framework-bundle": ">=2.0.16,~2.0",
+                "symfony/options-resolver": ">=2.0.16,~2.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.1",
+                "symfony/yaml": ">=2.0.16,~2.0",
+                "twig/twig": ">=1.0,<2.0-dev"
+            },
+            "suggest": {
+                "twig/twig": ">=1.0,<2.0-dev"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Liip\\ImagineBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Liip and other contributors",
+                    "homepage": "https://github.com/liip/LiipImagineBundle/contributors"
+                }
+            ],
+            "description": "This Bundle assists in imagine manipulation using the imagine library",
+            "homepage": "http://liip.ch",
+            "keywords": [
+                "image",
+                "imagine"
+            ],
+            "time": "2014-02-20 13:36:21"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.7.0",
             "source": {
@@ -1941,12 +2048,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
-                "reference": "73580a6dbe5937425a3dd6e2f23f5b270697dd91"
+                "reference": "9f341066b2fa77e8b061925406bfcb59ed8cbcd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/73580a6dbe5937425a3dd6e2f23f5b270697dd91",
-                "reference": "73580a6dbe5937425a3dd6e2f23f5b270697dd91",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/9f341066b2fa77e8b061925406bfcb59ed8cbcd1",
+                "reference": "9f341066b2fa77e8b061925406bfcb59ed8cbcd1",
                 "shasum": ""
             },
             "require": {
@@ -1998,7 +2105,7 @@
                 "form",
                 "template"
             ],
-            "time": "2014-02-10 09:43:39"
+            "time": "2014-02-19 08:18:03"
         },
         {
             "name": "mopa/composer-bridge",
@@ -2058,12 +2165,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/1up-lab/OneupUploaderBundle.git",
-                "reference": "c8d119534029226b874ae8ccaef5e265fa137d06"
+                "reference": "49ea4703d2ee7d92a605ab24deb6d888069b83e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/c8d119534029226b874ae8ccaef5e265fa137d06",
-                "reference": "c8d119534029226b874ae8ccaef5e265fa137d06",
+                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/49ea4703d2ee7d92a605ab24deb6d888069b83e7",
+                "reference": "49ea4703d2ee7d92a605ab24deb6d888069b83e7",
                 "shasum": ""
             },
             "require": {
@@ -2115,7 +2222,7 @@
                 "plupload",
                 "upload"
             ],
-            "time": "2014-02-17 16:06:45"
+            "time": "2014-02-21 16:17:30"
         },
         {
             "name": "ornicar/gravatar-bundle",
@@ -2636,20 +2743,21 @@
         },
         {
             "name": "symfony/icu",
-            "version": "v1.0.0",
+            "version": "v1.2.0",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Icu.git",
-                "reference": "cac3fdfb111adbe590155f491594636d45129783"
+                "reference": "7299cd3d8d6602103d1ebff5d0a9917b7bc6de72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/cac3fdfb111adbe590155f491594636d45129783",
-                "reference": "cac3fdfb111adbe590155f491594636d45129783",
+                "url": "https://api.github.com/repos/symfony/Icu/zipball/7299cd3d8d6602103d1ebff5d0a9917b7bc6de72",
+                "reference": "7299cd3d8d6602103d1ebff5d0a9917b7bc6de72",
                 "shasum": ""
             },
             "require": {
+                "lib-icu": ">=4.4",
                 "php": ">=5.3.3",
                 "symfony/intl": "~2.3"
             },
@@ -2679,21 +2787,21 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-06-03 18:32:07"
+            "time": "2013-06-03 18:32:58"
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "target-dir": "Symfony/Bundle/MonologBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/MonologBundle.git",
-                "reference": "29a17a347dfc41aed34ce9b72cceaf375635c408"
+                "reference": "71ad844ac29401f86619f9d643393265451e858b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/29a17a347dfc41aed34ce9b72cceaf375635c408",
-                "reference": "29a17a347dfc41aed34ce9b72cceaf375635c408",
+                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/71ad844ac29401f86619f9d643393265451e858b",
+                "reference": "71ad844ac29401f86619f9d643393265451e858b",
                 "shasum": ""
             },
             "require": {
@@ -2726,7 +2834,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Symfony Community",
@@ -2739,7 +2849,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2014-01-19 13:23:40"
+            "time": "2014-02-19 14:49:26"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -3160,6 +3270,7 @@
         "friendsofsymfony/user-bundle": 20,
         "knplabs/gaufrette": 20,
         "knplabs/knp-gaufrette-bundle": 20,
+        "liip/imagine-bundle": 20,
         "stfalcon/tinymce-bundle": 20,
         "jms/serializer-bundle": 20,
         "helios-ag/fm-elfinder-bundle": 20,

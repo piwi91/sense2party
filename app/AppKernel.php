@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
 
             # Users
             new FOS\UserBundle\FOSUserBundle(),
@@ -32,11 +33,12 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
 
             # System
+            new Piwi\System\CoreBundle\PiwiSystemCoreBundle(),
             new Piwi\System\UserBundle\PiwiSystemUserBundle(),
 
-            # App
-            new Piwi\Dst\CoreBundle\PiwiDstCoreBundle(),
-            new Piwi\Dst\DashboardBundle\PiwiDstDashboardBundle(),
+            # S2p App
+            new Piwi\S2p\DashboardBundle\PiwiS2pDashboardBundle(),
+            new Piwi\S2p\UserBundle\PiwiS2pUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -89,10 +89,9 @@ class FOSUBUserProvider extends BaseClass
 
             // Save profile picture
             $profilePictureFs = $this->filesystem->get('profile_pictures');
-            if (!$profilePictureFs->has($username . '.jpg'))
-                $profilePictureFs->write($username . '.jpg', file_get_contents(
-                    $fullResponse['picture']['data']['url']
-                ));
+            $profilePictureFs->write($username . '.jpg', file_get_contents(
+                $fullResponse['picture']['data']['url']
+            ), true);
             return $user;
         }
 
@@ -104,6 +103,11 @@ class FOSUBUserProvider extends BaseClass
 
         //update access token
         $user->$setter($response->getAccessToken());
+        //update profile picture
+        $profilePictureFs = $this->filesystem->get('profile_pictures');
+        $profilePictureFs->write($username . '.jpg', file_get_contents(
+            $fullResponse['picture']['data']['url']
+        ), true);
 
         return $user;
     }
