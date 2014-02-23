@@ -3,13 +3,45 @@ piwi:
         user:
             exception:
                 user_not_found: De gebruiker kon niet worden gevonden
+            login:
+                title: Log in
+                headline: Log in
+                text: Log in met je facebook account
+                facebook: Log in met je facebook account
+                flashbag:
+                    error: Inloggen mislukt. Probeer het a.u.b. opnieuw.
             profile:
                 index:
                     title: Profiel van %name%
                     headline: Profiel van %name%
+                    edit: Wijzig profiel
                     emailaddress: E-mailadres
                     last_login: Laatste keer ingelogd
                     birthday: Verjaardag
                     events: Evenementen
                     replies: Reacties
                     others: Overige
+                edit:
+                    title: Wijzig profiel
+                    headline: Wijzig profiel
+                    firstname: Voornaam
+                    lastname: Achternaam
+                    birthday: Verjaardag
+                    save: Opslaan
+                    flashbag:
+                        success: Het profiel is opgeslagen
+                list:
+                    title: Ledenlijst
+                    headline: Ledenlijst
+                    emailaddress: E-mailadres
+                    last_login: Laatste keer ingelogd
+                    attended_events: Deelgenomen evenementen
+            privacy:
+                edit:
+                    title: Privacy instellingen
+                    headline: Wijzig privacy instellingen
+                    show_email: E-mailadres weergeven
+                    show_birthday: Verjaardag weergeven
+                    save: Opslaan
+                    flashbag:
+                        success: De privacy instellingen zijn opgeslagen

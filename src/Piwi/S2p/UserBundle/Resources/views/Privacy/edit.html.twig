@@ -1,0 +1,13 @@
+{% extends 'PiwiS2pUserBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.user.privacy.edit.title'|trans }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.user.privacy.edit.headline'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 col-md-offset-3">
+        <form class="form-horizontal" action="{{ path('piwi_s2p_user_privacy_edit', {'username': app.user.username}) }}" method="post">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+{% endblock %}

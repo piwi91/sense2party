@@ -18,6 +18,15 @@
                         </div>
                     </div>
                 </div>
+                {% if app.user == user %}
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{ path('piwi_s2p_user_profile_edit', {'username': user.username}) }}">
+                            {{ 'piwi.s2p.user.profile.index.edit'|trans }}
+                        </a>
+                    </li>
+                </ul>
+                {% endif %}
                 <dl>
                     {% if user.email is not null %}
                         <dt>{{ 'piwi.s2p.user.profile.index.emailaddress'|trans }}</dt>
@@ -38,9 +47,22 @@
                 </dl>
             </div>
             <div class="col-md-9">
-                <h3>{{ 'piwi.s2p.user.profile.index.events'|trans }}</h3>
-                <h3>{{ 'piwi.s2p.user.profile.index.replies'|trans }}</h3>
-                <h3>{{ 'piwi.s2p.user.profile.index.others'|trans }}</h3>
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a href="#events" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.events'|trans }}</a></li>
+                    <li><a href="#replies" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.replies'|trans }}</a></li>
+                    <li><a href="#others" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.others'|trans }}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="events">
+
+                    </div>
+                    <div class="tab-pane" id="replies">
+
+                    </div>
+                    <div class="tab-pane" id="others">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -3,6 +3,20 @@ hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /connect
 
+# Imagine Bundle
+_imagine:
+    resource: .
+    type:     imagine
+
+# Login
+piwi_s2p_user_login:
+    pattern: /login
+    defaults: { _controller: PiwiS2pUserBundle:Default:login }
+
+piwi_s2p_user_login_failed:
+    pattern: /login/failed
+    defaults: { _controller: PiwiS2pUserBundle:Default:loginFailed }
+
 # Homepage
 homepage:
     pattern:  /
@@ -15,7 +29,7 @@ piwi_s2p_dashboard:
 
 piwi_s2p_user:
     resource: "@PiwiS2pUserBundle/Resources/config/routing.yml"
-    prefix:   /profile
+    prefix:   /user
 
 # System
 piwi_system_user:

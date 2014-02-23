@@ -2,50 +2,18 @@
 
 namespace Piwi\S2p\UserBundle\Controller;
 
-use Piwi\S2p\UserBundle\Form\ProfileFormType;
+use Piwi\S2p\UserBundle\Form\PrivacyFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProfileController extends Controller
+class PrivacyController extends Controller
 {
     /**
      * @param $username
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function indexAction($username)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $userRepository = $em->getRepository('PiwiSystemUserBundle:User');
-
-        if (!$user = $userRepository->findOneByUsername($username)) {
-            throw $this->createNotFoundException('piwi.s2p.user.exception.user_not_found');
-        }
-
-        return $this->render(
-            'PiwiS2pUserBundle:Profile:index.html.twig',
-            array('user' => $user)
-        );
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function listAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $userRepository = $em->getRepository('PiwiSystemUserBundle:User');
-
-        $users = $userRepository->findAll();
-
-        return $this->render(
-            'PiwiS2pUserBundle:Profile:list.html.twig',
-            array('users' => $users)
-        );
-    }
-
     public function editAction($username, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -57,7 +25,7 @@ class ProfileController extends Controller
             throw $this->createNotFoundException('piwi.s2p.user.exception.user_not_found');
         }
 
-        $form = $this->createForm(new ProfileFormType(), $user, array(
+        $form = $this->createForm(new PrivacyFormType(), $user, array(
             'show_legend' => false
         ));
 
@@ -68,7 +36,7 @@ class ProfileController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add(
-                    'success', 'piwi.s2p.user.profile.edit.flashbag.success'
+                    'success', 'piwi.s2p.user.privacy.edit.flashbag.success'
                 );
 
                 return $this->redirect(
@@ -81,7 +49,7 @@ class ProfileController extends Controller
         }
 
         return $this->render(
-            'PiwiS2pUserBundle:Profile:edit.html.twig',
+            'PiwiS2pUserBundle:Privacy:edit.html.twig',
             array(
                 'user' => $user,
                 'form' => $form->createView()

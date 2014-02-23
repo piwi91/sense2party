@@ -4,7 +4,7 @@ namespace Piwi\System\CoreBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
-class MainBuilder extends ContainerAware
+class ProfileBuilder extends ContainerAware
 {
     public function menu(FactoryInterface $factory, array $options)
     {
@@ -13,14 +13,14 @@ class MainBuilder extends ContainerAware
         ));
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
-        $menu->addChild('menu.home',
+        $menu->addChild('menu.profile.profile',
             array(
-                'route' => 'homepage'
+                'route' => 'piwi_s2p_user_profile'
             )
         );
-        $menu->addChild('menu.members',
+        $menu->addChild('menu.profile.privacy',
             array(
-                'route' => 'piwi_s2p_user_profile_list'
+                'route' => 'piwi_s2p_user_profile'
             )
         );
 

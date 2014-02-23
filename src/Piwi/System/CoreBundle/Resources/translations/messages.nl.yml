@@ -1,4 +1,7 @@
-Log out: Log uit
-My profile: Mijn profiel
-My events: Mijn evenementen
-Privacy settings: Privacy instellingen
+menu:
+    home: Home
+    members: Ledenlijst
+    profile:
+        profile: Mijn profiel
+        privacy: Privacy instellingen
+        logout: Log uit
