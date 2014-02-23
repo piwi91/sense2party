@@ -36,6 +36,7 @@ piwi:
                     emailaddress: E-mailaddress
                     last_login: Last time logged in
                     attended_events: Attended events
+                    privacy: Not visible because of privacy settings
             privacy:
                 edit:
                     title: Privacy settings
