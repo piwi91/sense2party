@@ -20,6 +20,8 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
 
+        "gedmo/doctrine-extensions": "2.3.*@dev",
+
         "mopa/bootstrap-bundle": "3.*@dev",
         "twbs/bootstrap": "v3.1.1",
         "bmatzner/fontawesome-bundle": "~4.0",
@@ -29,8 +31,9 @@
         "hwi/oauth-bundle": "v0.3.2",
 
         "knplabs/gaufrette": "0.2.*@dev",
-        "knplabs/knp-gaufrette-bundle": "0.2.*@dev",
+        "knplabs/knp-gaufrette-bundle" : "dev-master",
         "liip/imagine-bundle": "dev-master",
+        "vich/uploader-bundle": "dev-master",
 
         "stfalcon/tinymce-bundle": "0.3.*@dev",
         "jms/serializer-bundle": "0.13.*@dev",

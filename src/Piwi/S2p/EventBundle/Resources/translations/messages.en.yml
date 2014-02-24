@@ -5,6 +5,16 @@ piwi:
                 list:
                     title: Events
                     headline: Events
+                    add: New event
                 index:
                     title: Events
                     headline: Events
+                add:
+                    title: Create new event
+                    headline: Create new event
+                    title2: Title
+                    date: Date
+                    poster: Poster
+                    description: Description
+                    venue: Venue
+                    source: Source (URL)

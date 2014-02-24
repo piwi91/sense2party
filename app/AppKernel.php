@@ -19,6 +19,7 @@ class AppKernel extends Kernel
 
             # Storage
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
 
             # Layout
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),

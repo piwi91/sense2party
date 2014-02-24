@@ -1,3 +1,11 @@
 piwi_s2p_event_event_list:
     pattern:  /
     defaults: { _controller: PiwiS2pEventBundle:Event:list }
+
+piwi_s2p_event_event_add:
+    pattern:  /add
+    defaults: { _controller: PiwiS2pEventBundle:Event:add }
+
+piwi_s2p_event_event_index:
+    pattern:  /{slug}
+    defaults: { _controller: PiwiS2pEventBundle:Event:index }

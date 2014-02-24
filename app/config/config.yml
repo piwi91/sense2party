@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -111,6 +112,8 @@ hwi_oauth:
 
 # Gaufrette bundle
 knp_gaufrette:
+    stream_wrapper:
+        protocol: gaufrette
     adapters:
         profile_pictures:
             local:
@@ -120,11 +123,17 @@ knp_gaufrette:
             local:
                 directory:  "%kernel.root_dir%/../web/uploads/photos"
                 create:     true
+        event_posters:
+            local:
+                directory:  "%kernel.root_dir%/../web/uploads/events/posters"
+                create:     true
     filesystems:
           profile_pictures:
               adapter:    profile_pictures
           photos:
               adapter:    photos
+          event_posters:
+              adapter:    event_posters
 
 # Liip Imagine Bundle
 liip_imagine:
@@ -138,3 +147,16 @@ liip_imagine:
         profile_picture_s:
             filters:
                 thumbnail: { size: [60, 60], mode: outbound }
+
+# Vich Uploader Bundle
+vich_uploader:
+    db_driver: orm
+    twig: true
+    gaufrette: true
+    storage: vich_uploader.storage.gaufrette
+    mappings:
+        event_poster:
+            upload_destination: event_posters
+            delete_on_remove: true
+            delete_on_update: true
+            inject_on_load: true

@@ -1,0 +1,13 @@
+{% extends 'PiwiS2pEventBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.event.event.add.title'|trans }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.event.event.add.headline'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <form class="form-horizontal" action="{{ path('piwi_s2p_event_event_add') }}" method="post" enctype="multipart/form-data">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+{% endblock %}

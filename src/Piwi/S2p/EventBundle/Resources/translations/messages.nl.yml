@@ -5,6 +5,18 @@ piwi:
                 list:
                     title: Evenementen
                     headline: Evenementen
+                    add: Nieuw evenement
                 index:
                     title: Evenementen
                     headline: Evenementen
+                add:
+                    title: Maak nieuw evenement aan
+                    headline: Maak nieuwe evenement aan
+                    title2: Titel
+                    date: Datum
+                    poster: Poster
+                    description: Omschrijving
+                    venue: Locatie
+                    source: Bron (URL)
+                    flashbag:
+                        success: Het evenement is toegevoegd aan de agenda
