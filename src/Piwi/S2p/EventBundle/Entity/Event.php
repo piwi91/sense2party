@@ -2,6 +2,7 @@
 
 namespace Piwi\S2p\EventBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,9 +20,6 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class Event
 {
-
-    private $temp;
-
     /**
      * @var integer
      *
@@ -91,6 +89,33 @@ class Event
      * @ORM\Column(name="slug", type="string", length=128, unique=true)
      */
     private $slug;
+
+    /**
+     * @var \Piwi\System\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="\Piwi\System\UserBundle\Entity\User", inversedBy="events")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_name", type="string", length=255)
+     */
+    private $userName;
+
+    /**
+     * @var \Piwi\System\UserBundle\Entity\User
+     *
+     * @ORM\ManyToMany(targetEntity="\Piwi\System\UserBundle\Entity\User", inversedBy="attendedEvents")
+     */
+    private $attendees;
+
+    public function __construct()
+    {
+        $this->attendees = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -272,105 +297,68 @@ class Event
         return $this->posterFile;
     }
 
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+        $this->setUserName($user);
+    }
 
-//
-//    /**
-//     * @param UploadedFile $posterFile
-//     */
-//    public function setPosterFile($posterFile)
-//    {
-//        $this->posterFile = $posterFile;
-//        // check if we have an old image path
-//        if (isset($this->poster)) {
-//            // store the old name to delete after the update
-//            $this->temp = $this->poster;
-//            $this->poster = null;
-//        } else {
-//            $this->poster = 'initial';
-//        }
-//    }
-//
-//    /**
-//     * @ORM\PrePersist()
-//     * @ORM\PreUpdate()
-//     */
-//    public function preUpload()
-//    {
-//        if (null !== $this->getPosterFile()) {
-//            // do whatever you want to generate a unique name
-//            $filename = sha1(uniqid(mt_rand(), true));
-//            $this->poster = $filename.'.'.$this->getPosterFile()->guessExtension();
-//        }
-//    }
-//
-//    /**
-//     * @ORM\PostPersist()
-//     * @ORM\PostUpdate()
-//     */
-//    public function upload()
-//    {
-//        if (null === $this->getPosterFile()) {
-//            return;
-//        }
-//
-//        // if there is an error when moving the file, an exception will
-//        // be automatically thrown by move(). This will properly prevent
-//        // the entity from being persisted to the database on error
-//        $this->getPosterFile()->move($this->getUploadRootDir(), $this->poster);
-//
-//        // check if we have an old image
-//        if (isset($this->temp)) {
-//            // delete the old image
-//            unlink($this->getUploadRootDir().'/'.$this->temp);
-//            // clear the temp image path
-//            $this->temp = null;
-//        }
-//        $this->posterFile = null;
-//    }
-//
-//    /**
-//     * @ORM\PostRemove()
-//     */
-//    public function removeUpload()
-//    {
-//        if ($file = $this->getAbsolutePath()) {
-//            unlink($file);
-//        }
-//    }
-//
-//    /**
-//     * @return UploadedFile
-//     */
-//    public function getPosterFile()
-//    {
-//        return $this->posterFile;
-//    }
-//
-//    public function getAbsolutePath()
-//    {
-//        return null === $this->path
-//            ? null
-//            : $this->getUploadRootDir().'/'.$this->path;
-//    }
-//
-//    public function getWebPath()
-//    {
-//        return null === $this->path
-//            ? null
-//            : $this->getUploadDir().'/'.$this->path;
-//    }
-//
-//    protected function getUploadRootDir()
-//    {
-//        // the absolute directory path where uploaded
-//        // documents should be saved
-//        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-//    }
-//
-//    protected function getUploadDir()
-//    {
-//        // get rid of the __DIR__ so it doesn't screw up
-//        // when displaying uploaded doc/image in the view.
-//        return 'uploads/events/posters';
-//    }
+    /**
+     * @return \Piwi\System\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param string $userName
+     */
+    public function setUserName($userName)
+    {
+        $this->userName = $userName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $attendees
+     */
+    public function setAttendees($attendees)
+    {
+        $this->attendees = $attendees;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $attendees
+     */
+    public function addAttendees($attendees)
+    {
+        $this->attendees[] = $attendees;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $attendees
+     */
+    public function removeAttendees($attendees)
+    {
+        $this->attendees->removeElement($attendees);
+    }
+
+    /**
+     * @return \Piwi\System\UserBundle\Entity\User
+     */
+    public function getAttendees()
+    {
+        return $this->attendees;
+    }
 }

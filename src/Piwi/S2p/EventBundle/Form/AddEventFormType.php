@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class EventFormType extends AbstractType
+class AddEventFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

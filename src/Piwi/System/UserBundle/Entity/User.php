@@ -2,6 +2,7 @@
 
 namespace Piwi\System\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -45,10 +46,26 @@ class User extends BaseUser
     /** @ORM\Column(name="privacy_show_birthday", type="boolean") */
     protected $showBirthday = true;
 
+    /**
+     * @var \Piwi\S2p\EventBundle\Entity\Event
+     *
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\EventBundle\Entity\Event", mappedBy="user")
+     */
+    protected $events;
+
+    /**
+     * @var \Piwi\System\UserBundle\Entity\User
+     *
+     * @ORM\ManyToMany(targetEntity="\Piwi\System\UserBundle\Entity\User", mappedBy="attendees")
+     */
+    private $attendedEvents;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+
+        $this->events = new ArrayCollection();
+        $this->attendedEvents = new ArrayCollection();
     }
 
     /**
@@ -193,6 +210,70 @@ class User extends BaseUser
     public function getShowEmail()
     {
         return $this->showEmail;
+    }
+
+    /**
+     * @param \Piwi\S2p\EventBundle\Entity\Event $events
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
+    }
+
+    /**
+     * @param \Piwi\S2p\EventBundle\Entity\Event $events
+     */
+    public function addEvents($events)
+    {
+        $this->events[] = $events;
+    }
+
+    /**
+     * @param \Piwi\S2p\EventBundle\Entity\Event $events
+     */
+    public function removeEvents($events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * @return \Piwi\S2p\EventBundle\Entity\Event
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $attendedEvents
+     */
+    public function setAttendedEvents($attendedEvents)
+    {
+        $this->attendedEvents = $attendedEvents;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $attendedEvents
+     */
+    public function addAttendedEvents($attendedEvents)
+    {
+        $this->attendedEvents[] = $attendedEvents;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $attendedEvents
+     */
+    public function removeAttendedEvents($attendedEvents)
+    {
+        $this->attendedEvents->removeElement($attendedEvents);
+    }
+
+    /**
+     * @return \Piwi\System\UserBundle\Entity\User
+     */
+    public function getAttendedEvents()
+    {
+        return $this->attendedEvents;
     }
 
     function __toString()

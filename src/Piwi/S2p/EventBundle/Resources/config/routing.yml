@@ -9,3 +9,11 @@ piwi_s2p_event_event_add:
 piwi_s2p_event_event_index:
     pattern:  /{slug}
     defaults: { _controller: PiwiS2pEventBundle:Event:index }
+
+piwi_s2p_event_event_edit:
+    pattern:  /{slug}/edit
+    defaults: { _controller: PiwiS2pEventBundle:Event:edit }
+
+piwi_s2p_event_event_attend:
+    pattern:  /{slug}/attend
+    defaults: { _controller: PiwiS2pEventBundle:Event:attend }

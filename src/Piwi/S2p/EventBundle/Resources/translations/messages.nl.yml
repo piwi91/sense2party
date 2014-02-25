@@ -9,6 +9,12 @@ piwi:
                 index:
                     title: Evenementen
                     headline: Evenementen
+                    source: Bron en meer informatie
+                    attendees: Aanwezigen
+                    no_attendees: Nog geen aanmeldingen :-(
+                    attend: Ik kom ook!
+                    resume: Dit evenement vindt plaats op %date% in %venue%
+                    edit: Wijzig evenement
                 add:
                     title: Maak nieuw evenement aan
                     headline: Maak nieuwe evenement aan
@@ -20,3 +26,14 @@ piwi:
                     source: Bron (URL)
                     flashbag:
                         success: Het evenement is toegevoegd aan de agenda
+                edit:
+                    title: Wijzig %event%
+                    headline: Wijzig %event%
+                    title2: Titel
+                    date: Datum
+                    poster: Poster
+                    description: Omschrijving
+                    venue: Locatie
+                    source: Bron (URL)
+                    flashbag:
+                        success: Het evenement is gewijzigd

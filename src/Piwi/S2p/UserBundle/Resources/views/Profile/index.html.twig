@@ -11,7 +11,7 @@
                 <div class="row profile-heading">
                     <div class="col-sm-12">
                         <div class="pull-left">
-                            <img src="/uploads/profile_pictures/{{ user.username }}.jpg" alt="{{ user }}">
+                            <img src="{{ asset('/uploads/profile_pictures/' ~ user.username ~ '.jpg')|imagine_filter('profile_picture') }}" alt="{{ user }}">
                         </div>
                         <div class="pull-left profile-name">
                             <p>{{ user }}</p>

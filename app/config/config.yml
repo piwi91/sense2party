@@ -147,6 +147,9 @@ liip_imagine:
         profile_picture_s:
             filters:
                 thumbnail: { size: [60, 60], mode: outbound }
+        poster_m:
+            filters:
+                relative_resize: { heighten: 400, widen: 300 }
 
 # Vich Uploader Bundle
 vich_uploader:

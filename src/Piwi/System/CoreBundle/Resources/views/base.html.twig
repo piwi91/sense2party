@@ -52,7 +52,7 @@
                     </ul>
                 </li>
                 {% else %}
-                    <li><a href="{{ path('piwi_s2p_user_login') }}">Login</a></li>
+                    <li><a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">{{ 'menu.login'|trans }}</a></li>
                 {% endif %}
             </ul>
         {% endblock %}

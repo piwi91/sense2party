@@ -3,12 +3,29 @@
 namespace Piwi\S2p\EventBundle\Controller;
 
 use Piwi\S2p\EventBundle\Entity\Event;
-use Piwi\S2p\EventBundle\Form\EventFormType;
+use Piwi\S2p\EventBundle\Form\AddEventFormType;
+use Piwi\S2p\EventBundle\Form\EditEventFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class EventController extends Controller
 {
+    public function indexAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
+
+        if (!$event = $eventRepository->findOneBySlug($slug)) {
+            throw $this->createNotFoundException('piwi.s2p.event.exception.event_not_found');
+        }
+
+        return $this->render(
+            'PiwiS2pEventBundle:Event:index.html.twig',
+            array('event' => $event)
+        );
+    }
+
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -28,17 +45,21 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $event = new Event();
-        $form = $this->createForm(new EventFormType(), $event, array(
+        $form = $this->createForm(new AddEventFormType(), $event, array(
             'show_legend' => false
         ));
 
         if ($request->isMethod('POST')) {
             $form->submit($request);
             if ($form->isValid()) {
+                if ($user = $this->getUser()) {
+                    $event->setUser($user);
+                } else {
+                    $event->setUserName('Guest');
+                }
+
                 $em->persist($event);
                 $em->flush();
-
-//                $this->container->get('vich_uploader.storage')->upload($event);
 
                 $this->get('session')->getFlashBag()->add(
                     'success', 'piwi.s2p.event.event.add.flashbag.success'
@@ -46,7 +67,8 @@ class EventController extends Controller
 
                 return $this->redirect(
                     $this->generateUrl(
-                        'piwi_s2p_event_event_list'
+                        'piwi_s2p_event_event_index',
+                        array('slug' => $event->getSlug())
                     )
                 );
             }
@@ -58,6 +80,73 @@ class EventController extends Controller
                 'event' => $event,
                 'form' => $form->createView()
             )
+        );
+    }
+
+    public function editAction($slug, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
+
+        /** @var $event Event */
+        if (!$event = $eventRepository->findOneBySlug($slug)) {
+            throw $this->createNotFoundException('piwi.s2p.event.exception.event_not_found');
+        }
+
+        $form = $this->createForm(new EditEventFormType(), $event, array(
+            'show_legend' => false
+        ));
+
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
+            if ($form->isValid()) {
+                $em->persist($event);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'success', 'piwi.s2p.event.event.edit.flashbag.success'
+                );
+
+                return $this->redirect(
+                    $this->generateUrl(
+                        'piwi_s2p_event_event_index',
+                        array('slug' => $event->getSlug())
+                    )
+                );
+            }
+        }
+
+        return $this->render(
+            'PiwiS2pEventBundle:Event:edit.html.twig',
+            array(
+                'event' => $event,
+                'form' => $form->createView()
+            )
+        );
+    }
+
+    public function attendAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
+
+        /** @var $event Event */
+        if (!$event = $eventRepository->findOneBySlug($slug)) {
+            throw $this->createNotFoundException('piwi.s2p.event.exception.event_not_found');
+        }
+
+        if ($user = $this->getUser()) {
+            if (!in_array($user, $event->getAttendees()->toArray())) {
+                $event->addAttendees($user);
+                $em->persist($event);
+                $em->flush();
+            }
+        }
+
+        return $this->redirect(
+            $this->generateUrl('piwi_s2p_event_event_index', array('slug' => $event->getSlug()))
         );
     }
 }
