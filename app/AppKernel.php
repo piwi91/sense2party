@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
 
             # Users
             new FOS\UserBundle\FOSUserBundle(),

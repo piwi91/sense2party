@@ -21,7 +21,8 @@ class EditEventFormType extends AbstractType
             'format' => 'dd-MM-yyyy',
         ));
         $builder->add('description', 'textarea', array(
-            'label' => 'piwi.s2p.event.event.add.description'
+            'label' => 'piwi.s2p.event.event.add.description',
+            'attr' => array('rows' => 10)
         ));
         $builder->add('venue', 'text', array(
             'label' => 'piwi.s2p.event.event.add.venue'

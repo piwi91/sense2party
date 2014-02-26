@@ -35,5 +35,9 @@ piwi:
                     description: Omschrijving
                     venue: Locatie
                     source: Bron (URL)
+                    delete: Verwijder evenement
                     flashbag:
                         success: Het evenement is gewijzigd
+                delete:
+                    flashbag:
+                        success: Het evenement is verwijderd

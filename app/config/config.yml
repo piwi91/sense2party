@@ -163,3 +163,8 @@ vich_uploader:
             delete_on_remove: true
             delete_on_update: true
             inject_on_load: true
+
+# Markdown implementation
+knp_markdown:
+    parser:
+        service: markdown.parser.medium

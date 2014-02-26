@@ -21,6 +21,10 @@ piwi:
                     events: Evenementen
                     replies: Reacties
                     others: Overige
+                    table_events:
+                        date: Datum
+                        title: Omschrijving
+                        venue: Locatie
                 edit:
                     title: Wijzig profiel
                     headline: Wijzig profiel

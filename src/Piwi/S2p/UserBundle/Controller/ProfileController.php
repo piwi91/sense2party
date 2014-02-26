@@ -23,9 +23,16 @@ class ProfileController extends Controller
             throw $this->createNotFoundException('piwi.s2p.user.exception.user_not_found');
         }
 
+        $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
+
+        $events = $eventRepository->findAttendedEventsByUser($user);
+
         return $this->render(
             'PiwiS2pUserBundle:Profile:index.html.twig',
-            array('user' => $user)
+            array(
+                'user' => $user,
+                'events' => $events
+            )
         );
     }
 

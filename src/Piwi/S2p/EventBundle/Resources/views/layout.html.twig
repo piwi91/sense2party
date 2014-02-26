@@ -11,4 +11,13 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts combine=true
+    '../src/Piwi/S2p/EventBundle/Resources/private/js/edit.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
 {% block content %}{% endblock %}

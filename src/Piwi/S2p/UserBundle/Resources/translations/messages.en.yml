@@ -21,6 +21,10 @@ piwi:
                     events: Events
                     replies: Replies
                     others: Others
+                    table_events:
+                        date: Date
+                        title: Description
+                        venue: Venue
                 edit:
                     title: Edit profile
                     headline: Edit profile

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @ORM\HasLifecycleCallbacks
  */
 class User extends BaseUser
 {
@@ -54,9 +55,9 @@ class User extends BaseUser
     protected $events;
 
     /**
-     * @var \Piwi\System\UserBundle\Entity\User
+     * @var \Piwi\S2p\EventBundle\Entity\EventAttendee
      *
-     * @ORM\ManyToMany(targetEntity="\Piwi\System\UserBundle\Entity\User", mappedBy="attendees")
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\EventBundle\Entity\EventAttendee", mappedBy="user", cascade={"remove"})
      */
     private $attendedEvents;
 
@@ -276,8 +277,27 @@ class User extends BaseUser
         return $this->attendedEvents;
     }
 
-    function __toString()
+    public function __toString()
     {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function preRemove()
+    {
+        // Delete relationships with this entity so we can delete it
+        // Remove this user from the Event entity and set the user name again
+        if ($this->getEvents()) {
+            $_events = array();
+            /** @var $event \Piwi\S2p\EventBundle\Entity\Event */
+            foreach ($this->getEvents() as $event) {
+                $event->setUser(null);
+                $event->setUserName($this);
+                $_events[] = $event;
+            }
+            $this->setEvents($_events);
+        }
     }
 }

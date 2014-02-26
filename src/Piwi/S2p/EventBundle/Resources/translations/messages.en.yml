@@ -9,6 +9,12 @@ piwi:
                 index:
                     title: Events
                     headline: Events
+                    source: Source and more information
+                    attendees: Attendees
+                    no_attendees: No attendees yet :-(
+                    attend: I'm in!
+                    resume: This event will take place on %date% at %venue%
+                    edit: Edit event
                 add:
                     title: Create new event
                     headline: Create new event
@@ -18,3 +24,20 @@ piwi:
                     description: Description
                     venue: Venue
                     source: Source (URL)
+                    flashbag:
+                        success: The event is added in the calendar
+                edit:
+                    title: Edit %event%
+                    headline: Edit %event
+                    title2: Title
+                    date: Date
+                    poster: Poster
+                    description: Description
+                    venue: Venue
+                    source: Source (URL)
+                    delete: Delete event
+                    flashbag:
+                        success: Event saved
+                delete:
+                    flashbag:
+                        success: The event is deleted

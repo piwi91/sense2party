@@ -18,7 +18,7 @@
                             {% if event.attendees is not empty %}
                                 {% for attendee in event.attendees %}
                                     <li>
-                                        <img src="{{ asset('uploads/profile_pictures/' ~ attendee.username ~ '.jpg')|imagine_filter('profile_picture_s') }}" alt="{{ attendee }}" class="img-responsive img-circle">
+                                        <img src="{{ asset('uploads/profile_pictures/' ~ attendee.user.username ~ '.jpg')|imagine_filter('profile_picture_s') }}" alt="{{ attendee.user }}" class="img-responsive img-circle">
                                     </li>
                                 {% endfor %}
                             {% else %}
@@ -37,7 +37,7 @@
                                     </a>
                                 </li>
                             {% endif %}
-                            {% if app.user not in event.attendees %}
+                            {% if app.user and attendee not in event.attendees %}
                                 <li>
                                     <a href="{{ path('piwi_s2p_event_event_attend', {'slug': event.slug}) }}">
                                         {{ 'piwi.s2p.event.event.index.attend'|trans }}
@@ -68,7 +68,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <p>{{ event.description|nl2br }}</p>
+                        <p>{{ event.description|markdown }}</p>
                     </div>
                 </div>
             </div>

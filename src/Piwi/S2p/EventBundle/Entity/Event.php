@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * Event
  *
- * @ORM\Table()
+ * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="Piwi\S2p\EventBundle\Entity\EventRepository")
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
@@ -106,9 +106,9 @@ class Event
     private $userName;
 
     /**
-     * @var \Piwi\System\UserBundle\Entity\User
+     * @var \Piwi\S2p\EventBundle\Entity\EventAttendee
      *
-     * @ORM\ManyToMany(targetEntity="\Piwi\System\UserBundle\Entity\User", inversedBy="attendedEvents")
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\EventBundle\Entity\EventAttendee", mappedBy="event", cascade={"persist", "remove"})
      */
     private $attendees;
 
