@@ -1,0 +1,12 @@
+parameters:
+    piwi_s2p_comment.manager.thread.class: Piwi\S2p\CommentBundle\Entity\ThreadManager
+    piwi_s2p_comment.comment.class: Piwi\S2p\CommentBundle\Services\Comment
+
+services:
+    piwi_s2p_comment.manager.thread:
+        class: %piwi_s2p_comment.manager.thread.class%
+        arguments: [@event_dispatcher, @fos_comment.entity_manager, %fos_comment.model.thread.class%]
+
+    piwi_s2p_comment.comment:
+        class: %piwi_s2p_comment.comment.class%
+        arguments: [@fos_comment.manager.thread, @fos_comment.manager.comment, @request_stack]

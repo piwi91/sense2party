@@ -28,11 +28,17 @@ class EventController extends Controller
             $attendee = null;
         }
 
+        // Get comment thread
+        $commentService = $this->get('piwi_s2p_comment.comment');
+        $commentService->getThreadByEntityId('event', $event->getId());
+
         return $this->render(
             'PiwiS2pEventBundle:Event:index.html.twig',
             array(
                 'event' => $event,
-                'attendee' => $attendee
+                'attendee' => $attendee,
+                'thread' => $commentService->getThread(),
+                'comments' => $commentService->getComments()
             )
         );
     }

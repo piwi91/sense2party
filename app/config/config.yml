@@ -168,3 +168,14 @@ vich_uploader:
 knp_markdown:
     parser:
         service: markdown.parser.medium
+
+# FOS Comments
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: Piwi\S2p\CommentBundle\Entity\Comment
+            thread: Piwi\S2p\CommentBundle\Entity\Thread
+    service:
+        manager:
+            thread: piwi_s2p_comment.manager.thread

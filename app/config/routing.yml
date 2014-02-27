@@ -1,3 +1,10 @@
+# FOS Comment
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }
+
 # HWIO Oauth Bundle
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
@@ -34,6 +41,10 @@ piwi_s2p_user:
 piwi_s2p_event:
     resource: "@PiwiS2pEventBundle/Resources/config/routing.yml"
     prefix:   /events
+
+piwi_s2p_comment:
+    resource: "@PiwiS2pCommentBundle/Resources/config/routing.yml"
+    prefix:   /comment
 
 # System
 piwi_system_user:
