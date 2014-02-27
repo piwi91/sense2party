@@ -35,7 +35,7 @@ role :db,         domain, :primary => true       # This is where Symfony2 migrat
 # General config stuff
 set :keep_releases,  3
 set :shared_files,      ["app/config/parameters.yml"] # This stops us from having to recreate the parameters file on every deploy.
-set :shared_children,   [app_path + "/logs", web_path + "/uploads", "vendor"]
+set :shared_children,   [app_path + "/logs", web_path + "/uploads", "vendor", web_path + "/media"]
 set :permission_method, :acl
 set :use_composer, true
 
