@@ -5,13 +5,16 @@ namespace Piwi\S2p\CommentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Comment as BaseComment;
+use FOS\CommentBundle\Model\SignedCommentInterface;
+use Piwi\System\UserBundle\Entity\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="comment")
  * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
-class Comment extends BaseComment
+class Comment extends BaseComment implements SignedCommentInterface
 {
     /**
      * @ORM\Id
@@ -39,7 +42,7 @@ class Comment extends BaseComment
     /**
      * @param \Piwi\System\UserBundle\Entity\User $author
      */
-    public function setAuthor($author)
+    public function setAuthor(UserInterface $author)
     {
         $this->author = $author;
     }
@@ -61,6 +64,6 @@ class Comment extends BaseComment
             return 'Guest';
         }
 
-        return $this->getAuthor()->getUsername();
+        return $this->getAuthor();
     }
 }
