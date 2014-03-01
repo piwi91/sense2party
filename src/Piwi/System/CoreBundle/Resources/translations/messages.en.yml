@@ -1,0 +1,9 @@
+menu:
+    home: Home
+    events: Events
+    members: Memberlist
+    login: Login with Facebook
+    profile:
+        profile: My profile
+        privacy: Privacy settings
+        logout: Logout

@@ -11,7 +11,7 @@
                 <div class="row profile-heading">
                     <div class="col-sm-12">
                         <div class="pull-left">
-                            <img src="/uploads/profile_pictures/{{ user.username }}.jpg" alt="{{ user }}">
+                            <img src="{{ asset('/uploads/profile_pictures/' ~ user.username ~ '.jpg')|imagine_filter('profile_picture') }}" alt="{{ user }}">
                         </div>
                         <div class="pull-left profile-name">
                             <p>{{ user }}</p>
@@ -28,13 +28,13 @@
                 </ul>
                 {% endif %}
                 <dl>
-                    {% if user.showEmail %}
+                    {% if user.showEmail and app.user %}
                         <dt>{{ 'piwi.s2p.user.profile.index.emailaddress'|trans }}</dt>
                         <dd><a href="mailto:{{ user.email }}">{{ user.email }}</a></dd>
                     {% endif %}
                     <dt>{{ 'piwi.s2p.user.profile.index.last_login'|trans }}</dt>
                     <dd>{{ user.lastLogin|date("d F Y H:i") }}</dd>
-                    {% if user.showBirthday %}
+                    {% if user.showBirthday and app.user %}
                         <dt>{{ 'piwi.s2p.user.profile.index.birthday'|trans }}</dt>
                         <dd>{{ user.birthday|date("d F") }}</dd>
                     {% endif %}
@@ -54,7 +54,20 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="events">
-
+                        <table class="table table-striped">
+                            <thead>
+                                <td width="20%">{{ 'piwi.s2p.user.profile.index.table_events.date'|trans }}</td>
+                                <td>{{ 'piwi.s2p.user.profile.index.table_events.title'|trans }}</td>
+                                <td width="20%">{{ 'piwi.s2p.user.profile.index.table_events.venue'|trans }}</td>
+                            </thead>
+                            <tbody>
+                                {% for event in events %}
+                                    <td>{{ event.date|date("d F Y") }}</td>
+                                    <td><a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}">{{ event.title }}</a></td>
+                                    <td>{{ event.venue }}</td>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                     <div class="tab-pane" id="replies">
 

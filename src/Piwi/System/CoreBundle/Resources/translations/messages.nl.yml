@@ -1,6 +1,8 @@
 menu:
     home: Home
+    events: Evenementen
     members: Ledenlijst
+    login: Log in met Facebook
     profile:
         profile: Mijn profiel
         privacy: Privacy instellingen

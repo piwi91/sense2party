@@ -1,0 +1,39 @@
+{% extends 'PiwiS2pEventBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.event.event.list.title'|trans }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.event.event.list.headline'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="col-md-10">
+            <p>Tekst...</p>
+        </div>
+        <div class="col-md-2">
+            <div class="pull-right">
+                <a href="{{ path('piwi_s2p_event_event_add') }}" class="btn btn-primary btn-small">
+                    {{ 'piwi.s2p.event.event.list.add'|trans }}
+                </a>
+            </div>
+        </div>
+        <div class="col-md-12">
+            {% for event in events %}
+            <div class="col-md-3 event-container">
+                <a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}">
+                    <div class="panel panel-default event">
+                        <div class="panel-body">
+                            <div class="col-md-12 event-poster">
+                                <img src="{{ asset('uploads/events/posters/' ~ event.poster) }}" alt="{{ event.title }}" class="img-responsive">
+                            </div>
+                            <div class="col-md-12 event-label">
+                                <p><span class="label label-warning label-date">{{ event.date|date("d F Y") }}</span></p>
+                                <p><span class="label label-default label-title">{{ event.Title }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -19,15 +19,22 @@ class AppKernel extends Kernel
 
             # Storage
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
 
             # Layout
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
 
             # Users
             new FOS\UserBundle\FOSUserBundle(),
+
+            # Comments
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
 
             # Authentication
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
@@ -39,6 +46,8 @@ class AppKernel extends Kernel
             # S2p App
             new Piwi\S2p\DashboardBundle\PiwiS2pDashboardBundle(),
             new Piwi\S2p\UserBundle\PiwiS2pUserBundle(),
+            new Piwi\S2p\EventBundle\PiwiS2pEventBundle(),
+            new Piwi\S2p\CommentBundle\PiwiS2pCommentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

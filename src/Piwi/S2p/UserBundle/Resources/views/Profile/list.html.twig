@@ -12,14 +12,14 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="pull-left profile-picture">
-                                <img src="{{ asset('/uploads/profile_pictures/' ~ app.user.username ~ '.jpg')|imagine_filter('profile_picture') }}" alt="{{ user }}">
+                                <img src="{{ asset('/uploads/profile_pictures/' ~ user.username ~ '.jpg')|imagine_filter('profile_picture') }}" alt="{{ user }}">
                             </div>
                             <div class="pull-left profile-details">
                                 <h3><a href="{{ path('piwi_s2p_user_profile', {'username': user.username}) }}">{{ user }}</a></h3>
                                 <dl class="dl-horizontal">
                                     <dt>{{ 'piwi.s2p.user.profile.list.emailaddress'|trans }}</dt>
                                     <dd>
-                                        {% if user.showEmail %}
+                                        {% if user.showEmail and app.user %}
                                             <a href="mailto:{{ user.email }}">{{ user.email }}</a>
                                         {% else %}
                                             <em>{{ 'piwi.s2p.user.profile.list.privacy'|trans }}</em>

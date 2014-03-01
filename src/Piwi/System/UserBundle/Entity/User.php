@@ -2,14 +2,17 @@
 
 namespace Piwi\System\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @ORM\HasLifecycleCallbacks
  */
-class User extends BaseUser
+class User extends BaseUser implements UserInterface
 {
     /**
      * @ORM\Id
@@ -45,10 +48,26 @@ class User extends BaseUser
     /** @ORM\Column(name="privacy_show_birthday", type="boolean") */
     protected $showBirthday = true;
 
+    /**
+     * @var \Piwi\S2p\EventBundle\Entity\Event
+     *
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\EventBundle\Entity\Event", mappedBy="user")
+     */
+    protected $events;
+
+    /**
+     * @var \Piwi\S2p\EventBundle\Entity\EventAttendee
+     *
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\EventBundle\Entity\EventAttendee", mappedBy="user", cascade={"remove"})
+     */
+    private $attendedEvents;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+
+        $this->events = new ArrayCollection();
+        $this->attendedEvents = new ArrayCollection();
     }
 
     /**
@@ -195,8 +214,91 @@ class User extends BaseUser
         return $this->showEmail;
     }
 
-    function __toString()
+    /**
+     * @param \Piwi\S2p\EventBundle\Entity\Event $events
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
+    }
+
+    /**
+     * @param \Piwi\S2p\EventBundle\Entity\Event $events
+     */
+    public function addEvents($events)
+    {
+        $this->events[] = $events;
+    }
+
+    /**
+     * @param \Piwi\S2p\EventBundle\Entity\Event $events
+     */
+    public function removeEvents($events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * @return \Piwi\S2p\EventBundle\Entity\Event
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $attendedEvents
+     */
+    public function setAttendedEvents($attendedEvents)
+    {
+        $this->attendedEvents = $attendedEvents;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $attendedEvents
+     */
+    public function addAttendedEvents($attendedEvents)
+    {
+        $this->attendedEvents[] = $attendedEvents;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User $attendedEvents
+     */
+    public function removeAttendedEvents($attendedEvents)
+    {
+        $this->attendedEvents->removeElement($attendedEvents);
+    }
+
+    /**
+     * @return \Piwi\System\UserBundle\Entity\User
+     */
+    public function getAttendedEvents()
+    {
+        return $this->attendedEvents;
+    }
+
+    public function __toString()
     {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function preRemove()
+    {
+        // Delete relationships with this entity so we can delete it
+        // Remove this user from the Event entity and set the user name again
+        if ($this->getEvents()) {
+            $_events = array();
+            /** @var $event \Piwi\S2p\EventBundle\Entity\Event */
+            foreach ($this->getEvents() as $event) {
+                $event->setUser(null);
+                $event->setUserName($this);
+                $_events[] = $event;
+            }
+            $this->setEvents($_events);
+        }
     }
 }

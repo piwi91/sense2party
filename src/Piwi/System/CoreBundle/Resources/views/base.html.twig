@@ -4,6 +4,7 @@
 {% block head_style %}
     {% stylesheets output="css/core.css" combine=true filter="cssrewrite"
     '../src/Piwi/System/CoreBundle/Resources/private/less/core.less'
+    '../src/Piwi/S2p/CommentBundle/Resources/private/less/comments.less'
 
     '../src/Piwi/System/CoreBundle/Resources/private/js/uploadify/uploadify.css'
     %}
@@ -52,7 +53,7 @@
                     </ul>
                 </li>
                 {% else %}
-                    <li><a href="{{ path('piwi_s2p_user_login') }}">Login</a></li>
+                    <li><a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">{{ 'menu.login'|trans }}</a></li>
                 {% endif %}
             </ul>
         {% endblock %}
@@ -131,6 +132,8 @@
     '../src/Piwi/System/CoreBundle/Resources/private/js/jquery-ui/jquery-ui-1.10.4.custom.min.js'
     '../src/Piwi/System/CoreBundle/Resources/private/js/core.js'
     '../src/Piwi/System/CoreBundle/Resources/private/js/uploadify/jquery.uploadify.min.js'
+    '%kernel.root_dir%/../vendor/makeusabrew/bootbox/bootbox.js'
+    '%kernel.root_dir%/../vendor/tarruda/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
