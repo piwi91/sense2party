@@ -15,6 +15,11 @@ _imagine:
     resource: .
     type:     imagine
 
+# Oneup Uploader
+oneup_uploader:
+    resource: .
+    type: uploader
+
 # Login
 piwi_s2p_user_login:
     pattern: /login
@@ -45,6 +50,10 @@ piwi_s2p_event:
 piwi_s2p_comment:
     resource: "@PiwiS2pCommentBundle/Resources/config/routing.yml"
     prefix:   /comment
+
+piwi_s2p_photo:
+    resource: "@PiwiS2pPhotoBundle/Resources/config/routing.yml"
+    prefix:   /photo
 
 # System
 piwi_system_user:

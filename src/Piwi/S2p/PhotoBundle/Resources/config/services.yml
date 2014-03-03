@@ -1,0 +1,10 @@
+parameters:
+    piwi_s2p_photo.upload_listener.class: Piwi\S2p\PhotoBundle\EventListener\UploadListener
+
+services:
+    piwi_s2p_photo.upload_listener:
+        class: '%piwi_s2p_photo.upload_listener.class%'
+        arguments:
+            - @doctrine
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload}

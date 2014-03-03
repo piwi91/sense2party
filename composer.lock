@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "cfe2f84e193ffe716b72238f04ae9cbc",
+    "hash": "9c36b357d76ee2d54e08537460e45b66",
     "packages": [
         {
             "name": "bmatzner/fontawesome-bundle",
@@ -675,12 +675,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/eluceo/iCal.git",
-                "reference": "5caadbb3eef31cc717d99753f68446881c836c19"
+                "reference": "f26cae020c008e986c72dab3f216a41ad9b34b83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eluceo/iCal/zipball/5caadbb3eef31cc717d99753f68446881c836c19",
-                "reference": "5caadbb3eef31cc717d99753f68446881c836c19",
+                "url": "https://api.github.com/repos/eluceo/iCal/zipball/f26cae020c008e986c72dab3f216a41ad9b34b83",
+                "reference": "f26cae020c008e986c72dab3f216a41ad9b34b83",
                 "shasum": ""
             },
             "require": {
@@ -720,7 +720,23 @@
                 "ics",
                 "php calendar"
             ],
-            "time": "2014-02-04 09:12:55"
+            "time": "2014-03-02 17:33:33"
+        },
+        {
+            "name": "enyo/dropzone",
+            "version": "v3.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/enyo/dropzone.git",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/enyo/dropzone/zipball/v3.8.4",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
         },
         {
             "name": "friendsofsymfony/comment-bundle",
@@ -807,12 +823,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "4b6ac2e8c40ef6ad2a76f0c206b29594c078470f"
+                "reference": "924c43d096ddad2e97dad2c6d98631000deea28b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/4b6ac2e8c40ef6ad2a76f0c206b29594c078470f",
-                "reference": "4b6ac2e8c40ef6ad2a76f0c206b29594c078470f",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/924c43d096ddad2e97dad2c6d98631000deea28b",
+                "reference": "924c43d096ddad2e97dad2c6d98631000deea28b",
                 "shasum": ""
             },
             "require": {
@@ -876,7 +892,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2014-02-23 01:16:41"
+            "time": "2014-03-02 21:08:52"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -3495,16 +3511,16 @@
         },
         {
             "name": "willdurand/negotiation",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Negotiation.git",
-                "reference": "84c855a0a9318b29b2535ca88a86e899d7ac4bda"
+                "reference": "d1347ba8208a449c5aa0bf13cd7b65298c59257e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/84c855a0a9318b29b2535ca88a86e899d7ac4bda",
-                "reference": "84c855a0a9318b29b2535ca88a86e899d7ac4bda",
+                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/d1347ba8208a449c5aa0bf13cd7b65298c59257e",
+                "reference": "d1347ba8208a449c5aa0bf13cd7b65298c59257e",
                 "shasum": ""
             },
             "require": {
@@ -3541,7 +3557,7 @@
                 "header",
                 "negotiation"
             ],
-            "time": "2014-02-11 15:51:10"
+            "time": "2014-02-28 14:39:44"
         }
     ],
     "packages-dev": [

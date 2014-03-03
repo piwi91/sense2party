@@ -3,9 +3,6 @@
 namespace Piwi\S2p\CommentBundle\Entity;
 
 use FOS\CommentBundle\Entity\ThreadManager as BaseThreadManager;
-use FOS\CommentBundle\Event\ThreadEvent;
-use FOS\CommentBundle\Events;
-use FOS\CommentBundle\Model\Thread;
 
 class ThreadManager extends BaseThreadManager
 {

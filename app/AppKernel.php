@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             # Storage
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new Oneup\UploaderBundle\OneupUploaderBundle(),
 
             # Layout
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
@@ -48,6 +49,7 @@ class AppKernel extends Kernel
             new Piwi\S2p\UserBundle\PiwiS2pUserBundle(),
             new Piwi\S2p\EventBundle\PiwiS2pEventBundle(),
             new Piwi\S2p\CommentBundle\PiwiS2pCommentBundle(),
+            new Piwi\S2p\PhotoBundle\PiwiS2pPhotoBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

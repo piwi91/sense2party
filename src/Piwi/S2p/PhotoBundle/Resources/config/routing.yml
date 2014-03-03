@@ -1,0 +1,19 @@
+piwi_s2p_photo_photo_index:
+    pattern:  /
+    defaults: { _controller: PiwiS2pPhotoBundle:Photo:index }
+
+piwi_s2p_photo_photo_add:
+    pattern:  /add/step1
+    defaults: { _controller: PiwiS2pPhotoBundle:Photo:step1 }
+
+piwi_s2p_photo_photo_add_step2:
+    pattern:  /add/step2
+    defaults: { _controller: PiwiS2pPhotoBundle:Photo:step2 }
+
+piwi_s2p_photo_photo_add_step3:
+    pattern:  /add/step3
+    defaults: { _controller: PiwiS2pPhotoBundle:Photo:step3 }
+
+piwi_s2p_photo_photo_album:
+    pattern:  /{slug}
+    defaults: { _controller: PiwiS2pPhotoBundle:Photo:album }

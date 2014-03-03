@@ -1,0 +1,42 @@
+{% extends 'PiwiS2pPhotoBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.photo.photo.add.step2.title'|trans({'%album%': album.title}) }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.photo.photo.add.step2.headline'|trans({'%album%': album.title}) }}{% endblock %}
+
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+    'bundles/piwisystemcore/js/dropzone/downloads/css/dropzone.css'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts '@PiwiSystemCoreBundle/Resources/public/js/dropzone/downloads/dropzone.min.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="{{ oneup_uploader_endpoint('gallery') }}" class="dropzone">
+                </form>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="col-sm-12">
+                <form action="{{ path('piwi_s2p_photo_photo_add_step3') }}" method="post">
+                    <input type="hidden" name="album_id" id="album_id" value="{{ album.id }}">
+                    <div class="pull-right">
+                        <input type="submit" class="btn btn-primary" value="{{ 'piwi.s2p.photo.photo.add.step2.finish'|trans }}"
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
