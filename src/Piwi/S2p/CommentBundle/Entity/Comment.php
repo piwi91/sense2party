@@ -34,13 +34,13 @@ class Comment extends BaseComment implements SignedCommentInterface
     /**
      * Author of the comment
      *
-     * @ORM\ManyToOne(targetEntity="Piwi\System\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Piwi\System\UserBundle\Entity\User", inversedBy="comments")
      * @var \Piwi\System\UserBundle\Entity\User
      */
     protected $author;
 
     /**
-     * @param \Piwi\System\UserBundle\Entity\User $author
+     * @param UserInterface $author
      */
     public function setAuthor(UserInterface $author)
     {
@@ -65,5 +65,14 @@ class Comment extends BaseComment implements SignedCommentInterface
         }
 
         return $this->getAuthor();
+    }
+
+    function __toString()
+    {
+        $str = $this->getBody();
+        if (strlen($str) > 30)
+            $str = substr($str, 0, 27) . '...';
+
+        return $str;
     }
 }

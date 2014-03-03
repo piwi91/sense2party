@@ -27,16 +27,43 @@
 
 {% block content %}
     <div class="col-md-12">
-        {% for photo in album.photos %}
-            <div class="col-sm-12 col-md-3 col-lg-2">
-                <div class="panel panel-default">
-                    <div class="panel-body photo">
-                        <a href="{{ asset('uploads/photos/' ~ photo.filename) }}" title="{{ photo.title }}" class="album-picture" rel="album">
-                            <img src="{{ asset('uploads/photos/' ~ photo.filename)|imagine_filter('photo_preview') }}" alt="{{ photo.title }}" class="img-responsive">
-                        </a>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-md-8">
+                {{ album.description }}
             </div>
-        {% endfor %}
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>{{ 'piwi.s2p.photo.photo.album.views'|trans }}</dt>
+                    <dd>{{ album.views }}</dd>
+                    <dt>{{ 'piwi.s2p.photo.photo.album.count'|trans }}</dt>
+                    <dd>{{ album.count }}</dd>
+                    <dt>{{ 'piwi.s2p.photo.photo.album.author'|trans }}</dt>
+                    {% if album.user %}
+                        <dd>
+                            <a href="{{ path('piwi_s2p_user_profile', {'username': album.user.username}) }}">
+                                {{ album.author }}
+                            </a>
+                        </dd>
+                    {% else %}
+                        <dd>{{ album.author }}</dd>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% for photo in album.photos %}
+                    <div class="col-sm-12 col-md-3 col-lg-2">
+                        <div class="panel panel-default">
+                            <div class="panel-body photo">
+                                <a href="{{ asset('uploads/photos/' ~ photo.filename) }}" title="{{ photo.title }}" class="album-picture" rel="album">
+                                    <img src="{{ asset('uploads/photos/' ~ photo.filename)|imagine_filter('photo_preview') }}" alt="{{ photo.title }}" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}

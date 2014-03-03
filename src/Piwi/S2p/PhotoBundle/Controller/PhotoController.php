@@ -2,12 +2,15 @@
 
 namespace Piwi\S2p\PhotoBundle\Controller;
 
+use Gaufrette\Exception\FileNotFound;
 use Piwi\S2p\PhotoBundle\Entity\Photo;
 use Piwi\S2p\PhotoBundle\Form\AlbumFormType;
 use Piwi\S2p\PhotoBundle\Entity\Album;
+use Piwi\S2p\PhotoBundle\Form\EditAlbumFormType;
 use Piwi\S2p\PhotoBundle\Form\ExistingAlbumFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class PhotoController extends Controller
 {
@@ -15,7 +18,11 @@ class PhotoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $albums = $em->getRepository('PiwiS2pPhotoBundle:Album')->findBy(array(), array('date' => 'DESC'));
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $albums = $em->getRepository('PiwiS2pPhotoBundle:Album')->findBy(array('public' => true), array('date' => 'DESC'));
+        } else {
+            $albums = $em->getRepository('PiwiS2pPhotoBundle:Album')->findBy(array(), array('date' => 'DESC'));
+        }
 
         return $this->render('PiwiS2pPhotoBundle:Photo:index.html.twig', array(
             'albums' => $albums
@@ -31,9 +38,60 @@ class PhotoController extends Controller
             throw $this->createNotFoundException('piwi.s2p.photo.photo.album.exception');
         }
 
+        if (!$album->getPublic() && !$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw new AccessDeniedException('No access');
+        }
+
+        // Count views
+        $album->setViews($album->getViews() + 1);
+        $em->persist($album);
+        $em->flush();
+
         return $this->render('PiwiS2pPhotoBundle:Photo:album.html.twig', array(
             'album' => $album
         ));
+    }
+
+    public function editAction(Request $request, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $album = $em->getRepository('PiwiS2pPhotoBundle:Album')->findOneBySlug($slug);
+        if (!$album) {
+            throw $this->createNotFoundException('piwi.s2p.photo.photo.edit.exception');
+        }
+
+        if ($album->getUser() !== $this->getUser() && !$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('No access');
+        }
+
+        $form = $this->createForm(new EditAlbumFormType(), $album, array(
+            'show_legend' => false
+        ));
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
+            if ($form->isValid()) {
+                $em->persist($album);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'success', $this->get('translator')->trans(
+                        'piwi.s2p.photo.photo.edit.flashbag.success', array('%album%' => $album->getTitle())
+                    )
+                );
+
+                return $this->redirect(
+                    $this->generateUrl('piwi_s2p_photo_photo_index')
+                );
+            }
+        }
+
+        return $this->render('PiwiS2pPhotoBundle:Photo:edit.html.twig',
+            array(
+                'form' => $form->createView(),
+                'album' => $album
+            )
+        );
     }
 
     public function step1Action()
@@ -67,10 +125,12 @@ class PhotoController extends Controller
         if ($request->isMethod('POST')) {
             $valid = false;
             if ($albumForm = $request->get('piwi_s2p_photo_photo_choose_album')) {
-                $album = $em->getRepository('PiwiS2pPhotoBundle:Album')->find(
-                    $albumForm['album']
-                );
-                $valid = true;
+                if (array_key_exists('album', $albumForm)) {
+                    $album = $em->getRepository('PiwiS2pPhotoBundle:Album')->find(
+                        $albumForm['album']
+                    );
+                    $valid = true;
+                }
             } else {
                 $form->submit($request);
                 if ($form->isValid()) {
@@ -150,5 +210,50 @@ class PhotoController extends Controller
                 $this->generateUrl('piwi_s2p_photo_photo_album', array('slug' => $album->getSlug()))
             );
         }
+    }
+
+    public function deleteAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $album = $em->getRepository('PiwiS2pPhotoBundle:Album')->findOneBySlug($slug);
+        if (!$album) {
+            throw $this->createNotFoundException('piwi.s2p.photo.photo.edit.exception');
+        }
+
+        if ($album->getUser() !== $this->getUser() && !$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('No access');
+        }
+
+        // First remove the preview picture
+        $album->setPreview(null);
+        $em->persist($album);
+
+        // Iterate throw all photos and delete the file and entity
+        /** @var $photo \Piwi\S2p\PhotoBundle\Entity\Photo */
+        foreach ($album->getPhotos() as $photo) {
+            $gaufrette = $this->get('gaufrette.photos_filesystem');
+            try {
+                $gaufrette->delete($photo->getFilename());
+            } catch (FileNotFound $e) {
+                // Do nothing
+            }
+            $em->remove($photo);
+        }
+        $em->flush();
+
+        // At the end, remove the whole album
+        $em->remove($album);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'success', $this->get('translator')->trans(
+                'piwi.s2p.photo.photo.delete.flashbag.success', array('%album%' => $album->getTitle())
+            )
+        );
+
+        return $this->redirect(
+            $this->generateUrl('piwi_s2p_photo_photo_index')
+        );
     }
 }

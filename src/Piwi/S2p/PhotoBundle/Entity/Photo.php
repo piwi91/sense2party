@@ -69,7 +69,7 @@ class Photo
     /**
      * @var \Piwi\System\UserBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="\Piwi\System\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\Piwi\System\UserBundle\Entity\User", inversedBy="photos")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -78,7 +78,7 @@ class Photo
      * @var \Piwi\S2p\PhotoBundle\Entity\Album
      *
      * @ORM\ManyToOne(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Album", inversedBy="photos")
-     * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="album_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $album;
 

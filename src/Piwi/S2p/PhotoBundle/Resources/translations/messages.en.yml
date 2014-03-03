@@ -9,6 +9,21 @@ piwi:
                 album:
                     title: %album%
                     headline: %album%
+                    views: Views
+                    count: Amount of photos
+                    author: Album created by
+                edit:
+                    title: Edit %album%
+                    headline: Edit %album%
+                    title2: Title
+                    description: Description
+                    public: Public album
+                    submit: Submit
+                    flashbag:
+                        success: Album %album% is changed
+                delete:
+                    flashbag:
+                        success: Album %album% is deleted
                 add:
                     step1:
                         title: Add an album
@@ -18,6 +33,7 @@ piwi:
                         album: Album
                         title2: Title
                         description: Description
+                        public: Public album
                         next: Next
                         flashbag:
                             warning: Please fill in step 1

@@ -193,6 +193,22 @@ class EventController extends Controller
         );
     }
 
+    public function redirectAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
+
+        /** @var $event Event */
+        if (!$event = $eventRepository->find($id)) {
+            throw $this->createNotFoundException('piwi.s2p.event.exception.event_not_found');
+        }
+
+        return $this->redirect(
+            $this->generateUrl('piwi_s2p_event_event_index', array('slug' => $event->getSlug()))
+        );
+    }
+
     protected function isAttendee(Event $event, User $user)
     {
         /** @var $eventAttendee EventAttendee */

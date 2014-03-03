@@ -4,6 +4,27 @@
 
 {% block headline %}{{ 'piwi.s2p.user.profile.index.headline'|trans({'%name%': user}) }}{% endblock %}
 
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+    'bundles/piwisystemcore/js/fancybox/source/jquery.fancybox.css'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts '@PiwiSystemCoreBundle/Resources/public/js/fancybox/source/jquery.fancybox.pack.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
+        $(document).ready(function() {
+            $(".photo").attr('rel', 'gallery').fancybox();
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
     <div class="col-md-12">
         <div class="row">
@@ -50,6 +71,7 @@
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active"><a href="#events" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.events'|trans }}</a></li>
                     <li><a href="#replies" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.replies'|trans }}</a></li>
+                    <li><a href="#photos" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.photos'|trans }}</a></li>
                     <li><a href="#others" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.others'|trans }}</a></li>
                 </ul>
                 <div class="tab-content">
@@ -70,7 +92,39 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="replies">
-
+                        <table class="table table-striped">
+                            <thead>
+                            <td width="20%">{{ 'piwi.s2p.user.profile.index.table_comments.date'|trans }}</td>
+                            <td>{{ 'piwi.s2p.user.profile.index.table_comments.comment'|trans }}</td>
+                            <td width="30%">{{ 'piwi.s2p.user.profile.index.table_comments.thread'|trans }}</td>
+                            </thead>
+                            <tbody>
+                            {% for comment in user.comments %}
+                                {% set event = getEventById(comment.thread.entityId) %}
+                                <tr>
+                                    <td>{{ comment.createdAt|date("d F Y") }}</td>
+                                    <td>{{ comment }}</td>
+                                    <td><a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}#fos_comment_{{ comment.id }}">{{ event.title }}</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="photos">
+                        <table class="table table-striped">
+                            <thead>
+                            <td>{{ 'piwi.s2p.user.profile.index.table_photos.title'|trans }}</td>
+                            <td width="40%">{{ 'piwi.s2p.user.profile.index.table_photos.album'|trans }}</td>
+                            </thead>
+                            <tbody>
+                            {% for photo in user.photos %}
+                                <tr>
+                                    <td><a href="{{ asset('uploads/photos/' ~ photo.filename) }}" title="{{ photo.title }}" rel="album" class="photo">{{ photo.title }}</a></td>
+                                    <td><a href="{{ path('piwi_s2p_photo_photo_album', {'slug': photo.album.slug}) }}">{{ photo.album }}</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                     <div class="tab-pane" id="others">
 

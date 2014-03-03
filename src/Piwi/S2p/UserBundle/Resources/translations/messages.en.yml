@@ -20,11 +20,19 @@ piwi:
                     birthday: Birthday
                     events: Events
                     replies: Replies
+                    photos: Photos
                     others: Others
                     table_events:
                         date: Date
                         title: Description
                         venue: Venue
+                    table_photos:
+                        title: Title
+                        album: Album
+                    table_comments:
+                        date: Date
+                        comment: Comment
+                        thread: Event
                 edit:
                     title: Edit profile
                     headline: Edit profile

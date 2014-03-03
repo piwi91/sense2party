@@ -4,6 +4,13 @@
 
 {% block headline %}{{ 'piwi.s2p.photo.photo.index.headline'|trans }}{% endblock %}
 
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script>
+        $(document).photoIndex();
+    </script>
+{% endblock %}
+
 {% block content %}
     <div class="col-md-12">
         <div class="row">
@@ -32,7 +39,17 @@
                                     </div>
                                     <div class="col-md-12 album-label">
                                         <p><span class="label label-warning label-date">{{ album.date|date("d F Y") }}</span></p>
-                                        <p><span class="label label-default label-title">{{ album.title }}</span></p>
+                                        <p>
+                                            <span class="label label-default label-title">{{ album.title }}</span>
+                                            {% if album.user == app.user %}
+                                                <a href="{{ path('piwi_s2p_photo_photo_edit', {'slug': album.slug}) }}">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="{{ path('piwi_s2p_photo_photo_delete', {'slug': album.slug}) }}" class="delete">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            {% endif %}
+                                        </p>
                                     </div>
                                 </div>
                             </div>

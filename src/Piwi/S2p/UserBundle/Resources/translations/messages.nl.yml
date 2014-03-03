@@ -20,11 +20,19 @@ piwi:
                     birthday: Verjaardag
                     events: Evenementen
                     replies: Reacties
+                    photos: Foto's
                     others: Overige
                     table_events:
                         date: Datum
                         title: Omschrijving
                         venue: Locatie
+                    table_photos:
+                        title: Titel
+                        album: Album
+                    table_comments:
+                        date: Datum
+                        comment: Reactie
+                        thread: Evenement
                 edit:
                     title: Wijzig profiel
                     headline: Wijzig profiel
