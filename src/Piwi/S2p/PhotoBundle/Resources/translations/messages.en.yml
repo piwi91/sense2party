@@ -1,0 +1,32 @@
+piwi:
+    s2p:
+        photo:
+            photo:
+                index:
+                    title: Photos
+                    headline: Photos
+                    add: Upload photos
+                album:
+                    title: %album%
+                    headline: %album%
+                add:
+                    step1:
+                        title: Add an album
+                        headline: Add an album
+                        existing_album: Upload photos to an existing album
+                        new_album: Create a new album
+                        album: Album
+                        title2: Title
+                        description: Description
+                        next: Next
+                        flashbag:
+                            warning: Please fill in step 1
+                            success: Album added, now add some pictures!
+                    step2:
+                        title: Add pictures to %album%
+                        headline: Add pictures to %album%
+                        finish: Finish
+                    step3:
+                        exception: Couldn't find album
+                        flashbag:
+                            success: You're pictures are uploaded

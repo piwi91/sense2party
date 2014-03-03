@@ -1,6 +1,7 @@
 menu:
     home: Home
     events: Events
+    photos: Photos
     members: Memberlist
     login: Login with Facebook
     profile:

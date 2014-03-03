@@ -1,0 +1,42 @@
+{% extends 'PiwiS2pPhotoBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.photo.photo.album.title'|trans({'%album%': album.title}) }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.photo.photo.album.headline'|trans({'%album%': album.title}) }}{% endblock %}
+
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+    'bundles/piwisystemcore/js/fancybox/source/jquery.fancybox.css'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts '@PiwiSystemCoreBundle/Resources/public/js/fancybox/source/jquery.fancybox.pack.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
+        $(document).ready(function() {
+            $(".album-picture").attr('rel', 'gallery').fancybox();
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        {% for photo in album.photos %}
+            <div class="col-sm-12 col-md-3 col-lg-2">
+                <div class="panel panel-default">
+                    <div class="panel-body photo">
+                        <a href="{{ asset('uploads/photos/' ~ photo.filename) }}" title="{{ photo.title }}" class="album-picture" rel="album">
+                            <img src="{{ asset('uploads/photos/' ~ photo.filename)|imagine_filter('photo_preview') }}" alt="{{ photo.title }}" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
