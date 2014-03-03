@@ -51,7 +51,7 @@ class User extends BaseUser implements UserInterface
     /**
      * @var \Piwi\S2p\EventBundle\Entity\Event
      *
-     * @ORM\OneToMany(targetEntity="\Piwi\S2p\EventBundle\Entity\Event", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\EventBundle\Entity\Event", mappedBy="user", cascade={"persist"})
      */
     protected $events;
 
@@ -61,6 +61,27 @@ class User extends BaseUser implements UserInterface
      * @ORM\OneToMany(targetEntity="\Piwi\S2p\EventBundle\Entity\EventAttendee", mappedBy="user", cascade={"remove"})
      */
     private $attendedEvents;
+
+    /**
+     * @var \Piwi\S2p\PhotoBundle\Entity\Album
+     *
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Album", mappedBy="user", cascade={"persist"})
+     */
+    private $albums;
+
+    /**
+     * @var \Piwi\S2p\PhotoBundle\Entity\Photo
+     *
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Photo", mappedBy="user", cascade={"persist"})
+     */
+    private $photos;
+
+    /**
+     * @var \Piwi\S2p\CommentBundle\Entity\Comment
+     *
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\CommentBundle\Entity\Comment", mappedBy="author", cascade={"persist"})
+     */
+    private $comments;
 
     public function __construct()
     {
@@ -278,6 +299,54 @@ class User extends BaseUser implements UserInterface
         return $this->attendedEvents;
     }
 
+    /**
+     * @param \Piwi\S2p\PhotoBundle\Entity\Album $albums
+     */
+    public function setAlbums($albums)
+    {
+        $this->albums = $albums;
+    }
+
+    /**
+     * @return \Piwi\S2p\PhotoBundle\Entity\Album
+     */
+    public function getAlbums()
+    {
+        return $this->albums;
+    }
+
+    /**
+     * @param \Piwi\S2p\PhotoBundle\Entity\Photo $photos
+     */
+    public function setPhotos($photos)
+    {
+        $this->photos = $photos;
+    }
+
+    /**
+     * @return \Piwi\S2p\PhotoBundle\Entity\Photo
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * @param \Piwi\S2p\CommentBundle\Entity\Comment $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return \Piwi\S2p\CommentBundle\Entity\Comment
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
     public function __toString()
     {
         return $this->firstName . ' ' . $this->lastName;
@@ -299,6 +368,28 @@ class User extends BaseUser implements UserInterface
                 $_events[] = $event;
             }
             $this->setEvents($_events);
+        }
+
+        if ($this->getAlbums()) {
+            $_albums = array();
+            /** @var $album \Piwi\S2p\PhotoBundle\Entity\Album */
+            foreach ($this->getAlbums() as $album) {
+                $album->setUser(null);
+                $album->setAuthor($this);
+                $_albums[] = $album;
+            }
+            $this->setAlbums($_albums);
+        }
+
+        if ($this->getPhotos()) {
+            $_photos = array();
+            /** @var $photo \Piwi\S2p\PhotoBundle\Entity\Photo */
+            foreach ($this->getPhotos() as $photo) {
+                $photo->setUser(null);
+                $photo->setAuthor($this);
+                $_photos[] = $photo;
+            }
+            $this->setPhotos($_photos);
         }
     }
 }

@@ -17,3 +17,11 @@ piwi_s2p_photo_photo_add_step3:
 piwi_s2p_photo_photo_album:
     pattern:  /{slug}
     defaults: { _controller: PiwiS2pPhotoBundle:Photo:album }
+
+piwi_s2p_photo_photo_edit:
+    pattern:  /edit/{slug}
+    defaults: { _controller: PiwiS2pPhotoBundle:Photo:edit }
+
+piwi_s2p_photo_photo_delete:
+    pattern:  /delete/{slug}
+    defaults: { _controller: PiwiS2pPhotoBundle:Photo:delete }

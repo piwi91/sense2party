@@ -1,0 +1,26 @@
+{% extends 'PiwiSystemCoreBundle::system.html.twig' %}
+
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets output="css/compiled/error.css" combine=true filter="?cssrewrite,?uglifycss"
+    '../src/Piwi/System/CoreBundle/Resources/private/less/error.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock head_style %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4 hidden-xs">
+            <img src="{{ asset('/bundles/piwisystemcore/img/oops.png') }}" class="img-responsive" alt="Error">
+        </div>
+        <div class="col-sm-8">
+            <h1>Oops! {{ status_code }} error</h1>
+            <p>
+                Something is broken. Please e-mail us at <a href="mailto:pim@piwi-web.com">pim@piwi-web.com</a> and let us know
+                what you were doing when this error occurred. We will fix it as soon
+                as possible. Sorry for any inconvenience caused.
+            </p>
+        </div>
+    </div>
+{% endblock content %}

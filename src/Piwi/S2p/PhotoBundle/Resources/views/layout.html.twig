@@ -11,13 +11,13 @@
     {% endstylesheets %}
 {% endblock %}
 
-{#{% block foot_script_assetic %}#}
-    {#{{ parent() }}#}
-    {#{% javascripts combine=true#}
-    {#'../src/Piwi/S2p/PhotoBundle/Resources/private/js/edit.js'#}
-    {#%}#}
-    {#<script src="{{ asset_url }}"></script>#}
-    {#{% endjavascripts %}#}
-{#{% endblock %}#}
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts combine=true
+    '../src/Piwi/S2p/PhotoBundle/Resources/private/js/index.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 
 {% block content %}{% endblock %}

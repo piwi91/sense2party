@@ -21,3 +21,7 @@ piwi_s2p_event_event_delete:
 piwi_s2p_event_event_attend:
     pattern:  /{slug}/attend
     defaults: { _controller: PiwiS2pEventBundle:Event:attend }
+
+piwi_s2p_event_event_redirect:
+    pattern:  /{id}
+    defaults: { _controller: PiwiS2pEventBundle:Event:redirect }

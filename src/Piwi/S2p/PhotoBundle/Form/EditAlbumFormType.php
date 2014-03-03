@@ -6,16 +6,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AlbumFormType extends AbstractType
+class EditAlbumFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // add your custom field
         $builder->add('title', 'text', array(
-            'label' => 'piwi.s2p.photo.photo.add.step1.title2'
+            'label' => 'piwi.s2p.photo.photo.edit.title2'
         ));
         $builder->add('description', 'textarea', array(
-            'label' => 'piwi.s2p.photo.photo.add.step1.description',
+            'label' => 'piwi.s2p.photo.photo.edit.description',
             'attr' => array('rows' => 10)
         ));
         $builder->add('public', 'checkbox', array(
@@ -23,10 +23,10 @@ class AlbumFormType extends AbstractType
             'render_required_asterisk' => false,
             'render_optional_text' => false,
             'value' => true,
-            'label' => 'piwi.s2p.photo.photo.add.step1.public'
+            'label' => 'piwi.s2p.photo.photo.edit.public'
         ));
-        $builder->add('next', 'submit', array(
-            'label' => 'piwi.s2p.photo.photo.add.step1.next',
+        $builder->add('submit', 'submit', array(
+            'label' => 'piwi.s2p.photo.photo.edit.submit',
             'attr' => array('class' => 'pull-right btn-primary')
         ));
     }
@@ -40,6 +40,6 @@ class AlbumFormType extends AbstractType
 
     public function getName()
     {
-        return 'piwi_s2p_photo_photo_add_album';
+        return 'piwi_s2p_photo_photo_edit_album';
     }
 }

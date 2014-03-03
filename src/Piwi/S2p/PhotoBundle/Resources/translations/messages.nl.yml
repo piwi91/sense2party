@@ -9,6 +9,21 @@ piwi:
                 album:
                     title: %album%
                     headline: %album%
+                    views: Aantal keer bekeken
+                    count: Aantal foto's
+                    author: Album aangemaakt door
+                edit:
+                    title: Wijzig %album%
+                    headline: Wijzig %album%
+                    title2: Titel
+                    description: Omschrijving
+                    public: Zichtbaar voor publiek
+                    submit: Wijzig album
+                    flashbag:
+                        success: Album %album% is succesvol gewijzigd
+                delete:
+                    flashbag:
+                        success: Album %album% is succesvol verwijderd
                 add:
                     step1:
                         title: Maak nieuw album aan
@@ -18,6 +33,7 @@ piwi:
                         album: Album
                         title2: Titel
                         description: Omschrijving
+                        public: Zichtbaar voor publiek
                         next: Volgende
                         flashbag:
                             warning: Voltooi eerst stap 1

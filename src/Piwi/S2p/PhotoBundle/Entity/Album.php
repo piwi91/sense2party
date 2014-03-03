@@ -67,9 +67,16 @@ class Album
     private $author;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="public", type="boolean")
+     */
+    private $public = true;
+
+    /**
      * @var \Piwi\System\UserBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="\Piwi\System\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\Piwi\System\UserBundle\Entity\User", inversedBy="albums")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -85,14 +92,14 @@ class Album
     /**
      * @var \Piwi\S2p\PhotoBundle\Entity\Photo
      *
-     * @ORM\OneToMany(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Photo", mappedBy="album")
+     * @ORM\OneToMany(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Photo", mappedBy="album", cascade={"persist"})
      */
     private $photos;
 
     /**
      * @var \Piwi\S2p\PhotoBundle\Entity\Photo
      *
-     * @ORM\OneToOne(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Photo")
+     * @ORM\OneToOne(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Photo", cascade={"remove"}, orphanRemoval=true)
      */
     private $preview;
 
@@ -231,6 +238,14 @@ class Album
     }
 
     /**
+     * @param string
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    /**
      * @param \Piwi\S2p\PhotoBundle\Entity\Photo $photos
      */
     public function setPhotos($photos)
@@ -298,6 +313,22 @@ class Album
             return $this->preview->getFilename();
         }
         return null;
+    }
+
+    /**
+     * @param boolean $public
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getPublic()
+    {
+        return $this->public;
     }
 
     function __toString()

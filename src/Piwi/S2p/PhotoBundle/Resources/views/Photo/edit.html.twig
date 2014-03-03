@@ -1,0 +1,13 @@
+{% extends 'PiwiS2pPhotoBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.photo.photo.edit.title'|trans({'%album%': album.title}) }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.photo.photo.edit.headline'|trans({'%album%': album.title}) }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <form class="form-horizontal" action="{{ path('piwi_s2p_photo_photo_edit', {'slug': album.slug}) }}" method="post">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+{% endblock %}
