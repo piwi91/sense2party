@@ -23,7 +23,7 @@ set :interactive_mode, false
 set :repository,  "git@github.com:piwi91/sense2party.git"
 set :scm,         :git
 set :deploy_via,  :copy
-set :branch,      "feature/events"
+set :branch,      "develop"
 
 set :model_manager, "doctrine"
 
