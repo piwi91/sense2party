@@ -46,3 +46,9 @@ piwi:
                         exception: Couldn't find album
                         flashbag:
                             success: You're pictures are uploaded
+                deletephoto:
+                    flashbag:
+                        success: Photo %photo% is deleted
+                selectpreview:
+                    flashbag:
+                        success: Photo %photo% is now the preview of album %album%

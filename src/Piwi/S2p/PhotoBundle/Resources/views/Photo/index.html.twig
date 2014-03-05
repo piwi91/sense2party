@@ -41,12 +41,14 @@
                                         <p><span class="label label-warning label-date">{{ album.date|date("d F Y") }}</span></p>
                                         <p>
                                             <span class="label label-default label-title">{{ album.title }}</span>
+                                        </p>
+                                        <p>
                                             {% if album.user == app.user %}
                                                 <a href="{{ path('piwi_s2p_photo_photo_edit', {'slug': album.slug}) }}">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <a href="{{ path('piwi_s2p_photo_photo_delete', {'slug': album.slug}) }}" class="delete">
-                                                    <i class="fa fa-times"></i>
+                                                    <i class="fa fa-times" style="color:red;"></i>
                                                 </a>
                                             {% endif %}
                                         </p>

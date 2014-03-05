@@ -46,3 +46,9 @@ piwi:
                         exception: Kon het gekozen album niet vinden
                         flashbag:
                             success: De foto's zijn geupload!
+                deletephoto:
+                    flashbag:
+                        success: Foto %photo% is verwijderd
+                selectpreview:
+                    flashbag:
+                        success: Foto %photo% is nu de preview van het album %album%

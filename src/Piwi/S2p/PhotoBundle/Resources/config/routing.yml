@@ -25,3 +25,11 @@ piwi_s2p_photo_photo_edit:
 piwi_s2p_photo_photo_delete:
     pattern:  /delete/{slug}
     defaults: { _controller: PiwiS2pPhotoBundle:Photo:delete }
+
+piwi_s2p_photo_photo_delete_photo:
+    pattern:  /delete/photo/{id}
+    defaults: { _controller: PiwiS2pPhotoBundle:Photo:deletePhoto }
+
+piwi_s2p_photo_photo_select_preview:
+    pattern:  /{slug}/preview/{id}
+    defaults: { _controller: PiwiS2pPhotoBundle:Photo:selectPreview }

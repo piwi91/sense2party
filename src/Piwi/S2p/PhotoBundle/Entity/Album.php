@@ -99,7 +99,7 @@ class Album
     /**
      * @var \Piwi\S2p\PhotoBundle\Entity\Photo
      *
-     * @ORM\OneToOne(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Photo", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Photo")
      */
     private $preview;
 

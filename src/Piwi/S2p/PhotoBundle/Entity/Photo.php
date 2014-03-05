@@ -78,7 +78,7 @@ class Photo
      * @var \Piwi\S2p\PhotoBundle\Entity\Album
      *
      * @ORM\ManyToOne(targetEntity="\Piwi\S2p\PhotoBundle\Entity\Album", inversedBy="photos")
-     * @ORM\JoinColumn(name="album_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
      */
     private $album;
 

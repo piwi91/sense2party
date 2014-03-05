@@ -21,6 +21,7 @@
     <script>
         $(document).ready(function() {
             $(".album-picture").attr('rel', 'gallery').fancybox();
+            $(document).photoAlbum();
         });
     </script>
 {% endblock %}
@@ -59,6 +60,16 @@
                                 <a href="{{ asset('uploads/photos/' ~ photo.filename) }}" title="{{ photo.title }}" class="album-picture" rel="album">
                                     <img src="{{ asset('uploads/photos/' ~ photo.filename)|imagine_filter('photo_preview') }}" alt="{{ photo.title }}" class="img-responsive">
                                 </a>
+                                {% if photo.user == app.user %}
+                                <p class="text-center">
+                                    <a href="{{ path('piwi_s2p_photo_photo_select_preview', {'slug': album.slug, 'id': photo.id}) }}">
+                                        <i class="fa fa-camera"></i>
+                                    </a>
+                                    <a href="{{ path('piwi_s2p_photo_photo_delete_photo', {'id': photo.id}) }}" class="delete">
+                                        <i class="fa fa-times" style="color:red;"></i>
+                                    </a>
+                                </p>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

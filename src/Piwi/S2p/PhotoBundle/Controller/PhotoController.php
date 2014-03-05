@@ -256,4 +256,81 @@ class PhotoController extends Controller
             $this->generateUrl('piwi_s2p_photo_photo_index')
         );
     }
+
+    public function deletePhotoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $photo = $em->getRepository('PiwiS2pPhotoBundle:Photo')->find($id);
+        if (!$photo) {
+            throw $this->createNotFoundException('piwi.s2p.photo.photo.edit.exception');
+        }
+
+        if ($photo->getUser() !== $this->getUser() && !$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('No access');
+        }
+
+        $album = $photo->getAlbum();
+        if ($album->getPreview() == $photo->getFilename()) {
+            $album->setPreview(null);
+        }
+        $album->setCount($album->getCount() - 1);
+        $em->persist($album);
+        $em->flush();
+
+        $gaufrette = $this->get('gaufrette.photos_filesystem');
+        try {
+            $gaufrette->delete($photo->getFilename());
+        } catch (FileNotFound $e) {
+            // Do nothing
+        }
+        $em->remove($photo);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'success', $this->get('translator')->trans(
+                'piwi.s2p.photo.photo.deletephoto.flashbag.success', array('%photo%' => $photo->getTitle())
+            )
+        );
+
+        return $this->redirect(
+            $this->generateUrl('piwi_s2p_photo_photo_album', array('slug' => $photo->getAlbum()->getSlug()))
+        );
+    }
+
+    public function selectPreviewAction($slug, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $photo = $em->getRepository('PiwiS2pPhotoBundle:Photo')->find($id);
+        if (!$photo) {
+            throw $this->createNotFoundException('piwi.s2p.photo.photo.edit.exception');
+        }
+
+        $album = $em->getRepository('PiwiS2pPhotoBundle:Album')->findOneBySlug($slug);
+        if (!$album) {
+            throw $this->createNotFoundException('piwi.s2p.photo.photo.edit.exception');
+        }
+
+        if ($album->getUser() !== $this->getUser() && !$this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('No access');
+        }
+
+        $album->setPreview($photo);
+        $em->persist($album);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'success', $this->get('translator')->trans(
+                'piwi.s2p.photo.photo.selectpreview.flashbag.success', array(
+                    '%photo%' => $photo->getTitle(),
+                    '%album%' => $album->getTitle()
+                )
+            )
+        );
+
+        return $this->redirect(
+            $this->generateUrl('piwi_s2p_photo_photo_album', array('slug' => $album->getSlug()))
+        );
+    }
 }
