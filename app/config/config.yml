@@ -150,6 +150,9 @@ liip_imagine:
         poster_m:
             filters:
                 relative_resize: { heighten: 400, widen: 300 }
+        poster_m_crop:
+            filters:
+                thumbnail: { size: [300, 400], mode: outbound }
         photo_preview:
             filters:
                 thumbnail: { size: [300, 300], mode: outbound }

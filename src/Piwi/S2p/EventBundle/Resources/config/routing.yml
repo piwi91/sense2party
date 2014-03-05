@@ -19,8 +19,12 @@ piwi_s2p_event_event_delete:
     defaults: { _controller: PiwiS2pEventBundle:Event:delete }
 
 piwi_s2p_event_event_attend:
-    pattern:  /{slug}/attend
-    defaults: { _controller: PiwiS2pEventBundle:Event:attend }
+    pattern:  /{slug}/attend/{status}
+    defaults: { _controller: PiwiS2pEventBundle:Event:attend, status: present }
+
+piwi_s2p_event_event_cancel_attend:
+    pattern:  /{slug}/cancel_attend
+    defaults: { _controller: PiwiS2pEventBundle:Event:cancelAttend }
 
 piwi_s2p_event_event_redirect:
     pattern:  /{id}

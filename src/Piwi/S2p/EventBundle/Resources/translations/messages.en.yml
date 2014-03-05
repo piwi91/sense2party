@@ -13,6 +13,8 @@ piwi:
                     attendees: Attendees
                     no_attendees: No attendees yet :-(
                     attend: I'm in!
+                    maybe: I'm not sure!
+                    cancel_attend: I'm out
                     resume: This event will take place on %date% at %venue%
                     edit: Edit event
                 add:

@@ -187,6 +187,27 @@ class EventController extends Controller
         $em->persist($eventAttendee);
         $em->flush();
 
+        return $this->redirect(
+            $this->generateUrl('piwi_s2p_event_event_index', array('slug' => $event->getSlug()))
+        );
+    }
+
+    public function cancelAttendAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
+
+        /** @var $event Event */
+        if (!$event = $eventRepository->findOneBySlug($slug)) {
+            throw $this->createNotFoundException('piwi.s2p.event.exception.event_not_found');
+        }
+
+        $user = $this->getUser();
+        if ($eventAttendee = $this->isAttendee($event, $user)) {
+            $em->remove($eventAttendee);
+        }
+        $em->flush();
 
         return $this->redirect(
             $this->generateUrl('piwi_s2p_event_event_index', array('slug' => $event->getSlug()))

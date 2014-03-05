@@ -2,7 +2,14 @@
 
 {% block title %}{{ parent() }} - {{ event.title }}{% endblock %}
 
-{% block headline %}{{ event.title }}{% endblock %}
+{% block headline %}
+    {{ event.title }}
+    {% if event.user == app.user %}
+            <a href="{{ path('piwi_s2p_event_event_edit', {'slug': event.slug}) }}">
+                <i class="fa fa-edit"></i>
+            </a>
+    {% endif %}
+{% endblock %}
 
 {% block foot_script_assetic %}
     {{ parent() }}
@@ -16,16 +23,19 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="row">
-                    <div class="col-sm-12">
-                        <img src="{{ asset('uploads/events/posters/' ~ event.poster)|imagine_filter('poster_m') }}" alt="{{ event.title }}">
+                    <div class="col-sm-12 event-details-poster">
+                        <img src="{{ asset('uploads/events/posters/' ~ event.poster)|imagine_filter('poster_m') }}" alt="{{ event.title }}" class="img-responsive">
                     </div>
                     <div class="col-sm-12 event-attendees">
                         <h3>{{ 'piwi.s2p.event.event.index.attendees'|trans }}</h3>
                         <ul class="list-inline">
                             {% if event.attendees is not empty %}
                                 {% for attendee in event.attendees %}
-                                    <li>
+                                    <li class="event-attendee">
                                         <img src="{{ asset('uploads/profile_pictures/' ~ attendee.user.username ~ '.jpg')|imagine_filter('profile_picture_s') }}" alt="{{ attendee.user }}" class="img-responsive img-circle">
+                                        {% if attendee.status == 'maybe' %}
+                                            <img src="{{ asset('/bundles/piwis2pevent/img/asterisk.png') }}" class="maybe">
+                                        {% endif %}
                                     </li>
                                 {% endfor %}
                             {% else %}
@@ -37,19 +47,23 @@
                     </div>
                     <div class="col-sm-12">
                         <ul class="list-unstyled">
-                            {% if event.user == app.user %}
-                                <li>
-                                    <a href="{{ path('piwi_s2p_event_event_edit', {'slug': event.slug}) }}">
-                                        {{ 'piwi.s2p.event.event.index.edit'|trans }}
-                                    </a>
-                                </li>
-                            {% endif %}
-                            {% if app.user and attendee not in event.attendees %}
-                                <li>
-                                    <a href="{{ path('piwi_s2p_event_event_attend', {'slug': event.slug}) }}">
-                                        {{ 'piwi.s2p.event.event.index.attend'|trans }}
-                                    </a>
-                                </li>
+                            {% if app.user %}
+                                {% if attendee not in event.attendees %}
+                                    <li>
+                                        <a href="{{ path('piwi_s2p_event_event_attend', {'slug': event.slug}) }}" class="btn btn-primary">
+                                            <i class="fa fa-beer"></i> {{ 'piwi.s2p.event.event.index.attend'|trans }}
+                                        </a>
+                                        <a href="{{ path('piwi_s2p_event_event_attend', {'slug': event.slug, 'status': 'maybe'}) }}" class="btn btn-info">
+                                            <i class="fa fa-asterisk"></i> {{ 'piwi.s2p.event.event.index.maybe'|trans }}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="{{ path('piwi_s2p_event_event_cancel_attend', {'slug': event.slug}) }}" class="btn btn-danger">
+                                            <i class="fa fa-thumbs-o-down"></i> {{ 'piwi.s2p.event.event.index.cancel_attend'|trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
                             {% endif %}
                         </ul>
                     </div>
