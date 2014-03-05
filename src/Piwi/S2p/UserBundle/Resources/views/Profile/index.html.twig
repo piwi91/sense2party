@@ -84,9 +84,11 @@
                             </thead>
                             <tbody>
                                 {% for event in events %}
-                                    <td>{{ event.date|date("d F Y") }}</td>
-                                    <td><a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}">{{ event.title }}</a></td>
-                                    <td>{{ event.venue }}</td>
+                                    <tr>
+                                        <td>{{ event.date|date("d F Y") }}</td>
+                                        <td><a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}">{{ event.title }}</a></td>
+                                        <td>{{ event.venue }}</td>
+                                    </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
