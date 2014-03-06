@@ -26,7 +26,7 @@
                                         {% endif %}
                                     </dd>
                                     <dt>{{ 'piwi.s2p.user.profile.list.last_login'|trans }}</dt>
-                                    <dd>{{ user.lastLogin|date("d F Y H:i") }}</dd>
+                                    <dd>{{ user.lastLogin|localizeddate('long', 'medium', app.request.locale) }}</dd>
                                     <dt>{{ 'piwi.s2p.user.profile.list.attended_events'|trans }}</dt>
                                     <dd>Yet to come...</dd>
                                     {#<dd>{{ user.attendedEvents }}</dd>#}

@@ -76,7 +76,7 @@
                             <p class="resume">
                                 {{ 'piwi.s2p.event.event.index.resume'|trans(
                                     {
-                                        '%date%': event.date|date("d F"),
+                                        '%date%': event.date|localizeddate('full', 'none', app.request.locale),
                                         '%venue%': event.venue
                                     }
                                 ) }}

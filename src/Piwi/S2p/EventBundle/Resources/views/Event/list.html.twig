@@ -31,7 +31,7 @@
                                     <img src="{{ asset('uploads/events/posters/' ~ event.poster)|imagine_filter('poster_m_crop') }}" alt="{{ event.title }}" class="img-responsive">
                                 </div>
                                 <div class="col-md-12 event-label">
-                                    <p><span class="label label-warning label-date">{{ event.date|date("d F Y") }}</span></p>
+                                    <p><span class="label label-warning label-date">{{ event.date|localizeddate('full', 'none', app.request.locale) }}</span></p>
                                     <p><span class="label label-default label-title">{{ event.Title }}</span></p>
                                 </div>
                             </div>

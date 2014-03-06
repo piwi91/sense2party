@@ -38,7 +38,7 @@
                                         <img src="{{ asset('uploads/photos/' ~ album.preview)|imagine_filter('photo_preview') }}" alt="{{ album.title }}" class="img-responsive">
                                     </div>
                                     <div class="col-md-12 album-label">
-                                        <p><span class="label label-warning label-date">{{ album.date|date("d F Y") }}</span></p>
+                                        <p><span class="label label-warning label-date">{{ album.date|localizeddate('long', 'none', app.request.locale) }}</span></p>
                                         <p>
                                             <span class="label label-default label-title">{{ album.title }}</span>
                                         </p>
