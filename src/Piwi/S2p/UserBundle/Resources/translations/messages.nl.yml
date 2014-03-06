@@ -30,6 +30,7 @@ piwi:
                         title: Titel
                         album: Album
                     table_comments:
+                        author: Door
                         date: Datum
                         comment: Reactie
                         thread: Evenement

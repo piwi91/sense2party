@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity
  * @ORM\Table(name="comment")
  * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
+ * @ORM\Entity(repositoryClass="Piwi\S2p\CommentBundle\Entity\CommentRepository")
  */
 class Comment extends BaseComment implements SignedCommentInterface
 {

@@ -1,6 +1,12 @@
 piwi:
     s2p:
         dashboard:
-            index:
-                title: Dashboard
-                headline: Dashboard
+            default:
+                index:
+                    title: Dashboard
+                    headline: Dashboard
+                    next_events: De volgende 4 evenementen ...
+                    plan_event: Plan er een nu!
+                    latest_photos: Laatste toegevoegde foto's
+                    latest_comments: Laatste reacties
+                    read_more: Lees meer

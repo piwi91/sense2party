@@ -30,6 +30,7 @@ piwi:
                         title: Title
                         album: Album
                     table_comments:
+                        author: By
                         date: Date
                         comment: Comment
                         thread: Event

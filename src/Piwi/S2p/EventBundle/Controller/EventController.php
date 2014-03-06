@@ -49,11 +49,7 @@ class EventController extends Controller
 
         $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
 
-        $qb = $eventRepository->createQueryBuilder('event');
-        $qb->where('event.date >= :date');
-        $qb->orderBy('event.date', 'ASC');
-        $qb->setParameter('date', date('Y-m-d'));
-        $events = $qb->getQuery()->getResult();
+        $events = $eventRepository->findLatestEvents(999);
 
         return $this->render(
             'PiwiS2pEventBundle:Event:list.html.twig',

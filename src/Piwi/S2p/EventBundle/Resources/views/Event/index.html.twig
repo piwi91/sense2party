@@ -16,6 +16,12 @@
     {% javascripts '@FOSCommentBundle/Resources/assets/js/comments.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+
+    <script>
+        $(document).ready(function() {
+            $(".poster-link").fancybox();
+        });
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -24,7 +30,9 @@
             <div class="col-md-3">
                 <div class="row">
                     <div class="col-sm-12 event-details-poster">
-                        <img src="{{ asset('uploads/events/posters/' ~ event.poster)|imagine_filter('poster_m') }}" alt="{{ event.title }}" class="img-responsive">
+                        <a href="{{ asset('uploads/events/posters/' ~ event.poster) }}" title="{{ event.title }}" class="poster-link">
+                            <img src="{{ asset('uploads/events/posters/' ~ event.poster)|imagine_filter('poster_m') }}" alt="{{ event.title }}" class="img-responsive">
+                        </a>
                     </div>
                     <div class="col-sm-12 event-attendees">
                         <h3>{{ 'piwi.s2p.event.event.index.attendees'|trans }}</h3>
@@ -73,7 +81,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="pull-right">
-                            <p class="resume">
+                            <p class="event-resume">
                                 {{ 'piwi.s2p.event.event.index.resume'|trans(
                                     {
                                         '%date%': event.date|localizeddate('full', 'none', app.request.locale),

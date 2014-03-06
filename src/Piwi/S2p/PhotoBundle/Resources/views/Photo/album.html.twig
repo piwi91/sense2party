@@ -4,20 +4,8 @@
 
 {% block headline %}{{ 'piwi.s2p.photo.photo.album.headline'|trans({'%album%': album.title}) }}{% endblock %}
 
-{% block head_style %}
-    {{ parent() }}
-    {% stylesheets filter="cssrewrite"
-    'bundles/piwisystemcore/js/fancybox/source/jquery.fancybox.css'
-    %}
-    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
-    {% endstylesheets %}
-{% endblock %}
-
 {% block foot_script_assetic %}
     {{ parent() }}
-    {% javascripts '@PiwiSystemCoreBundle/Resources/public/js/fancybox/source/jquery.fancybox.pack.js' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
     <script>
         $(document).ready(function() {
             $(".album-picture").attr('rel', 'gallery').fancybox();
