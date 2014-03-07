@@ -14,5 +14,5 @@ parameters:
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    facebook_client_id:           120966774652813
-    facebook_client_secret:       5df7df47790e69381569fe986c9696bc
+    facebook_client_id:
+    facebook_client_secret:
