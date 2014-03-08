@@ -33,6 +33,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\Length(min = "5")
      */
     private $title;
 
@@ -40,6 +41,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -54,13 +56,15 @@ class Event
      * @var string
      *
      * @ORM\Column(name="venue", type="string", length=255)
+     * @Assert\Length(min = "5")
      */
     private $venue;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="source", type="string", length=255)
+     * @ORM\Column(name="source", type="string", length=255, nullable=true)
+     * @Assert\Url()
      */
     private $source;
 

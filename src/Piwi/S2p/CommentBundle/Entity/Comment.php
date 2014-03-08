@@ -71,8 +71,8 @@ class Comment extends BaseComment implements SignedCommentInterface
     function __toString()
     {
         $str = $this->getBody();
-        if (strlen($str) > 30)
-            $str = substr($str, 0, 27) . '...';
+        if (strlen($str) > 150)
+            $str = substr($str, 0, 147) . '...';
 
         return $str;
     }

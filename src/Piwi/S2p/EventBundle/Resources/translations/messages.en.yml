@@ -25,7 +25,7 @@ piwi:
                     poster: Poster
                     description: Description
                     venue: Venue
-                    source: Source (URL)
+                    source: Source (URL) (not required)
                     flashbag:
                         success: The event is added in the calendar
                 edit:

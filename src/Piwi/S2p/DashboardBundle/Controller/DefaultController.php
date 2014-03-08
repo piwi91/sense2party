@@ -31,8 +31,13 @@ class DefaultController extends Controller
 
         $comments = $em->getRepository('PiwiS2pCommentBundle:Comment')->findLatestComments(10);
 
+        // Get comment thread
+        $commentService = $this->get('piwi_s2p_comment.comment');
+        $commentService->getThreadByEntityId('event', $upcomingEvent->getId());
+
         return $this->render('PiwiS2pDashboardBundle:Default:index.html.twig', array(
             'upcomingEvent' => $upcomingEvent,
+            'upcomingEventComments' => count($commentService->getComments()),
             'events' => $nextEvents,
             'photos' => $photos,
             'comments' => $comments

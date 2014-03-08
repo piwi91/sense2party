@@ -4,6 +4,13 @@
 
 {% block headline %}{{ 'piwi.s2p.event.event.add.headline'|trans }}{% endblock %}
 
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script>
+        $(document).eventAdd();
+    </script>
+{% endblock %}
+
 {% block content %}
     <div class="col-md-12">
         <form class="form-horizontal" action="{{ path('piwi_s2p_event_event_add') }}" method="post" enctype="multipart/form-data">

@@ -24,7 +24,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <a href="{{ asset('uploads/events/posters/' ~ upcomingEvent.poster) }}" title="{{ upcomingEvent.title }}" class="poster-link">
+                <a href="{{ path('piwi_s2p_event_event_index', {'slug': upcomingEvent.slug}) }}" title="{{ upcomingEvent.title }}" class="poster-link">
                     <img src="{{ asset('uploads/events/posters/' ~ upcomingEvent.poster)|imagine_filter('poster_m') }}" alt="{{ upcomingEvent.title }}" class="img-responsive">
                 </a>
             </div>
@@ -67,6 +67,23 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <p>{{ upcomingEvent.description|markdown }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>
+                            <a href="{{ path('piwi_s2p_event_event_index', {'slug': upcomingEvent.slug}) }}">
+                                <span class="label label-default">
+                                    {{ 'piwi.s2p.dashboard.default.index.replies'|transchoice(upcomingEventComments) }}
+                                </span>
+                            </a>
+                            &nbsp;
+                            <a href="{{ path('piwi_s2p_event_event_index', {'slug': upcomingEvent.slug}) }}">
+                                <span class="label label-warning">
+                                    {{ 'piwi.s2p.dashboard.default.index.read_more'|trans }}
+                                </span>
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>

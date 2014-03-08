@@ -28,7 +28,10 @@ class EditEventFormType extends AbstractType
             'label' => 'piwi.s2p.event.event.add.venue'
         ));
         $builder->add('source', 'text', array(
-            'label' => 'piwi.s2p.event.event.add.source'
+            'label' => 'piwi.s2p.event.event.add.source',
+            'required' => false,
+            'render_required_asterisk' => false,
+            'render_optional_text' => false
         ));
         $builder->add('save', 'submit', array(
             'label' => 'piwi.s2p.user.profile.edit.save',

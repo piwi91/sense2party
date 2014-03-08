@@ -16,12 +16,12 @@ class AddEventFormType extends AbstractType
         ));
         $builder->add('date', 'date', array(
             'label' => 'piwi.s2p.event.event.add.date',
-            'attr' => array('class' => 'col-md-1'),
+            'attr' => array('class' => 'datepicker'),
             'widget' => 'single_text',
             'format' => 'dd-MM-yyyy',
         ));
         $builder->add('posterFile', 'file', array(
-            'label' => 'piwi.s2p.event.event.add.image'
+            'label' => 'piwi.s2p.event.event.add.poster'
         ));
         $builder->add('description', 'textarea', array(
             'label' => 'piwi.s2p.event.event.add.description',
@@ -31,7 +31,10 @@ class AddEventFormType extends AbstractType
             'label' => 'piwi.s2p.event.event.add.venue'
         ));
         $builder->add('source', 'text', array(
-            'label' => 'piwi.s2p.event.event.add.source'
+            'label' => 'piwi.s2p.event.event.add.source',
+            'required' => false,
+            'render_required_asterisk' => false,
+            'render_optional_text' => false
         ));
         $builder->add('save', 'submit', array(
             'label' => 'piwi.s2p.user.profile.edit.save',

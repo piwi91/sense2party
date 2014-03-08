@@ -1,5 +1,5 @@
 $(function() {
-    $.widget('sense2party.eventEdit', {
+    $.widget('sense2party.eventAdd', {
         // Default options
         options: {
         },
@@ -12,17 +12,6 @@ $(function() {
          * @private
          */
         _create: function() {
-            this._on(this.document, {
-                'click.delete': function(event) {
-                    event.preventDefault();
-                    var location = $(event.currentTarget).attr('href');
-                    bootbox.confirm("Are you sure?", function(result) {
-                        if (result !== false) {
-                            window.location.replace(location);
-                        }
-                    });
-                }
-            });
             $('.datepicker').datepicker({
                 'format': 'dd-mm-yyyy'
             });

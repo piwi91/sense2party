@@ -25,7 +25,7 @@ piwi:
                     poster: Poster
                     description: Omschrijving
                     venue: Locatie
-                    source: Bron (URL)
+                    source: Bron (URL) (niet verplicht)
                     flashbag:
                         success: Het evenement is toegevoegd aan de agenda
                 edit:

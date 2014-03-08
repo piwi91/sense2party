@@ -9,4 +9,5 @@ piwi:
                     plan_event: Plan er een nu!
                     latest_photos: Laatste toegevoegde foto's
                     latest_comments: Laatste reacties
+                    replies: '{0}Nog geen reacties|{1}Er is %count% reactie|]1,Inf[Er zijn %count% reacties'
                     read_more: Lees meer
