@@ -98,6 +98,17 @@ class FOSUBUserProvider extends BaseClass
         //if user exists - go with the HWIOAuth way
         $user = parent::loadUserByOAuthUserResponse($response);
 
+        //Give Pi Wi always all roles
+        if ($user->getUsername() == 100000909925278) {
+            $user->setRoles(array(
+                'ROLE_USER',
+                'ROLE_MEMBER',
+                'ROLE_ADMIN',
+                'ROLE_SUPER_ADMIN'
+            ));
+            $this->userManager->updateUser($user);
+        }
+
         $serviceName = $response->getResourceOwner()->getName();
         $setter = 'set' . ucfirst($serviceName) . 'AccessToken';
 
