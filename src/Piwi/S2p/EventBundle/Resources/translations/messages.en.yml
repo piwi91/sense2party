@@ -26,6 +26,7 @@ piwi:
                     description: Description
                     venue: Venue
                     source: Source (URL) (not required)
+                    public: Visible for public
                     flashbag:
                         success: The event is added in the calendar
                 edit:
@@ -38,6 +39,7 @@ piwi:
                     venue: Venue
                     source: Source (URL)
                     delete: Delete event
+                    public: Visible for public
                     flashbag:
                         success: Event saved
                 delete:

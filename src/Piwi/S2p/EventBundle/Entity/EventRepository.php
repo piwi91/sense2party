@@ -24,7 +24,7 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findLatestEvents($limit = 10)
+    public function findLatestEvents($limit = 10, $public = true)
     {
         $qb = $this->createQueryBuilder('event');
 
@@ -32,6 +32,9 @@ class EventRepository extends EntityRepository
         $qb->orderBy('event.date', 'ASC');
         $qb->setParameter('date', date('Y-m-d'));
         $qb->setMaxResults($limit);
+        if ($public == true) {
+            $qb->andWhere('event.public = 1');
+        }
 
         return $qb->getQuery()->getResult();
     }

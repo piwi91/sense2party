@@ -10,7 +10,13 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('PiwiS2pEventBundle:Event')->findLatestEvents(5);
+        if ($this->getUser()) {
+            $public = false;
+        } else {
+            $public = true;
+        }
+
+        $events = $em->getRepository('PiwiS2pEventBundle:Event')->findLatestEvents(5, $public);
         $upcomingEvent = $events[0];
 
         $nextEvents = array();
@@ -27,11 +33,6 @@ class DefaultController extends Controller
             }
         }
 
-        if ($this->getUser()) {
-            $public = false;
-        } else {
-            $public = true;
-        }
         $photos = $em->getRepository('PiwiS2pPhotoBundle:Photo')->findLatestPhotos(12, $public);
 
         $comments = $em->getRepository('PiwiS2pCommentBundle:Comment')->findLatestComments(10);

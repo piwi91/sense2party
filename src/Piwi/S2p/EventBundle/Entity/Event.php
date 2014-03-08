@@ -116,6 +116,13 @@ class Event
      */
     private $attendees;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="public", type="boolean", options={"default" = 1})
+     */
+    private $public = true;
+
     public function __construct()
     {
         $this->attendees = new ArrayCollection();
@@ -364,5 +371,21 @@ class Event
     public function getAttendees()
     {
         return $this->attendees;
+    }
+
+    /**
+     * @param boolean $public
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getPublic()
+    {
+        return $this->public;
     }
 }

@@ -36,6 +36,13 @@ class AddEventFormType extends AbstractType
             'render_required_asterisk' => false,
             'render_optional_text' => false
         ));
+        $builder->add('public', 'checkbox', array(
+            'required' => false,
+            'render_required_asterisk' => false,
+            'render_optional_text' => false,
+            'value' => true,
+            'label' => 'piwi.s2p.event.event.add.public'
+        ));
         $builder->add('save', 'submit', array(
             'label' => 'piwi.s2p.user.profile.edit.save',
             'attr' => array('class' => 'pull-right btn-primary')

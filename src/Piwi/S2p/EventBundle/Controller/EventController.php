@@ -9,6 +9,7 @@ use Piwi\S2p\EventBundle\Form\EditEventFormType;
 use Piwi\System\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class EventController extends Controller
 {
@@ -20,6 +21,10 @@ class EventController extends Controller
 
         if (!$event = $eventRepository->findOneBySlug($slug)) {
             throw $this->createNotFoundException('piwi.s2p.event.exception.event_not_found');
+        }
+
+        if (!$event->getPublic() && !$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw new AccessDeniedException('No access');
         }
 
         if ($user = $this->getUser()) {
@@ -49,7 +54,13 @@ class EventController extends Controller
 
         $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
 
-        $events = $eventRepository->findLatestEvents(999);
+        if ($this->getUser()) {
+            $public = false;
+        } else {
+            $public = true;
+        }
+
+        $events = $eventRepository->findLatestEvents(999, $public);
 
         return $this->render(
             'PiwiS2pEventBundle:Event:list.html.twig',

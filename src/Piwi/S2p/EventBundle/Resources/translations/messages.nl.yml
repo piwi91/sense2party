@@ -26,6 +26,7 @@ piwi:
                     description: Omschrijving
                     venue: Locatie
                     source: Bron (URL) (niet verplicht)
+                    public: Zichtbaar voor publiek
                     flashbag:
                         success: Het evenement is toegevoegd aan de agenda
                 edit:
@@ -37,6 +38,7 @@ piwi:
                     description: Omschrijving
                     venue: Locatie
                     source: Bron (URL)
+                    public: Zichtbaar voor publiek
                     delete: Verwijder evenement
                     flashbag:
                         success: Het evenement is gewijzigd
