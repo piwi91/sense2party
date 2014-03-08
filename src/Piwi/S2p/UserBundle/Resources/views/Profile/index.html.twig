@@ -71,70 +71,76 @@
                 </dl>
             </div>
             <div class="col-md-9">
-                <ul class="nav nav-tabs" id="myTab">
-                    <li class="active"><a href="#events" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.events'|trans }}</a></li>
-                    <li><a href="#replies" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.replies'|trans }}</a></li>
-                    <li><a href="#photos" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.photos'|trans }}</a></li>
-                    <li><a href="#others" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.others'|trans }}</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="events">
-                        <table class="table table-striped" id="table-events">
-                            <thead>
-                                <td width="20%">{{ 'piwi.s2p.user.profile.index.table_events.date'|trans }}</td>
-                                <td>{{ 'piwi.s2p.user.profile.index.table_events.title'|trans }}</td>
-                                <td width="20%">{{ 'piwi.s2p.user.profile.index.table_events.venue'|trans }}</td>
-                            </thead>
-                            <tbody>
-                                {% for event in events %}
+                {% if app.user %}
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active"><a href="#events" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.events'|trans }}</a></li>
+                        <li><a href="#replies" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.replies'|trans }}</a></li>
+                        <li><a href="#photos" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.photos'|trans }}</a></li>
+                        <li><a href="#others" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.others'|trans }}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="events">
+                            <table class="table table-striped" id="table-events">
+                                <thead>
+                                    <td width="20%">{{ 'piwi.s2p.user.profile.index.table_events.date'|trans }}</td>
+                                    <td>{{ 'piwi.s2p.user.profile.index.table_events.title'|trans }}</td>
+                                    <td width="20%">{{ 'piwi.s2p.user.profile.index.table_events.venue'|trans }}</td>
+                                </thead>
+                                <tbody>
+                                    {% for event in events %}
+                                        <tr>
+                                            <td>{{ event.date|localizeddate('long', 'none', app.request.locale) }}</td>
+                                            <td><a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}">{{ event.title }}</a></td>
+                                            <td>{{ event.venue }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="replies">
+                            <table class="table table-striped" id="table-comments">
+                                <thead>
+                                <td width="20%">{{ 'piwi.s2p.user.profile.index.table_comments.date'|trans }}</td>
+                                <td>{{ 'piwi.s2p.user.profile.index.table_comments.comment'|trans }}</td>
+                                <td width="30%">{{ 'piwi.s2p.user.profile.index.table_comments.thread'|trans }}</td>
+                                </thead>
+                                <tbody>
+                                {% for comment in user.comments %}
+                                    {% set event = getEventById(comment.thread.entityId) %}
                                     <tr>
-                                        <td>{{ event.date|localizeddate('long', 'none', app.request.locale) }}</td>
-                                        <td><a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}">{{ event.title }}</a></td>
-                                        <td>{{ event.venue }}</td>
+                                        <td>{{ comment.createdAt|localizeddate('long', 'none', app.request.locale) }}</td>
+                                        <td>{{ comment }}</td>
+                                        <td><a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}#fos_comment_{{ comment.id }}">{{ event.title }}</a></td>
                                     </tr>
                                 {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane" id="replies">
-                        <table class="table table-striped" id="table-comments">
-                            <thead>
-                            <td width="20%">{{ 'piwi.s2p.user.profile.index.table_comments.date'|trans }}</td>
-                            <td>{{ 'piwi.s2p.user.profile.index.table_comments.comment'|trans }}</td>
-                            <td width="30%">{{ 'piwi.s2p.user.profile.index.table_comments.thread'|trans }}</td>
-                            </thead>
-                            <tbody>
-                            {% for comment in user.comments %}
-                                {% set event = getEventById(comment.thread.entityId) %}
-                                <tr>
-                                    <td>{{ comment.createdAt|localizeddate('long', 'none', app.request.locale) }}</td>
-                                    <td>{{ comment }}</td>
-                                    <td><a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}#fos_comment_{{ comment.id }}">{{ event.title }}</a></td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane" id="photos">
-                        <table class="table table-striped" id="table-photos">
-                            <thead>
-                            <td>{{ 'piwi.s2p.user.profile.index.table_photos.title'|trans }}</td>
-                            <td width="40%">{{ 'piwi.s2p.user.profile.index.table_photos.album'|trans }}</td>
-                            </thead>
-                            <tbody>
-                            {% for photo in user.photos %}
-                                <tr>
-                                    <td><a href="{{ asset('uploads/photos/' ~ photo.filename) }}" title="{{ photo.title }}" rel="album" class="photo">{{ photo.title }}</a></td>
-                                    <td><a href="{{ path('piwi_s2p_photo_photo_album', {'slug': photo.album.slug}) }}">{{ photo.album }}</a></td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-pane" id="others">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="photos">
+                            <table class="table table-striped" id="table-photos">
+                                <thead>
+                                <td>{{ 'piwi.s2p.user.profile.index.table_photos.title'|trans }}</td>
+                                <td width="40%">{{ 'piwi.s2p.user.profile.index.table_photos.album'|trans }}</td>
+                                </thead>
+                                <tbody>
+                                {% for photo in user.photos %}
+                                    <tr>
+                                        <td><a href="{{ asset('uploads/photos/' ~ photo.filename) }}" title="{{ photo.title }}" rel="album" class="photo">{{ photo.title }}</a></td>
+                                        <td><a href="{{ path('piwi_s2p_photo_photo_album', {'slug': photo.album.slug}) }}">{{ photo.album }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="others">
 
+                        </div>
                     </div>
-                </div>
+                {% else %}
+                    <p class="bg-warning" style="padding: 15px;">
+                        {{ 'piwi.s2p.user.profile.index.restricted_access'|trans }}
+                    </p>
+                {% endif %}
             </div>
         </div>
     </div>

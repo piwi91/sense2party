@@ -22,6 +22,7 @@ piwi:
                     replies: Reacties
                     photos: Foto's
                     others: Overige
+                    restricted_access: Alleen ingelogde personen kunnen profieldetails bekijken
                     table_events:
                         date: Datum
                         title: Omschrijving
