@@ -27,7 +27,12 @@ class DefaultController extends Controller
             }
         }
 
-        $photos = $em->getRepository('PiwiS2pPhotoBundle:Photo')->findLatestPhotos(12);
+        if ($this->getUser()) {
+            $public = false;
+        } else {
+            $public = true;
+        }
+        $photos = $em->getRepository('PiwiS2pPhotoBundle:Photo')->findLatestPhotos(12, $public);
 
         $comments = $em->getRepository('PiwiS2pCommentBundle:Comment')->findLatestComments(10);
 

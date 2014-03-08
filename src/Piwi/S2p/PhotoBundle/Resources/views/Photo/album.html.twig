@@ -2,7 +2,17 @@
 
 {% block title %}{{ parent() }} - {{ 'piwi.s2p.photo.photo.album.title'|trans({'%album%': album.title}) }}{% endblock %}
 
-{% block headline %}{{ 'piwi.s2p.photo.photo.album.headline'|trans({'%album%': album.title}) }}{% endblock %}
+{% block headline %}
+    {{ 'piwi.s2p.photo.photo.album.headline'|trans({'%album%': album.title}) }}
+    {% if album.user == app.user %}
+        <a href="{{ path('piwi_s2p_photo_photo_edit', {'slug': album.slug}) }}">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a href="{{ path('piwi_s2p_photo_photo_delete', {'slug': album.slug}) }}" class="delete">
+            <i class="fa fa-times" style="color:red;"></i>
+        </a>
+    {% endif %}
+{% endblock %}
 
 {% block foot_script_assetic %}
     {{ parent() }}

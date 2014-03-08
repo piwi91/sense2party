@@ -12,12 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class PhotoRepository extends EntityRepository
 {
-    public function findLatestPhotos($limit = 10)
+    public function findLatestPhotos($limit = 10, $public = true)
     {
         $qb = $this->createQueryBuilder('photo');
 
         $qb->orderBy('photo.date', 'ASC');
         $qb->setMaxResults($limit);
+        if ($public === true) {
+            $qb->innerJoin('photo.album', 'album');
+            $qb->where('album.public = 1');
+        }
 
         return $qb->getQuery()->getResult();
     }
