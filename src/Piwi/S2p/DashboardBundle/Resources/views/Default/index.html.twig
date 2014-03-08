@@ -163,14 +163,16 @@
                     <tbody>
                     {% for comment in comments %}
                         {% set event = getEventById(comment.thread.entityId) %}
-                        <tr>
-                            <td>{% if comment.author %}{{ comment.author.firstName }}{% endif %}</td>
-                            <td>
-                                {{ comment }}
-                                <br />
-                                <a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}#fos_comment_{{ comment.id }}">{{ 'piwi.s2p.dashboard.default.index.read_more'|trans }}</a>
-                            </td>
-                        </tr>
+                        {% if (not app.user and event.public) or app.user %}
+                            <tr>
+                                <td>{% if comment.author %}{{ comment.author.firstName }}{% endif %}</td>
+                                <td>
+                                    {{ comment }}
+                                    <br />
+                                    <a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}#fos_comment_{{ comment.id }}">{{ 'piwi.s2p.dashboard.default.index.read_more'|trans }}</a>
+                                </td>
+                            </tr>
+                        {% endif %}
                     {% endfor %}
                     </tbody>
                 </table>
