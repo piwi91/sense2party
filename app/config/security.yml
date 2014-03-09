@@ -50,6 +50,6 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/photo/add/.*, role: ROLE_USER }
-        - { path: ^/events/add, role: ROLE_USER }
+        - { path: ^/photo/add/.*, role: ROLE_MEMBER }
+        - { path: ^/events/add, role: ROLE_MEMBER }
         - { path: ^/admin/, role: ROLE_ADMIN }

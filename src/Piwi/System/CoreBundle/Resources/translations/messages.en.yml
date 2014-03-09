@@ -1,3 +1,6 @@
+yes: Yes
+no: No
+
 menu:
     home: Home
     events: Events
@@ -8,3 +11,5 @@ menu:
         profile: My profile
         privacy: Privacy settings
         logout: Logout
+    admin:
+        users: User management

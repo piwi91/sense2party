@@ -18,7 +18,7 @@ class PhotoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$this->get('security.context')->isGranted('ROLE_MEMBER')) {
             $albums = $em->getRepository('PiwiS2pPhotoBundle:Album')->findBy(array('public' => true), array('date' => 'DESC'));
         } else {
             $albums = $em->getRepository('PiwiS2pPhotoBundle:Album')->findBy(array(), array('date' => 'DESC'));
@@ -38,7 +38,7 @@ class PhotoController extends Controller
             throw $this->createNotFoundException('piwi.s2p.photo.photo.album.exception');
         }
 
-        if (!$album->getPublic() && !$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$album->getPublic() && !$this->get('security.context')->isGranted('ROLE_MEMBER')) {
             throw new AccessDeniedException('No access');
         }
 

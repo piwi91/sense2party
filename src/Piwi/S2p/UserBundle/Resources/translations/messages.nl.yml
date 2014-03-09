@@ -60,3 +60,25 @@ piwi:
                     save: Opslaan
                     flashbag:
                         success: De privacy instellingen zijn opgeslagen
+            admin:
+                list:
+                    title: Gebruikersbeheer
+                    headline: Gebruikersbeheer
+                    name: Naam
+                    member: Is lid?
+                edit:
+                    title: Wijzig gebruiker
+                    headline: Wijzig gebruiker
+                    firstname: Voornaam
+                    lastname: Achternaam
+                    birthday: Verjaardag
+                    roles: Rollen
+                    email: E-mailadres
+                    enabled: Geactiveerd
+                    locked: Gelockt
+                    save: Opslaan
+                    flashbag:
+                        success: De gebruiker is opgeslagen
+                delete:
+                    flashbag:
+                        success: De gebruiker is verwijderd

@@ -1,3 +1,6 @@
+yes: Ja
+no: Nee
+
 menu:
     home: Home
     events: Evenementen
@@ -8,3 +11,5 @@ menu:
         profile: Mijn profiel
         privacy: Privacy instellingen
         logout: Log uit
+    admin:
+        users: Gebruikersbeheer

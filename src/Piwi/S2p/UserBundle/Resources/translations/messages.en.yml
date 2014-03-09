@@ -60,3 +60,25 @@ piwi:
                     save: Save
                     flashbag:
                         success: The privacy settings are saved
+            admin:
+                list:
+                    title: User management
+                    headline: User management
+                    name: Name
+                    member: Is member?
+                edit:
+                    title: Edit user
+                    headline: Edit user
+                    firstname: First name
+                    lastname: Last name
+                    birthday: Birthday
+                    roles: Roles
+                    email: Emailaddress
+                    enabled: Enabled
+                    locked: Locked
+                    save: Save
+                    flashbag:
+                        success: The user is saved
+                delete:
+                    flashbag:
+                        success: The user is removed

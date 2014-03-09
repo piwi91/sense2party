@@ -10,7 +10,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        if ($this->getUser()) {
+        if ($this->get('security.context')->isGranted('ROLE_MEMBER')) {
             $public = false;
         } else {
             $public = true;

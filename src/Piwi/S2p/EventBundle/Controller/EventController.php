@@ -23,7 +23,7 @@ class EventController extends Controller
             throw $this->createNotFoundException('piwi.s2p.event.exception.event_not_found');
         }
 
-        if (!$event->getPublic() && !$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$event->getPublic() && !$this->get('security.context')->isGranted('ROLE_MEMBER')) {
             throw new AccessDeniedException('No access');
         }
 
@@ -54,7 +54,7 @@ class EventController extends Controller
 
         $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
 
-        if ($this->getUser()) {
+        if ($this->get('security.context')->isGranted('ROLE_MEMBER')) {
             $public = false;
         } else {
             $public = true;

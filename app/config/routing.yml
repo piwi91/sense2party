@@ -60,4 +60,7 @@ piwi_system_user:
     resource: "@PiwiSystemUserBundle/Resources/config/routing.yml"
     prefix:   /
 
-# App
+# S2p admin
+piwi_s2p_user_admin:
+    resource: "@PiwiS2pUserBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin/user
