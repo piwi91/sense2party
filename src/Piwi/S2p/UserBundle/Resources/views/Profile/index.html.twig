@@ -71,7 +71,7 @@
                 </dl>
             </div>
             <div class="col-md-9">
-                {% if app.user %}
+                {% if is_granted('ROLE_MEMBER') %}
                     <ul class="nav nav-tabs" id="myTab">
                         <li class="active"><a href="#events" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.events'|trans }}</a></li>
                         <li><a href="#replies" data-toggle="tab">{{ 'piwi.s2p.user.profile.index.replies'|trans }}</a></li>

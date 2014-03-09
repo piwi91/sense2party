@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-2">
                 <div class="pull-right">
-                    {% if app.user %}
+                    {% if is_granted('ROLE_MEMBER') %}
                         <a href="{{ path('piwi_s2p_photo_photo_add') }}" class="btn btn-primary btn-small">
                             {{ 'piwi.s2p.photo.photo.index.add'|trans }}
                         </a>

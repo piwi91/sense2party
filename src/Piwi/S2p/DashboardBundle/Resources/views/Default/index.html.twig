@@ -114,7 +114,7 @@
                         </div>
                     {% else %}
                         <div class="col-md-3 event-container">
-                            {% if app.user %}
+                            {% if is_granted('ROLE_MEMBER') %}
                                 <a href="{{ path('piwi_s2p_event_event_add') }}">
                             {% endif %}
                                 <div class="panel panel-default event">
@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            {% if app.user %}
+                            {% if is_granted('ROLE_MEMBER') %}
                                 </a>
                             {% endif %}
                         </div>

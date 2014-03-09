@@ -12,7 +12,7 @@
             </div>
             <div class="col-md-2">
                 <div class="pull-right">
-                    {% if app.user %}
+                    {% if is_granted('ROLE_MEMBER') %}
                         <a href="{{ path('piwi_s2p_event_event_add') }}" class="btn btn-primary btn-small">
                             {{ 'piwi.s2p.event.event.list.add'|trans }}
                         </a>

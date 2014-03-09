@@ -46,6 +46,15 @@ class ProfileController extends Controller
         $userRepository = $em->getRepository('PiwiSystemUserBundle:User');
 
         $users = $userRepository->findAll();
+        // Loop trough users to check if the user has a role ROLE_MEMBER
+        $_users = array();
+        foreach ($users as $user) {
+            if ($user->hasRole('ROLE_MEMBER')) {
+                $_users[] = $user;
+            }
+        }
+        // Replace $users variable by the filtered array
+        $users = $_users;
 
         return $this->render(
             'PiwiS2pUserBundle:Profile:list.html.twig',

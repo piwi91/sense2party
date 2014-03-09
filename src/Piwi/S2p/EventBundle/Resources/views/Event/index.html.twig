@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-sm-12">
                         <ul class="list-unstyled">
-                            {% if app.user %}
+                            {% if is_granted('ROLE_MEMBER') %}
                                 {% if attendee not in event.attendees %}
                                     <li>
                                         <a href="{{ path('piwi_s2p_event_event_attend', {'slug': event.slug}) }}" class="btn btn-primary">
