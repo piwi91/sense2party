@@ -51,6 +51,7 @@ piwi:
                     last_login: Last time logged in
                     attended_events: Attended events
                     privacy: Not visible because of privacy settings
+                    maybe: Maybe
             privacy:
                 edit:
                     title: Privacy settings

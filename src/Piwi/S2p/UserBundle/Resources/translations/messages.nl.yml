@@ -51,6 +51,7 @@ piwi:
                     last_login: Laatste keer ingelogd
                     attended_events: Deelgenomen evenementen
                     privacy: Niet zichtbaar i.v.m. privacy instelling
+                    maybe: Misschien
             privacy:
                 edit:
                     title: Privacy instellingen

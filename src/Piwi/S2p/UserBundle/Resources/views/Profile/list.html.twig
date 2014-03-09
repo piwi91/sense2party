@@ -28,7 +28,12 @@
                                     <dt>{{ 'piwi.s2p.user.profile.list.last_login'|trans }}</dt>
                                     <dd>{{ user.lastLogin|localizeddate('long', 'medium', app.request.locale) }}</dd>
                                     <dt>{{ 'piwi.s2p.user.profile.list.attended_events'|trans }}</dt>
-                                    <dd>Yet to come...</dd>
+                                    <dd>
+                                        {{ user.countAttendedEvents }}
+                                        {% if user.countAttendedEvents > 0 %}
+                                            ({{ user.countMaybeAttendedEvents }} {{ 'piwi.s2p.user.profile.list.maybe'|trans }})
+                                        {% endif %}
+                                    </dd>
                                     {#<dd>{{ user.attendedEvents }}</dd>#}
                                 </dl>
                             </div>

@@ -339,6 +339,26 @@ class User extends BaseUser implements UserInterface
         $this->comments = $comments;
     }
 
+    public function countAttendedEvents()
+    {
+        return count($this->getAttendedEvents());
+    }
+
+    public function countMaybeAttendedEvents()
+    {
+        if ($this->countAttendedEvents() > 0) {
+            $countMaybe = 0;
+            /** @var $attendedEvent \Piwi\S2p\EventBundle\Entity\EventAttendee */
+            foreach ($this->getAttendedEvents() as $attendedEvent) {
+                if ($attendedEvent->getStatus() == $attendedEvent::MAYBE) {
+                    $countMaybe++;
+                }
+            }
+            return $countMaybe;
+        }
+        return 0;
+    }
+
     /**
      * @return \Piwi\S2p\CommentBundle\Entity\Comment
      */
