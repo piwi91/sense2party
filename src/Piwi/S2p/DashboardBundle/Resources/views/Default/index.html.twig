@@ -155,6 +155,7 @@
             </div>
             <div class="col-md-8">
                 <h3>{{ 'piwi.s2p.dashboard.default.index.latest_comments'|trans }}</h3>
+                {% if is_granted('ROLE_MEMBER') %}
                 <table class="table table-striped" id="table-comments">
                     <thead>
                     <td width="20%">{{ 'piwi.s2p.user.profile.index.table_comments.author'|trans }}</td>
@@ -176,6 +177,11 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                {% else %}
+                    <p class="bg-warning" style="padding: 15px;">
+                        {{ 'piwi.s2p.dashboard.default.index.restricted_access'|trans }}
+                    </p>
+                {% endif %}
             </div>
         </div>
     </div>

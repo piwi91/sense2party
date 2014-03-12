@@ -100,6 +100,7 @@
                         <p>{{ event.description|markdown }}</p>
                     </div>
                 </div>
+                {% if is_granted('ROLE_MEMBER') %}
                 <div class="row">
                     <div class="col-sm-12">
                         <div id="fos_comment_thread" data-thread="{{ thread.id }}">
@@ -110,6 +111,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
