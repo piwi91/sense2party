@@ -153,6 +153,9 @@ liip_imagine:
         poster_m_crop:
             filters:
                 thumbnail: { size: [300, 400], mode: outbound }
+        poster_mail:
+            filters:
+                thumbnail: { size: [550, 200], mode: outbound }
         photo_preview:
             filters:
                 thumbnail: { size: [300, 300], mode: outbound }

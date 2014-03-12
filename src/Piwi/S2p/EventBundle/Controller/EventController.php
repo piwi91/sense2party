@@ -89,6 +89,8 @@ class EventController extends Controller
                 $em->persist($event);
                 $em->flush();
 
+                $this->newEventMail($event);
+
                 $this->get('session')->getFlashBag()->add(
                     'success', 'piwi.s2p.event.event.add.flashbag.success'
                 );
@@ -172,7 +174,7 @@ class EventController extends Controller
             'success', 'piwi.s2p.event.event.delete.flashbag.success'
         );
 
-        $this->redirect(
+        return $this->redirect(
             $this->generateUrl('piwi_s2p_event_event_list')
         );
     }
@@ -239,6 +241,40 @@ class EventController extends Controller
         return $this->redirect(
             $this->generateUrl('piwi_s2p_event_event_index', array('slug' => $event->getSlug()))
         );
+    }
+
+
+
+    /**
+     * @param \Piwi\S2p\EventBundle\Entity\Event $event
+     */
+    public function newEventMail(Event $event)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $users = $em->getRepository('PiwiSystemUserBundle:User')->findAll();
+        $mailUsers = array();
+        foreach ($users as $user) {
+            if ($user->hasRole('ROLE_MEMBER')) {
+                $mailUsers[] = $user;
+            }
+        }
+
+        $subject = "Nieuw evenement: " . $event->getTitle();
+
+        /** @var $user \Piwi\System\UserBundle\Entity\User */
+        foreach ($mailUsers as $user) {
+            $htmlBody = $this->renderView('PiwiSystemMailBundle:Mail:event.html.twig', array(
+                'event' => $event,
+                'user' => $user
+            ));
+            $mail = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom('no_reply@sense2party.nl')
+                ->setBody($htmlBody, 'text/html')
+                ->setTo($user->getEmail());
+            $this->get('mailer')->send($mail);
+        }
     }
 
     protected function isAttendee(Event $event, User $user)

@@ -50,6 +50,7 @@ class AppKernel extends Kernel
             new Piwi\S2p\EventBundle\PiwiS2pEventBundle(),
             new Piwi\S2p\CommentBundle\PiwiS2pCommentBundle(),
             new Piwi\S2p\PhotoBundle\PiwiS2pPhotoBundle(),
+            new Piwi\System\MailBundle\PiwiSystemMailBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

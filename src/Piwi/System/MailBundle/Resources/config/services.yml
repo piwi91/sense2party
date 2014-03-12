@@ -1,0 +1,7 @@
+parameters:
+#    piwi_system_mail.example.class: Piwi\System\MailBundle\Example
+
+services:
+#    piwi_system_mail.example:
+#        class: %piwi_system_mail.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
