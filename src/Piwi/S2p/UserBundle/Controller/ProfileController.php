@@ -5,6 +5,7 @@ namespace Piwi\S2p\UserBundle\Controller;
 use Piwi\S2p\UserBundle\Form\ProfileFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProfileController extends Controller
 {
@@ -21,6 +22,14 @@ class ProfileController extends Controller
 
         if (!$user = $userRepository->findOneByUsername($username)) {
             throw $this->createNotFoundException('piwi.s2p.user.exception.user_not_found');
+        }
+
+        if (!$this->getUser() && !$user->getShowProfile()) {
+            throw new AccessDeniedException();
+        } elseif ($this->getUser()) {
+            if (!$this->getUser()->hasRole('ROLE_MEMBER') && !$user->getShowProfile()) {
+                throw new AccessDeniedException();
+            }
         }
 
         $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
@@ -48,8 +57,9 @@ class ProfileController extends Controller
         $users = $userRepository->findAll();
         // Loop trough users to check if the user has a role ROLE_MEMBER
         $_users = array();
+        /** @var $user \Piwi\System\UserBundle\Entity\User */
         foreach ($users as $user) {
-            if ($user->hasRole('ROLE_MEMBER')) {
+            if ($user->hasRole('ROLE_MEMBER') && $user->getShowProfile()) {
                 $_users[] = $user;
             }
         }

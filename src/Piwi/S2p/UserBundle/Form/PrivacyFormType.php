@@ -27,6 +27,14 @@ class PrivacyFormType extends AbstractType
             'render_optional_text' => false,
             'required' => false
         ));
+        $builder->add('show_profile', 'checkbox', array(
+            'label' => 'piwi.s2p.user.privacy.edit.show_profile',
+            'widget_checkbox_label' => 'label',
+            'horizontal_label_class' => 'col-md-6',
+            'horizontal_input_wrapper_class' => 'col-md-6',
+            'render_optional_text' => false,
+            'required' => false
+        ));
         $builder->add('save', 'submit', array(
             'label' => 'piwi.s2p.user.privacy.edit.save',
             'attr' => array('class' => 'pull-right btn-primary')

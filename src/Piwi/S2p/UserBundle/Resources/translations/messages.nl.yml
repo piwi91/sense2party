@@ -56,8 +56,10 @@ piwi:
                 edit:
                     title: Privacy instellingen
                     headline: Wijzig privacy instellingen
+                    text: Geef met deze privacy instellingen aan welke gegevens gasten en gebruikers die geen lid van Sense2Party zijn mogen zien. Deze instellingen gelden dus niet voor gebruikers die wel lid zijn (en dus vrienden zijn).
                     show_email: E-mailadres weergeven
                     show_birthday: Verjaardag weergeven
+                    show_profile: Profiel weergeven
                     save: Opslaan
                     flashbag:
                         success: De privacy instellingen zijn opgeslagen

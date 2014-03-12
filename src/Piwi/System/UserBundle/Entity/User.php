@@ -42,11 +42,14 @@ class User extends BaseUser implements UserInterface
     /** @ORM\Column(name="facebook_link", type="string", length=255, nullable=true) */
     protected $facebookLink;
 
-    /** @ORM\Column(name="privacy_show_email", type="boolean") */
+    /** @ORM\Column(name="privacy_show_email", type="boolean", options={"default" = 1}) */
     protected $showEmail = true;
 
-    /** @ORM\Column(name="privacy_show_birthday", type="boolean") */
+    /** @ORM\Column(name="privacy_show_birthday", type="boolean", options={"default" = 1}) */
     protected $showBirthday = true;
+
+    /** @ORM\Column(name="privacy_show_profile", type="boolean", options={"default" = 1}) */
+    protected $showProfile = true;
 
     /**
      * @var \Piwi\S2p\EventBundle\Entity\Event
@@ -233,6 +236,22 @@ class User extends BaseUser implements UserInterface
     public function getShowEmail()
     {
         return $this->showEmail;
+    }
+
+    /**
+     * @param mixed $showProfile
+     */
+    public function setShowProfile($showProfile)
+    {
+        $this->showProfile = $showProfile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShowProfile()
+    {
+        return $this->showProfile;
     }
 
     /**
