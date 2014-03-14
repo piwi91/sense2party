@@ -1,5 +1,5 @@
 {% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
-{% extends 'MopaBootstrapBundle::base' ~ theme_type|default('')~ '.html.twig' %}
+{% extends 'MopaBootstrapBundle::base_less.html.twig' %}
 
 {% block head_style %}
     {% stylesheets output="css/core.css" combine=true filter="cssrewrite"
