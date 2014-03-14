@@ -29,7 +29,7 @@ set :model_manager, "doctrine"
 
 # Role info. I don't think this is particularly important for Capifony...
 role :web,        domain                         # Your HTTP server, Apache/etc
-role :app,        domain                         # This may be the same as your `Web` server
+role :app,        domain, :primary => true       # This may be the same as your `Web` server
 role :db,         domain, :primary => true       # This is where Symfony2 migrations will run
 
 # General config stuff
