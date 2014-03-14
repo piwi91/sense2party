@@ -20,6 +20,9 @@
         "sensio/framework-extra-bundle": "~3.0",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
+	
+	"doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master",
 
         "gedmo/doctrine-extensions": "2.3.*@dev",
 

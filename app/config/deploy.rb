@@ -1,6 +1,6 @@
 set :application, "Sense2Party"
 set :domain,      "vps01.transip.piwi-web.com"
-set :deploy_to,   "/home/s2p/domains/beta.sense2party.nl/public_html"
+set :deploy_to,   "/home/s2p/domains/sense2party.nl/public_html"
 
 set :user,        "s2p"
 # set :password,    ""
@@ -23,7 +23,7 @@ set :interactive_mode, false
 set :repository,  "git@github.com:piwi91/sense2party.git"
 set :scm,         :git
 set :deploy_via,  :copy
-set :branch,      "develop"
+set :branch,      "master"
 
 set :model_manager, "doctrine"
 
@@ -47,4 +47,4 @@ ssh_options[:keys] = [ssh_key]
 # logger.level = Logger::MAX_LEVEL
 
 # Run migrations before warming the cache
-# before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
+before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
