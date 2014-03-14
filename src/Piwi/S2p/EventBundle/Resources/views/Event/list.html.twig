@@ -2,24 +2,24 @@
 
 {% block title %}{{ parent() }} - {{ 'piwi.s2p.event.event.list.title'|trans }}{% endblock %}
 
-{% block headline %}{{ 'piwi.s2p.event.event.list.headline'|trans }}{% endblock %}
+{% block headline %}
+    {{ 'piwi.s2p.event.event.list.headline'|trans }}
+    {% if is_granted('ROLE_MEMBER') %}
+        <a href="{{ path('piwi_s2p_event_event_add') }}">
+            <i class="fa fa-plus"></i>
+        </a>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <div class="col-md-12">
+        {% if is_granted('ROLE_MEMBER') %}
         <div class="row">
-            <div class="col-md-10">
-                <p>Tekst...</p>
-            </div>
-            <div class="col-md-2">
-                <div class="pull-right">
-                    {% if is_granted('ROLE_MEMBER') %}
-                        <a href="{{ path('piwi_s2p_event_event_add') }}" class="btn btn-primary btn-small">
-                            {{ 'piwi.s2p.event.event.list.add'|trans }}
-                        </a>
-                    {% endif %}
-                </div>
+            <div class="col-md-12">
+                <p>Wil je een evenement toevoegen? Dan kan dat! Klik in de zwarte balk, helemaal rechts, op het "plus" teken en vul alle benodigde gegevens in. Tip: Probeer een leuke poster / foto / afbeelding te vinden van het evenement om het voor iedereen herkenbaar te maken. <a href="#extra_explanation">Zie onderaan deze pagina voor een uitgebreide uitleg.</a></p>
             </div>
         </div>
+        {% endif %}
         <div class="row">
             <div class="col-md-12">
                 {% for event in events %}
@@ -41,5 +41,15 @@
                 {% endfor %}
             </div>
         </div>
+        {% if is_granted('ROLE_MEMBER') %}
+        <div class="row">
+            <div class="col-md-12" id="extra_explanation">
+                    <p><strong>Wat extra uitleg:</strong></p>
+                    <p>Het toevoegen of wijzigen van evenementen is zo eenvoudig mogelijk gehouden zodat iedereen de website up to date kan houden met de leukste feestjes. Als je een nieuw evenement toevoegd is het belangrijkste de titel, datum en poster (of andere afbeelding). Je kan in het vakje omschrijving de details van het evenement vermelden of zelf iets verzinnen. Als laatste geef je op waar het evenement plaats vindt, bijvoorbeeld in de stoba, bravoure of gewoon een plaatsnaam. Heb je de informatie van een wbesite gehaald vermeld dan ook even de bron en je bent klaar!</p>
+                    <p><strong>Niet iedereen hoeft mijn evenement te weten!</strong> Geen paniek, want als je het vinkje bij "Zichtbaar voor publiek" uitzet dan is het evenement alleen nog te zien voor de leden van de website!</p>
+                    <p><strong>Shit ik heb een fout gemaakt :-(</strong> Ook dan geen paniek, want je kan een evenement zo vaak wijzigen als jij zelf wilt.</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}
