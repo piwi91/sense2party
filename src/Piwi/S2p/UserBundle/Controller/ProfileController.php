@@ -11,8 +11,9 @@ class ProfileController extends Controller
 {
     /**
      * @param $username
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction($username)
     {
@@ -32,15 +33,17 @@ class ProfileController extends Controller
             }
         }
 
-        $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
-
-        $events = $eventRepository->findAttendedEventsByUser($user);
+        $events = $em->getRepository('PiwiS2pEventBundle:Event')
+            ->findAttendedEventsByUser($user);
+        $comments = $em->getRepository('PiwiS2pCommentBundle:Comment')
+            ->findBy(array('author' => $user), array('createdAt' => 'DESC'));
 
         return $this->render(
             'PiwiS2pUserBundle:Profile:index.html.twig',
             array(
                 'user' => $user,
-                'events' => $events
+                'events' => $events,
+                'comments' => $comments
             )
         );
     }
@@ -54,7 +57,7 @@ class ProfileController extends Controller
 
         $userRepository = $em->getRepository('PiwiSystemUserBundle:User');
 
-        $users = $userRepository->findAll();
+        $users = $userRepository->findBy(array(), array('firstName' => 'DESC','lastName' => 'DESC'));
         // Loop trough users to check if the user has a role ROLE_MEMBER
         $_users = array();
         /** @var $user \Piwi\System\UserBundle\Entity\User */

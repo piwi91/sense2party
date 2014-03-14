@@ -18,6 +18,7 @@ class EventRepository extends EntityRepository
         $qb = $this->createQueryBuilder('event');
         $qb
             ->innerJoin('event.attendees', 'eventAttendee')
+            ->orderBy('event.date', 'DESC')
             ->where($qb->expr()->eq('eventAttendee.user', ':userId'))
             ->setParameter('userId', $user->getId());
 

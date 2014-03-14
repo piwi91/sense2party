@@ -105,7 +105,7 @@
                                 <td width="30%">{{ 'piwi.s2p.user.profile.index.table_comments.thread'|trans }}</td>
                                 </thead>
                                 <tbody>
-                                {% for comment in user.comments %}
+                                {% for comment in comments %}
                                     {% set event = getEventById(comment.thread.entityId) %}
                                     <tr>
                                         <td>{{ comment.createdAt|localizeddate('long', 'none', app.request.locale) }}</td>
