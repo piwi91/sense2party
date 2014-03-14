@@ -1,0 +1,21 @@
+parameters:
+    piwi_system_core.twig.datetime_extension.class: Piwi\System\CoreBundle\Twig\DatetimeExtension
+
+services:
+    piwi_system_core.locale_listener:
+        class: Piwi\System\CoreBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    piwi_system_core.twig.datetime_extension:
+        class: '%piwi_system_core.twig.datetime_extension.class%'
+        arguments:
+            - @request_stack
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.intl:
+            class: Twig_Extensions_Extension_Intl
+            tags:
+                - { name: twig.extension }

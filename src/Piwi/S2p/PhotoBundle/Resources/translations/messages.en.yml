@@ -1,0 +1,54 @@
+piwi:
+    s2p:
+        photo:
+            photo:
+                index:
+                    title: Photos
+                    headline: Photos
+                    add: Upload photos
+                album:
+                    title: %album%
+                    headline: %album%
+                    views: Views
+                    count: Amount of photos
+                    author: Album created by
+                edit:
+                    title: Edit %album%
+                    headline: Edit %album%
+                    title2: Title
+                    description: Description
+                    public: Public album
+                    submit: Submit
+                    flashbag:
+                        success: Album %album% is changed
+                delete:
+                    flashbag:
+                        success: Album %album% is deleted
+                add:
+                    step1:
+                        title: Add an album
+                        headline: Add an album
+                        existing_album: Upload photos to an existing album
+                        new_album: Create a new album
+                        album: Album
+                        title2: Title
+                        description: Description
+                        public: Public album
+                        next: Next
+                        flashbag:
+                            warning: Please fill in step 1
+                            success: Album added, now add some pictures!
+                    step2:
+                        title: Add pictures to %album%
+                        headline: Add pictures to %album%
+                        finish: Finish
+                    step3:
+                        exception: Couldn't find album
+                        flashbag:
+                            success: You're pictures are uploaded
+                deletephoto:
+                    flashbag:
+                        success: Photo %photo% is deleted
+                selectpreview:
+                    flashbag:
+                        success: Photo %photo% is now the preview of album %album%

@@ -1,0 +1,87 @@
+piwi:
+    s2p:
+        user:
+            exception:
+                user_not_found: De gebruiker kon niet worden gevonden
+            login:
+                title: Log in
+                headline: Log in
+                text: Log in met je facebook account
+                facebook: Log in met je facebook account
+                flashbag:
+                    error: Inloggen mislukt. Probeer het a.u.b. opnieuw.
+            profile:
+                index:
+                    title: Profiel van %name%
+                    headline: Profiel van %name%
+                    edit: Wijzig profiel
+                    emailaddress: E-mailadres
+                    last_login: Laatste keer ingelogd
+                    birthday: Verjaardag
+                    events: Evenementen
+                    replies: Reacties
+                    photos: Foto's
+                    others: Overige
+                    restricted_access: Alleen ingelogde personen kunnen profieldetails bekijken
+                    table_events:
+                        date: Datum
+                        title: Omschrijving
+                        venue: Locatie
+                    table_photos:
+                        title: Titel
+                        album: Album
+                    table_comments:
+                        author: Door
+                        date: Datum
+                        comment: Reactie
+                        thread: Evenement
+                edit:
+                    title: Wijzig profiel
+                    headline: Wijzig profiel
+                    firstname: Voornaam
+                    lastname: Achternaam
+                    birthday: Verjaardag
+                    save: Opslaan
+                    flashbag:
+                        success: Het profiel is opgeslagen
+                list:
+                    title: Ledenlijst
+                    headline: Ledenlijst
+                    emailaddress: E-mailadres
+                    last_login: Laatste keer ingelogd
+                    attended_events: Deelgenomen evenementen
+                    privacy: Niet zichtbaar i.v.m. privacy instelling
+                    maybe: Misschien
+            privacy:
+                edit:
+                    title: Privacy instellingen
+                    headline: Wijzig privacy instellingen
+                    text: Geef met deze privacy instellingen aan welke gegevens gasten en gebruikers die geen lid van Sense2Party zijn mogen zien. Deze instellingen gelden dus niet voor gebruikers die wel lid zijn (en dus vrienden zijn).
+                    show_email: E-mailadres weergeven
+                    show_birthday: Verjaardag weergeven
+                    show_profile: Profiel weergeven
+                    save: Opslaan
+                    flashbag:
+                        success: De privacy instellingen zijn opgeslagen
+            admin:
+                list:
+                    title: Gebruikersbeheer
+                    headline: Gebruikersbeheer
+                    name: Naam
+                    member: Is lid?
+                edit:
+                    title: Wijzig gebruiker
+                    headline: Wijzig gebruiker
+                    firstname: Voornaam
+                    lastname: Achternaam
+                    birthday: Verjaardag
+                    roles: Rollen
+                    email: E-mailadres
+                    enabled: Geactiveerd
+                    locked: Gelockt
+                    save: Opslaan
+                    flashbag:
+                        success: De gebruiker is opgeslagen
+                delete:
+                    flashbag:
+                        success: De gebruiker is verwijderd

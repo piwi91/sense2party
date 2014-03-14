@@ -1,0 +1,14 @@
+{% extends 'PiwiSystemCoreBundle::base.html.twig' %}
+{% block head_style %}
+    {% stylesheets output="css/core.css" combine=true filter="cssrewrite"
+    '../src/Piwi/System/CoreBundle/Resources/private/less/core.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock head_style %}
+{% block navbar %}{% endblock %}
+{% block content %}
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block foot_script_assetic %}
+{% endblock %}

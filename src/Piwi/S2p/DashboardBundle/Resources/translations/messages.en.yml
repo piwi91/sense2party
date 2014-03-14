@@ -1,0 +1,13 @@
+piwi:
+    s2p:
+        dashboard:
+            default:
+                index:
+                    title: Dashboard
+                    headline: Dashboard
+                    next_events: The next 4 events ...
+                    plan_event: Plan an event now!
+                    latest_photos: Latest added pictures
+                    latest_comments: Latest comments
+                    replies: '{0}No replies yet|{1}There is 1 reply|]1,Inf[There are %count% replies'
+                    read_more: Read more

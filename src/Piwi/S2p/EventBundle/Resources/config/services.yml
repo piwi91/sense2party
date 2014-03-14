@@ -1,0 +1,10 @@
+parameters:
+    piwi_s2p_event.twig.event_extension.class: Piwi\S2p\EventBundle\Twig\EventExtension
+
+services:
+    piwi_s2p_event.twig.event_extension:
+        class: '%piwi_s2p_event.twig.event_extension.class%'
+        arguments:
+            - @doctrine
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,18 @@
+{% extends 'PiwiS2pPhotoBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.photo.photo.add.step1.title'|trans }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.photo.photo.add.step1.headline'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <h3>{{ 'piwi.s2p.photo.photo.add.step1.existing_album'|trans }}</h3>
+        <form class="form-horizontal" action="{{ path('piwi_s2p_photo_photo_add_step2') }}" method="post">
+            {{ form_widget(form_albums) }}
+        </form>
+        <h3>{{ 'piwi.s2p.photo.photo.add.step1.new_album'|trans }}</h3>
+        <form class="form-horizontal" action="{{ path('piwi_s2p_photo_photo_add_step2') }}" method="post">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+{% endblock %}

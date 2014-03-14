@@ -1,0 +1,70 @@
+# FOS Comment
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }
+
+# HWIO Oauth Bundle
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+# Imagine Bundle
+_imagine:
+    resource: .
+    type:     imagine
+
+# Oneup Uploader
+oneup_uploader:
+    resource: .
+    type: uploader
+
+# Login
+piwi_s2p_user_login:
+    pattern: /login
+    defaults: { _controller: PiwiS2pUserBundle:Default:login }
+
+piwi_s2p_user_login_failed:
+    pattern: /login/failed
+    defaults: { _controller: PiwiS2pUserBundle:Default:loginFailed }
+
+# Homepage
+homepage:
+    pattern:  /
+    defaults: { _controller: PiwiS2pDashboardBundle:Default:index }
+
+# S2p app
+piwi_s2p_dashboard:
+    resource: "@PiwiS2pDashboardBundle/Resources/config/routing.yml"
+    prefix:   /dashboard
+
+piwi_s2p_user:
+    resource: "@PiwiS2pUserBundle/Resources/config/routing.yml"
+    prefix:   /user
+
+piwi_s2p_event:
+    resource: "@PiwiS2pEventBundle/Resources/config/routing.yml"
+    prefix:   /events
+
+piwi_s2p_comment:
+    resource: "@PiwiS2pCommentBundle/Resources/config/routing.yml"
+    prefix:   /comment
+
+piwi_s2p_photo:
+    resource: "@PiwiS2pPhotoBundle/Resources/config/routing.yml"
+    prefix:   /photo
+
+# System
+piwi_system_user:
+    resource: "@PiwiSystemUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+piwi_system_mail:
+    resource: "@PiwiSystemMailBundle/Resources/config/routing.yml"
+    prefix:   /email/
+
+# S2p admin
+piwi_s2p_user_admin:
+    resource: "@PiwiS2pUserBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin/user

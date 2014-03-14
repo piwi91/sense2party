@@ -1,0 +1,54 @@
+piwi:
+    s2p:
+        photo:
+            photo:
+                index:
+                    title: Foto's
+                    headline: Foto's
+                    add: Upload foto's
+                album:
+                    title: %album%
+                    headline: %album%
+                    views: Aantal keer bekeken
+                    count: Aantal foto's
+                    author: Album aangemaakt door
+                edit:
+                    title: Wijzig %album%
+                    headline: Wijzig %album%
+                    title2: Titel
+                    description: Omschrijving
+                    public: Zichtbaar voor publiek
+                    submit: Wijzig album
+                    flashbag:
+                        success: Album %album% is succesvol gewijzigd
+                delete:
+                    flashbag:
+                        success: Album %album% is succesvol verwijderd
+                add:
+                    step1:
+                        title: Maak nieuw album aan
+                        headline: Maak nieuw album aan
+                        existing_album: Upload foto's naar een bestaand album
+                        new_album: Maak nieuw album aan
+                        album: Album
+                        title2: Titel
+                        description: Omschrijving
+                        public: Zichtbaar voor publiek
+                        next: Volgende
+                        flashbag:
+                            warning: Voltooi eerst stap 1
+                            success: Album gekozen of toegevoegd! Upload nu wat foto's
+                    step2:
+                        title: Upload foto's naar %album%
+                        headline: Upload foto's naar %album%
+                        finish: Voltooi
+                    step3:
+                        exception: Kon het gekozen album niet vinden
+                        flashbag:
+                            success: De foto's zijn geupload!
+                deletephoto:
+                    flashbag:
+                        success: Foto %photo% is verwijderd
+                selectpreview:
+                    flashbag:
+                        success: Foto %photo% is nu de preview van het album %album%

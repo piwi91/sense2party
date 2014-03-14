@@ -1,15 +1,31 @@
+# Symfony files and directories
+/app/bootstrap*
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+/bin
+/build
+/vendor/*
+/web/bundles/*
+/web/css/
+/web/images/
+/web/img/
+/web/js/
+/web/less/
+/web/uploads/
+/web/media/
+
+# Windows
+Thumbs.db
+
+# Mac OSX
+.DS_Store
+
+# Other applications
+.DS_Store
 .idea
-
-# Bootstrap
-app/bootstrap*
-
-# Symfony directories
-vendor/*
-*/logs/*
-*/cache/*
-web/uploads/*
-web/bundles/*
-
-# Configuration files
-app/config/parameters.ini
-app/config/parameters.yml
+.vagrant
+.buildpath
+.cache
+.project
+.settings

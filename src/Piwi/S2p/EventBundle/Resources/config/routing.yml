@@ -1,0 +1,31 @@
+piwi_s2p_event_event_list:
+    pattern:  /
+    defaults: { _controller: PiwiS2pEventBundle:Event:list }
+
+piwi_s2p_event_event_add:
+    pattern:  /add
+    defaults: { _controller: PiwiS2pEventBundle:Event:add }
+
+piwi_s2p_event_event_index:
+    pattern:  /{slug}
+    defaults: { _controller: PiwiS2pEventBundle:Event:index }
+
+piwi_s2p_event_event_edit:
+    pattern:  /{slug}/edit
+    defaults: { _controller: PiwiS2pEventBundle:Event:edit }
+
+piwi_s2p_event_event_delete:
+    pattern:  /{slug}/delete
+    defaults: { _controller: PiwiS2pEventBundle:Event:delete }
+
+piwi_s2p_event_event_attend:
+    pattern:  /{slug}/attend/{status}
+    defaults: { _controller: PiwiS2pEventBundle:Event:attend, status: present }
+
+piwi_s2p_event_event_cancel_attend:
+    pattern:  /{slug}/cancel_attend
+    defaults: { _controller: PiwiS2pEventBundle:Event:cancelAttend }
+
+piwi_s2p_event_event_redirect:
+    pattern:  /{id}
+    defaults: { _controller: PiwiS2pEventBundle:Event:redirect }

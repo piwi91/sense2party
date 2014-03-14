@@ -1,0 +1,47 @@
+piwi:
+    s2p:
+        event:
+            event:
+                list:
+                    title: Events
+                    headline: Events
+                    add: New event
+                index:
+                    title: Events
+                    headline: Events
+                    source: Source and more information
+                    attendees: Attendees
+                    no_attendees: No attendees yet :-(
+                    attend: I'm in!
+                    maybe: I'm not sure!
+                    cancel_attend: I'm out
+                    resume: This event will take place on %date% at %venue%
+                    edit: Edit event
+                add:
+                    title: Create new event
+                    headline: Create new event
+                    title2: Title
+                    date: Date
+                    poster: Poster
+                    description: Description
+                    venue: Venue
+                    source: Source (URL) (not required)
+                    public: Visible for public
+                    flashbag:
+                        success: The event is added in the calendar
+                edit:
+                    title: Edit %event%
+                    headline: Edit %event
+                    title2: Title
+                    date: Date
+                    poster: Poster
+                    description: Description
+                    venue: Venue
+                    source: Source (URL)
+                    delete: Delete event
+                    public: Visible for public
+                    flashbag:
+                        success: Event saved
+                delete:
+                    flashbag:
+                        success: The event is deleted

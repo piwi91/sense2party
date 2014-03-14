@@ -1,0 +1,24 @@
+{% extends 'PiwiSystemCoreBundle::default.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+    '../src/Piwi/S2p/PhotoBundle/Resources/private/less/core.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block foot_script_assetic %}
+    {{ parent() }}
+    {% javascripts combine=true
+    '../src/Piwi/S2p/PhotoBundle/Resources/private/js/index.js'
+    '../src/Piwi/S2p/PhotoBundle/Resources/private/js/album.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}{% endblock %}

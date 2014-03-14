@@ -1,0 +1,15 @@
+yes: Yes
+no: No
+
+menu:
+    home: Home
+    events: Events
+    photos: Photos
+    members: Memberlist
+    login: Login with Facebook
+    profile:
+        profile: My profile
+        privacy: Privacy settings
+        logout: Logout
+    admin:
+        users: User management

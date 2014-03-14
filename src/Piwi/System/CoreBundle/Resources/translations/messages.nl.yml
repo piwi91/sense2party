@@ -1,0 +1,15 @@
+yes: Ja
+no: Nee
+
+menu:
+    home: Home
+    events: Evenementen
+    photos: Foto's
+    members: Ledenlijst
+    login: Log in met Facebook
+    profile:
+        profile: Mijn profiel
+        privacy: Privacy instellingen
+        logout: Log uit
+    admin:
+        users: Gebruikersbeheer

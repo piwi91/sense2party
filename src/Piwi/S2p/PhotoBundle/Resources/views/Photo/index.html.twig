@@ -1,0 +1,64 @@
+{% extends 'PiwiS2pPhotoBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.s2p.photo.photo.index.title'|trans }}{% endblock %}
+
+{% block headline %}{{ 'piwi.s2p.photo.photo.index.headline'|trans }}{% endblock %}
+
+{% block foot_script_assetic %}
+    {{ parent() }}
+    <script>
+        $(document).photoIndex();
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-10">
+                <p>Tekst...</p>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    {% if is_granted('ROLE_MEMBER') %}
+                        <a href="{{ path('piwi_s2p_photo_photo_add') }}" class="btn btn-primary btn-small">
+                            {{ 'piwi.s2p.photo.photo.index.add'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% for album in albums %}
+                    <div class="col-md-3 album-container">
+                        <a href="{{ path('piwi_s2p_photo_photo_album', {'slug': album.slug}) }}">
+                            <div class="panel panel-default album">
+                                <div class="panel-body">
+                                    <div class="col-md-12 album-poster">
+                                        <img src="{{ asset('uploads/photos/' ~ album.preview)|imagine_filter('photo_preview') }}" alt="{{ album.title }}" class="img-responsive">
+                                    </div>
+                                    <div class="col-md-12 album-label">
+                                        <p><span class="label label-warning label-date">{{ album.date|localizeddate('long', 'none', app.request.locale) }}</span></p>
+                                        <p>
+                                            <span class="label label-default label-title">{{ album.title }}</span>
+                                        </p>
+                                        <p>
+                                            {% if album.user == app.user %}
+                                                <a href="{{ path('piwi_s2p_photo_photo_edit', {'slug': album.slug}) }}">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="{{ path('piwi_s2p_photo_photo_delete', {'slug': album.slug}) }}" class="delete">
+                                                    <i class="fa fa-times" style="color:red;"></i>
+                                                </a>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
