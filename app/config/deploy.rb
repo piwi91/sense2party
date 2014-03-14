@@ -1,6 +1,6 @@
 set :application, "Sense2Party"
 set :domain,      "vps01.transip.piwi-web.com"
-set :deploy_to,   "/home/s2p/domains/beta.sense2party.nl/public_html"
+set :deploy_to,   "/home/s2p/domains/sense2party.nl/public_html"
 
 set :user,        "s2p"
 # set :password,    ""
@@ -23,13 +23,13 @@ set :interactive_mode, false
 set :repository,  "git@github.com:piwi91/sense2party.git"
 set :scm,         :git
 set :deploy_via,  :copy
-set :branch,      "develop"
+set :branch,      "master"
 
 set :model_manager, "doctrine"
 
 # Role info. I don't think this is particularly important for Capifony...
 role :web,        domain                         # Your HTTP server, Apache/etc
-role :app,        domain                         # This may be the same as your `Web` server
+role :app,        domain, :primary => true       # This may be the same as your `Web` server
 role :db,         domain, :primary => true       # This is where Symfony2 migrations will run
 
 # General config stuff
@@ -47,4 +47,4 @@ ssh_options[:keys] = [ssh_key]
 # logger.level = Logger::MAX_LEVEL
 
 # Run migrations before warming the cache
-# before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
+before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"

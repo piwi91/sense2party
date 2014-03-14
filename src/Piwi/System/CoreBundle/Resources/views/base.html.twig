@@ -1,8 +1,8 @@
 {% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
-{% extends 'MopaBootstrapBundle::base' ~ theme_type|default('')~ '.html.twig' %}
+{% extends 'MopaBootstrapBundle::base_less.html.twig' %}
 
 {% block head_style %}
-    {% stylesheets output="css/core.css" filter="cssrewrite"
+    {% stylesheets output="css/core.css" combine=true filter="cssrewrite"
     '../src/Piwi/System/CoreBundle/Resources/private/less/core.less'
     '../src/Piwi/S2p/CommentBundle/Resources/private/less/comments.less'
 
