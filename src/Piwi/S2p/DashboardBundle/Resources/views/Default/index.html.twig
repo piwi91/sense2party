@@ -36,10 +36,12 @@
                                 {% if upcomingEvent.attendees is not empty %}
                                     {% for attendee in upcomingEvent.attendees %}
                                         <li class="event-attendee">
-                                            <img src="{{ asset('uploads/profile_pictures/' ~ attendee.user.username ~ '.jpg')|imagine_filter('profile_picture_s') }}" alt="{{ attendee.user }}" class="img-responsive img-circle">
-                                            {% if attendee.status == 'maybe' %}
-                                                <img src="{{ asset('/bundles/piwis2pevent/img/asterisk.png') }}" class="maybe">
-                                            {% endif %}
+                                            <a href="{{ path('piwi_s2p_user_profile', {'username': attendee.user.username}) }}">
+                                                <img src="{{ asset('uploads/profile_pictures/' ~ attendee.user.username ~ '.jpg')|imagine_filter('profile_picture_s') }}" alt="{{ attendee.user }}" class="img-responsive img-circle">
+                                                {% if attendee.status == 'maybe' %}
+                                                    <img src="{{ asset('/bundles/piwis2pevent/img/asterisk.png') }}" class="maybe">
+                                                {% endif %}
+                                            </a>
                                         </li>
                                     {% endfor %}
                                 {% else %}
@@ -141,7 +143,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 hidden-xs">
                 <h3>{{ 'piwi.s2p.dashboard.default.index.latest_photos'|trans }}</h3>
                 <div class="row">
                     {% for photo in photos %}
@@ -155,6 +157,7 @@
             </div>
             <div class="col-md-8">
                 <h3>{{ 'piwi.s2p.dashboard.default.index.latest_comments'|trans }}</h3>
+                {% if is_granted('ROLE_MEMBER') %}
                 <table class="table table-striped" id="table-comments">
                     <thead>
                     <td width="20%">{{ 'piwi.s2p.user.profile.index.table_comments.author'|trans }}</td>
@@ -176,6 +179,11 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                {% else %}
+                    <p class="bg-warning" style="padding: 15px;">
+                        {{ 'piwi.s2p.dashboard.default.index.restricted_access'|trans }}
+                    </p>
+                {% endif %}
             </div>
         </div>
     </div>

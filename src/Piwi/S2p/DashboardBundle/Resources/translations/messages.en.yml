@@ -11,3 +11,4 @@ piwi:
                     latest_comments: Latest comments
                     replies: '{0}No replies yet|{1}There is 1 reply|]1,Inf[There are %count% replies'
                     read_more: Read more
+                    restricted_access: Replies can only be read by members

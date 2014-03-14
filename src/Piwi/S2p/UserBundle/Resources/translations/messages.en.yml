@@ -22,7 +22,7 @@ piwi:
                     replies: Replies
                     photos: Photos
                     others: Others
-                    restricted_access: Only logged in persons can view profiles
+                    restricted_access: Only logged in members can view profiles
                     table_events:
                         date: Date
                         title: Description

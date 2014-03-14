@@ -40,10 +40,12 @@
                             {% if event.attendees is not empty %}
                                 {% for attendee in event.attendees %}
                                     <li class="event-attendee">
-                                        <img src="{{ asset('uploads/profile_pictures/' ~ attendee.user.username ~ '.jpg')|imagine_filter('profile_picture_s') }}" alt="{{ attendee.user }}" class="img-responsive img-circle">
-                                        {% if attendee.status == 'maybe' %}
-                                            <img src="{{ asset('/bundles/piwis2pevent/img/asterisk.png') }}" class="maybe">
-                                        {% endif %}
+                                        <a href="{{ path('piwi_s2p_user_profile', {'username': attendee.user.username}) }}">
+                                            <img src="{{ asset('uploads/profile_pictures/' ~ attendee.user.username ~ '.jpg')|imagine_filter('profile_picture_s') }}" alt="{{ attendee.user }}" class="img-responsive img-circle">
+                                            {% if attendee.status == 'maybe' %}
+                                                <img src="{{ asset('/bundles/piwis2pevent/img/asterisk.png') }}" class="maybe">
+                                            {% endif %}
+                                        </a>
                                     </li>
                                 {% endfor %}
                             {% else %}
@@ -100,6 +102,7 @@
                         <p>{{ event.description|markdown }}</p>
                     </div>
                 </div>
+                {% if is_granted('ROLE_MEMBER') %}
                 <div class="row">
                     <div class="col-sm-12">
                         <div id="fos_comment_thread" data-thread="{{ thread.id }}">
@@ -110,6 +113,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
