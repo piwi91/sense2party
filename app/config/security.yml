@@ -23,18 +23,28 @@ security:
                 csrf_provider: form.csrf_provider
                 login_path: /login
                 check_path: /login_check
+                use_referer: true
+                remember_me: true
             oauth:
                 resource_owners:
                     facebook: /connect/check-facebook
                 login_path: /login
                 failure_path: /login/failed
+                use_referer: true
                 default_target_path: /
+                remember_me: true
                 oauth_user_provider:
                     #this is my custom user provider, created from FOSUBUserProvider - will manage the
                     #automatic user registration on your site, with data from the provider (facebook. google, etc.)
                     service: piwi_user_provider
             logout:       true
             anonymous:    true
+            remember_me:
+                key: "%secret%"
+                always_remember_me: true
+                lifetime: 31536000 # 365 days in seconds
+                path: /
+                domain: ~ # Defaults to the current domain from $_SERVER
 
         login:
             pattern:  ^/login$
@@ -42,6 +52,7 @@ security:
 
             remember_me:
                 key: "%secret%"
+                always_remember_me: true
                 lifetime: 31536000 # 365 days in seconds
                 path: /
                 domain: ~ # Defaults to the current domain from $_SERVER

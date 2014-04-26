@@ -9,6 +9,7 @@ use Piwi\S2p\EventBundle\Form\EditEventFormType;
 use Piwi\System\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class EventController extends Controller
@@ -191,6 +192,9 @@ class EventController extends Controller
         }
 
         $user = $this->getUser();
+        if (is_null($user)) {
+            throw new AccessDeniedHttpException();
+        }
         if (!$eventAttendee = $this->isAttendee($event, $user)) {
             $eventAttendee = new EventAttendee();
             $eventAttendee->setEvent($event);
