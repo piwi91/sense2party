@@ -11,9 +11,8 @@ hwi_oauth_redirect:
     prefix:   /connect
 
 # Imagine Bundle
-_imagine:
-    resource: .
-    type:     imagine
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
 # Oneup Uploader
 oneup_uploader:
@@ -68,3 +67,7 @@ piwi_system_mail:
 piwi_s2p_user_admin:
     resource: "@PiwiS2pUserBundle/Resources/config/routing_admin.yml"
     prefix:   /admin/user
+
+piwi_system_mail_admin:
+    resource: "@PiwiSystemMailBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin/email

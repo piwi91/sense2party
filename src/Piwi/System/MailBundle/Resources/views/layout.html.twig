@@ -1,6 +1,5 @@
-{% extends 'PiwiSystemCoreBundle::email.html.twig' %}
+{% extends 'PiwiSystemCoreBundle::default.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}{{ parent() }}{% endblock %}
 
-{% block content %}
-{% endblock %}
+{% block content %}{% endblock %}

@@ -1,0 +1,12 @@
+piwi:
+    system:
+        mail:
+            compose:
+                compose:
+                    title: Verstuur nieuwe massa e-mail
+                    headline: Verstuur nieuwe massa e-mail
+                    title2: Titel
+                    text: Tekst
+                    send: Verstuur e-mail
+                    flashbag:
+                        success: De mailing is verstuurd

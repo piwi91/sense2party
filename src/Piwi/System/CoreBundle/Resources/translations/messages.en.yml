@@ -13,3 +13,4 @@ menu:
         logout: Logout
     admin:
         users: User management
+        mail: Mass email

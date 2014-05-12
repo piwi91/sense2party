@@ -1,0 +1,3 @@
+piwi_system_mail_compose_compose:
+    pattern:  /compose
+    defaults: { _controller: PiwiSystemMailBundle:Compose:compose }

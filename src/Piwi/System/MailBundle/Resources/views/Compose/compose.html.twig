@@ -1,0 +1,13 @@
+{% extends 'PiwiSystemMailBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'piwi.system.mail.compose.compose.title'|trans }}{% endblock %}
+
+{% block headline %}{{ 'piwi.system.mail.compose.compose.headline'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <form class="form-horizontal" action="{{ path('piwi_system_mail_compose_compose') }}" method="post">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+{% endblock %}

@@ -247,8 +247,6 @@ class EventController extends Controller
         );
     }
 
-
-
     /**
      * @param \Piwi\S2p\EventBundle\Entity\Event $event
      */
@@ -274,7 +272,7 @@ class EventController extends Controller
             ));
             $mail = \Swift_Message::newInstance()
                 ->setSubject($subject)
-                ->setFrom('no_reply@sense2party.nl')
+                ->setFrom('no_reply@sense2party.nl', 'Sense 2 Party')
                 ->setBody($htmlBody, 'text/html')
                 ->setTo($user->getEmail());
             $this->get('mailer')->send($mail);

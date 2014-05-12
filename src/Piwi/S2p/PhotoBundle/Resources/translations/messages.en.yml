@@ -6,6 +6,7 @@ piwi:
                     title: Photos
                     headline: Photos
                     add: Upload photos
+                    text: Selct an album to see all the pictures and further details
                 album:
                     title: %album%
                     headline: %album%

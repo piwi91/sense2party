@@ -54,6 +54,7 @@
                         <li><a href="{{ path('piwi_s2p_user_privacy_edit', {'username': app.user.username}) }}">{{ 'menu.profile.privacy'|trans }}</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <li><a href="{{ path('piwi_s2p_user_admin_list') }}">{{ 'menu.admin.users'|trans }}</a></li>
+                            <li><a href="{{ path('piwi_system_mail_compose_compose') }}">{{ 'menu.admin.mail'|trans }}</a></li>
                         {% endif %}
                         <li class="divider"></li>
                         <li><a href="{{ path('fos_user_security_logout') }}">{{ 'menu.profile.logout'|trans }}</a></li>

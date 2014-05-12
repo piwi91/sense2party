@@ -1,0 +1,12 @@
+piwi:
+    system:
+        mail:
+            compose:
+                compose:
+                    title: Send new mass email
+                    headline: Send new mass email
+                    title2: Title
+                    text: Text
+                    send: Send email
+                    flashbag:
+                        success: The mailing is send

@@ -1,0 +1,11 @@
+{% extends 'PiwiSystemCoreBundle::email.html.twig' %}
+
+{% block title %}{{ mail.title }}{% endblock %}
+
+{% block headline %}{{ mail.title }}{% endblock %}
+
+{% block read_online_url %}{{ url('piwi_system_mail_mail_read', {'type': 'mail', 'username': user.username, 'id': mail.id}) }}{% endblock %}
+
+{% block content %}
+    {{ mail.text|markdown|raw }}
+{% endblock %}
