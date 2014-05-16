@@ -14,6 +14,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Mail
 {
+    const EVENT = 'event';
+    const MAIL = 'mail';
+
     /**
      * @var integer
      *

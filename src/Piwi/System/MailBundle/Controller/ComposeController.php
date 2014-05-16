@@ -46,11 +46,13 @@ class ComposeController extends Controller
     }
 
     /**
+     * Send e-mail to users
+     *
      * @param Mail $mailEntity
      */
-    public function newMail(Mail $mailEntity)
+    protected  function newMail(Mail $mailEntity)
     {
-        $mailUsers = $this->getUsers();
+        $mailUsers = $this->get('piwi_system_user.manager')->getMembers();
         $subject = $mailEntity->getTitle();
 
         /** @var $user \Piwi\System\UserBundle\Entity\User */
@@ -59,43 +61,8 @@ class ComposeController extends Controller
                 'mail' => $mailEntity,
                 'user' => $user
             ));
-            $mail = $this->getDefaultMessage($subject);
-            $mail->setBody($htmlBody, 'text/html');
-            $mail->setTo($user->getEmail());
-            $this->get('mailer')->send($mail);
+            $this->get('piwi_system_mail.mailer')->sendMail($subject, $htmlBody, $user->getEmail());
         }
 
-    }
-
-    /**
-     * @return array
-     */
-    protected function getUsers()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('PiwiSystemUserBundle:User')->findAll();
-        $mailUsers = array();
-        foreach ($users as $user) {
-            if ($user->hasRole('ROLE_MEMBER')) {
-                $mailUsers[] = $user;
-            }
-        }
-
-        return $mailUsers;
-    }
-
-    /**
-     * Get default message with subject
-     *
-     * @param $subject
-     * @return \Swift_Mime_MimePart
-     */
-    protected function getDefaultMessage($subject)
-    {
-        $message = \Swift_Message::newInstance()
-            ->setSubject($subject)
-            ->setFrom('no_reply@sense2party.nl', 'Sense 2 Party');
-        return $message;
     }
 }

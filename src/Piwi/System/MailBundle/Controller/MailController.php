@@ -17,107 +17,27 @@ class MailController extends Controller
             throw $this->createNotFoundException('User not found');
         }
 
+        $mail = $em->getRepository('PiwiSystemMailBundle:Mail')->find($id);
+        if (is_null($mail)) {
+            throw $this->createNotFoundException('Mail not found');
+        }
+
         switch ($type)
         {
-            case "event":
-                $event = $em->getRepository('PiwiS2pEventBundle:Event')->find($id);
-                if (is_null($event)) {
-                    throw $this->createNotFoundException('Event not found');
-                }
+            case Mail::EVENT:
                 return $this->render('PiwiSystemMailBundle:Mail:event.html.twig', array(
-                    'event' => $event,
+                    'event' => $mail,
                     'user' => $user
                 ));
                 break;
-            case "mail":
-                $mail = $em->getRepository('PiwiSystemMailBundle:Mail')->find($id);
-                if (is_null($mail)) {
-                    throw $this->createNotFoundException('E-mail not found');
-                }
+            case Mail::MAIL:
                 return $this->render('PiwiSystemMailBundle:Mail:email.html.twig', array(
                     'mail' => $mail,
                     'user' => $user
                 ));
                 break;
-
         }
 
-        throw $this->createNotFoundException('No mail found');
-    }
-
-    /**
-     * @param \Piwi\S2p\EventBundle\Entity\Event $event
-     */
-    public function newEventMail(Event $event)
-    {
-        $mailUsers = $this->getUsers();
-        $subject = "Nieuw evenement: " . $event->getTitle();
-
-        /** @var $user \Piwi\System\UserBundle\Entity\User */
-        foreach ($mailUsers as $user) {
-            $htmlBody = $this->renderView('PiwiSystemMailBundle:Mail:event.html.twig', array(
-                'event' => $event,
-                'user' => $user
-            ));
-            $mail = $this->getDefaultMessage($subject);
-            $mail->setBody($htmlBody, 'text/html');
-            $mail->setTo($user->getEmail());
-            $this->get('mailer')->send($mail);
-        }
-
-    }
-
-    /**
-     * @param Mail $mailEntity
-     */
-    public function newMail(Mail $mailEntity)
-    {
-        $mailUsers = $this->getUsers();
-        $subject = $mailEntity->getTitle();
-
-        /** @var $user \Piwi\System\UserBundle\Entity\User */
-        foreach ($mailUsers as $user) {
-            $htmlBody = $this->renderView('PiwiSystemMailBundle:Mail:email.html.twig', array(
-                'mail' => $mailEntity,
-                'user' => $user
-            ));
-            $mail = $this->getDefaultMessage($subject);
-            $mail->setBody($htmlBody, 'text/html');
-            $mail->setTo($user->getEmail());
-            $this->get('mailer')->send($mail);
-        }
-
-    }
-
-    /**
-     * @return array
-     */
-    protected function getUsers()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('PiwiSystemUserBundle:User')->findAll();
-        $mailUsers = array();
-        foreach ($users as $user) {
-            if ($user->hasRole('ROLE_MEMBER')) {
-                $mailUsers[] = $user;
-            }
-        }
-
-        return $mailUsers;
-    }
-
-    /**
-     * Get default message with subject
-     *
-     * @param $subject
-     * @return \Swift_Mime_MimePart
-     */
-    protected function getDefaultMessage($subject)
-    {
-        $message = \Swift_Message::newInstance()
-            ->setSubject($subject)
-            ->setFrom('no_reply@sense2party.nl', 'Sense 2 Party');
-        return $message;
+        throw $this->createNotFoundException(sprintf('Type %s not found', $type));
     }
 }

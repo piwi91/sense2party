@@ -1,5 +1,6 @@
 parameters:
     piwi_user_provider.class: Piwi\System\UserBundle\Security\Core\User\FOSUBUserProvider
+    piwi_system_user.manager.class: Piwi\System\UserBundle\Doctrine\UserManager
  
 services:
     piwi_user_provider:
@@ -13,3 +14,12 @@ services:
         tags:
             - { name: kernel.event_listener, event: security.authentication.success, method: handle }
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+    piwi_system_user.manager:
+        class: %piwi_system_user.manager.class%
+        arguments:
+            - @security.encoder_factory
+            - @fos_user.util.username_canonicalizer
+            - @fos_user.util.email_canonicalizer
+            - @fos_user.entity_manager
+            - %fos_user.model.user.class%
