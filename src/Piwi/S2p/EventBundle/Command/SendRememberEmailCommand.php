@@ -2,6 +2,7 @@
 
 namespace Piwi\S2p\EventBundle\Command;
 
+use Piwi\S2p\EventBundle\Entity\EventAttendee;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,10 +37,17 @@ class SendRememberEmailCommand extends ContainerAwareCommand
             throw new \Exception('Neither cron or event is given');
         }
 
-        $users = $this->getContainer()->get('piwi_system_user.manager')->getMembers();
+        $allUsers = $this->getContainer()->get('piwi_system_user.manager')->getMembers();
 
         if ($event != 0) {
             $event = $this->getContainer()->get('doctrine')->getRepository('PiwiS2pEventBundle:Event')->find($event);
+
+            if (is_null($event)) {
+                throw new \Exception("Event not found");
+            }
+
+            $users = $event->getAllNotificationUsers($allUsers);
+
             $subject = "Herinnering evenement: " . $event->getTitle();
             /** @var $user \Piwi\System\UserBundle\Entity\User */
             foreach ($users as $user) {
@@ -59,6 +67,7 @@ class SendRememberEmailCommand extends ContainerAwareCommand
             $events = $this->getContainer()->get('doctrine')->getRepository('PiwiS2pEventBundle:Event')
                 ->findLatestEvents(999, false, $tomorrow->format('Y-m-d'), 0);
             foreach ($events as $event) {
+                $users = $event->getAllNotificationUsers($allUsers);
                 $subject = "Herinnering evenement: " . $event->getTitle();
                 /** @var $user \Piwi\System\UserBundle\Entity\User */
                 foreach ($users as $user) {

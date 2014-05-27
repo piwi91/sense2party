@@ -55,3 +55,6 @@ piwi:
                 delete:
                     flashbag:
                         success: Het evenement is verwijderd
+                send_remember_mail:
+                    flashbag:
+                        success: De herinnerings e-mail is verstuurd

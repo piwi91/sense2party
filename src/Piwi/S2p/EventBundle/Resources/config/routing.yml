@@ -30,6 +30,10 @@ piwi_s2p_event_event_cancel_attend:
     pattern:  /{slug}/cancel_attend
     defaults: { _controller: PiwiS2pEventBundle:Event:cancelAttend }
 
+piwi_s2p_event_event_send_remember_mail:
+    pattern:  /{slug}/send_remember_mail
+    defaults: { _controller: PiwiS2pEventBundle:Event:sendRememberMail }
+
 piwi_s2p_event_event_redirect:
     pattern:  /{id}
     defaults: { _controller: PiwiS2pEventBundle:Event:redirect }

@@ -7,6 +7,8 @@
 {% block read_online_url %}{{ url('piwi_system_mail_mail_read', {'type': 'remember_event', 'username': user.username, 'id': event.id}) }}{% endblock %}
 
 {% block content %}
+    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;"><strong>Wil je geen e-mail van (sommige) evenementen ontvangen? Meld je dan af voor het betreffende evenement (klik op 'Ik kan niet (afmelden)').</strong></p>
+    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">&nbsp;</p>
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Beste {{ user.firstName }},</p>
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">&nbsp;</p>
     <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Morgen vindt het evenement <a href="{{ url('piwi_s2p_event_event_index', {'slug': event.slug}) }}">{{ event.title }}</a> plaats in {{ event.venue }}. Heb jij je al laten weten of je mee gaat?</p>

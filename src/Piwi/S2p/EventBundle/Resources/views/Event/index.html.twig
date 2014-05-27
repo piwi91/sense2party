@@ -9,6 +9,11 @@
             <i class="fa fa-edit"></i>
         </a>
     {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('piwi_s2p_event_event_send_remember_mail', {'slug': event.slug}) }}" class="remember_mail">
+            <i class="fa fa-mail-forward"></i>
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block foot_script_assetic %}
@@ -20,6 +25,7 @@
     <script>
         $(document).ready(function() {
             $(".poster-link").fancybox();
+            $(document).eventIndex();
         });
     </script>
 {% endblock %}

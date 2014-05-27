@@ -370,12 +370,32 @@ class EventController extends Controller
         );
     }
 
+    public function sendRememberMailAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $eventRepository = $em->getRepository('PiwiS2pEventBundle:Event');
+
+        /** @var $event Event */
+        if (!$event = $eventRepository->findOneBySlug($slug)) {
+            throw $this->createNotFoundException('piwi.s2p.event.exception.event_not_found');
+        }
+
+        $this->newRememberMail($event);
+
+        $this->get('session')->getFlashBag()->add('success', 'piwi.s2p.event.event.send_remember_mail.flashbag.success');
+
+        return $this->redirect(
+            $this->generateUrl('piwi_s2p_event_event_index', array('slug' => $slug))
+        );
+    }
+
     /**
      * Send new event e-mail
      *
      * @param \Piwi\S2p\EventBundle\Entity\Event $event
      */
-    public function newEventMail(Event $event)
+    protected function newEventMail(Event $event)
     {
         $users = $this->get('piwi_system_user.manager')->getMembers();
         $subject = "Nieuw evenement: " . $event->getTitle();
@@ -386,6 +406,29 @@ class EventController extends Controller
                 'event' => $event,
                 'user' => $user
             ));
+            $this->get('piwi_system_mail.mailer')->sendMail($subject, $htmlBody, $user->getEmail());
+        }
+    }
+
+    /**
+     * Send new remember event e-mail
+     *
+     * @param Event $event
+     */
+    protected function newRememberMail(Event $event)
+    {
+        $users = $event->getAllNotificationUsers($this->get('piwi_system_user.manager')->getMembers());
+
+        $subject = "Herinnering evenement: " . $event->getTitle();
+        /** @var $user \Piwi\System\UserBundle\Entity\User */
+        foreach ($users as $user) {
+            $htmlBody = $this->renderView(
+                'PiwiSystemMailBundle:Mail:remember_event.html.twig',
+                array(
+                    'event' => $event,
+                    'user' => $user
+                )
+            );
             $this->get('piwi_system_mail.mailer')->sendMail($subject, $htmlBody, $user->getEmail());
         }
     }

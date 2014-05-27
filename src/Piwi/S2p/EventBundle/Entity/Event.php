@@ -366,7 +366,8 @@ class Event
     }
 
     /**
-     * @return \Piwi\System\UserBundle\Entity\EventAttendee[]
+     * @param array $status
+     * @return \Piwi\S2p\EventBundle\Entity\EventAttendee[]
      */
     public function getAttendees($status = array(EventAttendee::MAYBE, EventAttendee::PRESENT))
     {
@@ -381,6 +382,26 @@ class Event
     public function getAllAttendees()
     {
         return $this->attendees;
+    }
+
+    /**
+     * @param \Piwi\System\UserBundle\Entity\User[] $users
+     * @return \Piwi\System\UserBundle\Entity\User[]
+     */
+    public function getAllNotificationUsers($users = array())
+    {
+        // Get all user entities from the EventAttendee entities
+        $offUsers = array_map(function($attendee) {
+            /** @var $attendee EventAttendee */
+            return $attendee->getUser();
+        }, $this->getAttendees(array(EventAttendee::OFF)));
+        // Filter the users so it contains only the users which aren't signed off for this event
+        return array_filter($users, function($user) use ($offUsers) {
+            if (in_array($user, $offUsers)) {
+                return false;
+            }
+            return true;
+        });
     }
 
     /**
