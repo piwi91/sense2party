@@ -33,11 +33,11 @@
                         <a href="{{ asset('uploads/events/posters/' ~ event.poster) }}" title="{{ event.title }}" class="poster-link">
                             <img src="{{ asset('uploads/events/posters/' ~ event.poster)|imagine_filter('poster_m') }}" alt="{{ event.title }}" class="img-responsive">
                         </a>
-                        {#<p>#}
-                            {#<a href="{{ path('piwi_s2p_event_event_edit_image', {'slug': event.slug}) }}">#}
-                                {#<i class="fa fa-picture-o"></i> {{ 'piwi.s2p.event.event.index.event_image'|trans }}#}
-                            {#</a>#}
-                        {#</p>#}
+                        <p>
+                            <a href="{{ path('piwi_s2p_event_event_edit_image', {'slug': event.slug}) }}">
+                                <i class="fa fa-picture-o"></i> {{ 'piwi.s2p.event.event.index.event_image'|trans }}
+                            </a>
+                        </p>
                     </div>
                     <div class="col-sm-12 event-attendees">
                         <h3>{{ 'piwi.s2p.event.event.index.attendees'|trans }}</h3>
@@ -60,10 +60,10 @@
                             {% endif %}
                         </ul>
                     </div>
-                    <div class="col-sm-12">
-                        <ul class="list-unstyled">
-                            {% if is_granted('ROLE_MEMBER') %}
-                                {% if attendee not in event.attendees %}
+                    {% if is_granted('ROLE_MEMBER') %}
+                        <div class="col-sm-12">
+                            <ul class="list-unstyled">
+                                {% if attendee not in event.getAllAttendees or attendee.status == 'off' %}
                                     <li>
                                         <a href="{{ path('piwi_s2p_event_event_attend', {'slug': event.slug}) }}" class="btn btn-primary">
                                             <i class="fa fa-beer"></i> {{ 'piwi.s2p.event.event.index.attend'|trans }}
@@ -72,6 +72,13 @@
                                             <i class="fa fa-asterisk"></i> {{ 'piwi.s2p.event.event.index.maybe'|trans }}
                                         </a>
                                     </li>
+                                    {% if attendee not in event.getAllAttendees %}
+                                        <li style="padding-top: 3px;">
+                                            <a href="{{ path('piwi_s2p_event_event_cancel_attend', {'slug': event.slug, 'status': 'off'}) }}" class="btn btn-danger">
+                                                <i class="fa fa-sign-out"></i> {{ 'piwi.s2p.event.event.index.not_attend'|trans }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
                                 {% else %}
                                     <li>
                                         <a href="{{ path('piwi_s2p_event_event_cancel_attend', {'slug': event.slug}) }}" class="btn btn-danger">
@@ -79,9 +86,9 @@
                                         </a>
                                     </li>
                                 {% endif %}
-                            {% endif %}
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-9 event-details">

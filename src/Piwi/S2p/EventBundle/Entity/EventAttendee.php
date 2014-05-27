@@ -14,6 +14,7 @@ class EventAttendee
 {
     const PRESENT = 'present';
     const MAYBE = 'maybe';
+    const OFF = 'off';
 
     /**
      * @var integer

@@ -207,6 +207,8 @@ class EventController extends Controller
         ));
 
         if ($request->isMethod('POST')) {
+            // First, remove the poster because it won't be updated if you don't
+            $event->setPoster(null);
             $form->submit($request);
             if ($form->isValid()) {
                 $em->persist($event);
@@ -306,10 +308,11 @@ class EventController extends Controller
      * Cancel the attend
      *
      * @param $slug
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function cancelAttendAction($slug)
+    public function cancelAttendAction($slug, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -321,9 +324,22 @@ class EventController extends Controller
         }
 
         $user = $this->getUser();
-        if ($eventAttendee = $this->isAttendee($event, $user)) {
-            $em->remove($eventAttendee);
+        $eventAttendee = $this->isAttendee($event, $user);
+
+        if ($request->get('status') == 'off') {
+            if (is_null($eventAttendee)) {
+                $eventAttendee = new EventAttendee();
+                $eventAttendee->setEvent($event);
+                $eventAttendee->setUser($user);
+            }
+            $eventAttendee->setStatus(EventAttendee::OFF);
+            $em->persist($eventAttendee);
+        } else {
+            if (!is_null($eventAttendee)) {
+                $em->remove($eventAttendee);
+            }
         }
+
         $em->flush();
 
         return $this->redirect(
@@ -384,7 +400,7 @@ class EventController extends Controller
     protected function isAttendee(Event $event, User $user)
     {
         /** @var $eventAttendee EventAttendee */
-        foreach ($event->getAttendees() as $eventAttendee) {
+        foreach ($event->getAllAttendees() as $eventAttendee) {
             if ($eventAttendee->getUser() == $user) {
                 return $eventAttendee;
             }

@@ -15,6 +15,7 @@ piwi:
                     attend: Ik kom ook!
                     maybe: Misschien!
                     cancel_attend: Ik kom niet meer
+                    not_attend: Ik kan niet (afmelden)
                     resume: Dit evenement vindt plaats op %date% in %venue%
                     edit: Wijzig evenement
                     event_image: Wijzig poster evenement

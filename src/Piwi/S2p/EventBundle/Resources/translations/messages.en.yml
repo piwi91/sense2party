@@ -15,6 +15,7 @@ piwi:
                     attend: I'm in!
                     maybe: I'm not sure!
                     cancel_attend: I'm out
+                    not_attend: I don't
                     resume: This event will take place on %date% at %venue%
                     edit: Edit event
                     event_image: Change event image

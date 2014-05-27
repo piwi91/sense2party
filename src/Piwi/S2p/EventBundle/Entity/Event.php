@@ -366,9 +366,19 @@ class Event
     }
 
     /**
-     * @return \Piwi\System\UserBundle\Entity\User
+     * @return \Piwi\System\UserBundle\Entity\EventAttendee[]
      */
-    public function getAttendees()
+    public function getAttendees($status = array(EventAttendee::MAYBE, EventAttendee::PRESENT))
+    {
+        return array_filter($this->attendees->toArray(), function ($eventAttendee) use ($status) {
+            if (in_array($eventAttendee->getStatus(), $status)) {
+                return true;
+            }
+            return false;
+        });
+    }
+
+    public function getAllAttendees()
     {
         return $this->attendees;
     }
