@@ -5,9 +5,9 @@
 {% block headline %}
     {{ event.title }}
     {% if event.user == app.user %}
-            <a href="{{ path('piwi_s2p_event_event_edit', {'slug': event.slug}) }}">
-                <i class="fa fa-edit"></i>
-            </a>
+        <a href="{{ path('piwi_s2p_event_event_edit', {'slug': event.slug}) }}">
+            <i class="fa fa-edit"></i>
+        </a>
     {% endif %}
 {% endblock %}
 
@@ -33,11 +33,13 @@
                         <a href="{{ asset('uploads/events/posters/' ~ event.poster) }}" title="{{ event.title }}" class="poster-link">
                             <img src="{{ asset('uploads/events/posters/' ~ event.poster)|imagine_filter('poster_m') }}" alt="{{ event.title }}" class="img-responsive">
                         </a>
-                        <p>
-                            <a href="{{ path('piwi_s2p_event_event_edit_image', {'slug': event.slug}) }}">
-                                <i class="fa fa-picture-o"></i> {{ 'piwi.s2p.event.event.index.event_image'|trans }}
-                            </a>
-                        </p>
+                        {% if event.user == app.user %}
+                            <p>
+                                <a href="{{ path('piwi_s2p_event_event_edit_image', {'slug': event.slug}) }}">
+                                    <i class="fa fa-picture-o"></i> {{ 'piwi.s2p.event.event.index.event_image'|trans }}
+                                </a>
+                            </p>
+                        {% endif %}
                     </div>
                     <div class="col-sm-12 event-attendees">
                         <h3>{{ 'piwi.s2p.event.event.index.attendees'|trans }}</h3>
