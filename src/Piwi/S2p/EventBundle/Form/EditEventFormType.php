@@ -16,7 +16,7 @@ class EditEventFormType extends AbstractType
         ));
         $builder->add('date', 'date', array(
             'label' => 'piwi.s2p.event.event.add.date',
-            'attr' => array('class' => 'col-md-1'),
+            'attr' => array('class' => 'datepicker'),
             'widget' => 'single_text',
             'format' => 'dd-MM-yyyy',
         ));
