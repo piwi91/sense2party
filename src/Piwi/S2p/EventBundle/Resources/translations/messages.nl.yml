@@ -17,6 +17,7 @@ piwi:
                     cancel_attend: Ik kom niet meer
                     resume: Dit evenement vindt plaats op %date% in %venue%
                     edit: Wijzig evenement
+                    event_image: Wijzig poster evenement
                 add:
                     title: Maak nieuw evenement aan
                     headline: Maak nieuwe evenement aan
@@ -27,6 +28,7 @@ piwi:
                     venue: Locatie
                     source: Bron (URL) (niet verplicht)
                     public: Zichtbaar voor publiek
+                    save: Voeg evenement toe
                     flashbag:
                         success: Het evenement is toegevoegd aan de agenda
                 edit:
@@ -40,8 +42,15 @@ piwi:
                     source: Bron (URL)
                     public: Zichtbaar voor publiek
                     delete: Verwijder evenement
+                    save: Wijzig evenement
                     flashbag:
                         success: Het evenement is gewijzigd
+                edit_image:
+                    title: Wijzig Poster %event%
+                    headline: Wijzig Poster %event%
+                    save: Wijzig Poster evenement
+                    flashbag:
+                        success: Poster evenement gewijzigd
                 delete:
                     flashbag:
                         success: Het evenement is verwijderd

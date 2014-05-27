@@ -17,6 +17,7 @@ piwi:
                     cancel_attend: I'm out
                     resume: This event will take place on %date% at %venue%
                     edit: Edit event
+                    event_image: Change event image
                 add:
                     title: Create new event
                     headline: Create new event
@@ -27,6 +28,7 @@ piwi:
                     venue: Venue
                     source: Source (URL) (not required)
                     public: Visible for public
+                    save: Add event
                     flashbag:
                         success: The event is added in the calendar
                 edit:
@@ -40,8 +42,15 @@ piwi:
                     source: Source (URL)
                     delete: Delete event
                     public: Visible for public
+                    save: Edit event
                     flashbag:
                         success: Event saved
+                edit_image:
+                    title: Edit image %event%
+                    headline: Edit image %event%
+                    save: Edit event image
+                    flashbag:
+                        success: Event image saved
                 delete:
                     flashbag:
                         success: The event is deleted

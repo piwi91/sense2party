@@ -44,7 +44,7 @@ class AddEventFormType extends AbstractType
             'label' => 'piwi.s2p.event.event.add.public'
         ));
         $builder->add('save', 'submit', array(
-            'label' => 'piwi.s2p.user.profile.edit.save',
+            'label' => 'piwi.s2p.event.event.add.save',
             'attr' => array('class' => 'pull-right btn-primary')
         ));
     }

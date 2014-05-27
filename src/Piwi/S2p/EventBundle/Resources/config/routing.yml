@@ -14,6 +14,10 @@ piwi_s2p_event_event_edit:
     pattern:  /{slug}/edit
     defaults: { _controller: PiwiS2pEventBundle:Event:edit }
 
+piwi_s2p_event_event_edit_image:
+    pattern:  /{slug}/edit/image
+    defaults: { _controller: PiwiS2pEventBundle:Event:editImage }
+
 piwi_s2p_event_event_delete:
     pattern:  /{slug}/delete
     defaults: { _controller: PiwiS2pEventBundle:Event:delete }
