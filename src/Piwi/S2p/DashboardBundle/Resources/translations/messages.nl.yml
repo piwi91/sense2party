@@ -12,3 +12,4 @@ piwi:
                     replies: '{0}Nog geen reacties|{1}Er is %count% reactie|]1,Inf[Er zijn %count% reacties'
                     read_more: Lees meer
                     restricted_access: Reacties kunnen enkel gelezen worden door ingelogde leden
+                    no_events: Geen evenementen gepland

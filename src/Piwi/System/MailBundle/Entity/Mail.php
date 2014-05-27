@@ -15,6 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Mail
 {
     const EVENT = 'event';
+    const REMEMBER_EVENT = 'remember_event';
     const MAIL = 'mail';
 
     /**

@@ -36,28 +36,43 @@ class SendRememberEmailCommand extends ContainerAwareCommand
             throw new \Exception('Neither cron or event is given');
         }
 
+        $users = $this->getContainer()->get('piwi_system_user.manager')->getMembers();
+
         if ($event != 0) {
             $event = $this->getContainer()->get('doctrine')->getRepository('PiwiS2pEventBundle:Event')->find($event);
-
-            $users = $this->getContainer()->get('piwi_system_user.manager')->getMembers();
             $subject = "Herinnering evenement: " . $event->getTitle();
-
             /** @var $user \Piwi\System\UserBundle\Entity\User */
             foreach ($users as $user) {
                 $htmlBody = $this->getContainer()->get('templating')->render(
-                    'PiwiSystemMailBundle:Mail:event.html.twig',
+                    'PiwiSystemMailBundle:Mail:remember_event.html.twig',
                     array(
                         'event' => $event,
                         'user' => $user
                     )
                 );
                 $this->getContainer()->get('piwi_system_mail.mailer')->sendMail($subject, $htmlBody, $user->getEmail());
-                $output->writeln('Email send to ' . $user->getEmail());
+                $output->writeln('Remember mail for event ' . $event->getTitle() . ' send to ' . $user->getEmail());
             }
-        }
-
-        if ($cron != 0) {
-            $output->writeln('Not implemented yet');
+        } else if ($cron != 0) {
+            $tomorrow = new \DateTime('+ ' . $cron . ' days');
+            /** @var $events \Piwi\S2p\EventBundle\Entity\Event[] */
+            $events = $this->getContainer()->get('doctrine')->getRepository('PiwiS2pEventBundle:Event')
+                ->findLatestEvents(999, false, $tomorrow->format('Y-m-d'), 0);
+            foreach ($events as $event) {
+                $subject = "Herinnering evenement: " . $event->getTitle();
+                /** @var $user \Piwi\System\UserBundle\Entity\User */
+                foreach ($users as $user) {
+                    $htmlBody = $this->getContainer()->get('templating')->render(
+                        'PiwiSystemMailBundle:Mail:remember_event.html.twig',
+                        array(
+                            'event' => $event,
+                            'user' => $user
+                        )
+                    );
+                    $this->getContainer()->get('piwi_system_mail.mailer')->sendMail($subject, $htmlBody, $user->getEmail());
+                    $output->writeln('Remember mail for event ' . $event->getTitle() . ' send to ' . $user->getEmail());
+                }
+            }
         }
     }
 }

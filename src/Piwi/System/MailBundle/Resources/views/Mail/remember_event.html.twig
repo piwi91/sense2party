@@ -1,0 +1,37 @@
+{% extends 'PiwiSystemCoreBundle::email.html.twig' %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block headline %}{{ event.title }}{% endblock %}
+
+{% block read_online_url %}{{ url('piwi_system_mail_mail_read', {'type': 'remember_event', 'username': user.username, 'id': event.id}) }}{% endblock %}
+
+{% block content %}
+    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Beste {{ user.firstName }},</p>
+    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">&nbsp;</p>
+    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Morgen vindt het evenement <a href="{{ url('piwi_s2p_event_event_index', {'slug': event.slug}) }}">{{ event.title }}</a> plaats in {{ event.venue }}. Heb jij je al laten weten of je mee gaat?</p>
+    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">&nbsp;</p>
+    {% if event.attendees|length == 0 %}
+        <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Op dit moment heeft zich nog niemand aangemeld =( Ben jij de eerste? <a href="{{ url('piwi_s2p_event_event_attend', {'slug': event.slug}) }}">Meld je nu aan</a> of <a href="{{ url('piwi_s2p_event_event_attend', {'slug': event.slug, 'status': 'mayebe'}) }}">klik hier</a> als je het nog niet zeker weet.</p>
+    {% else %}
+        {% set countAttendees = event.attendees|length %}
+        {% if countAttendees == 1 %}
+            <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Op dit moment heeft alleen {{ event.attendees.0.user }} zich aangemeld. Ga jij ook mee? <a href="{{ url('piwi_s2p_event_event_attend', {'slug': event.slug}) }}">Meld je nu aan</a> of <a href="{{ url('piwi_s2p_event_event_attend', {'slug': event.slug, 'status': 'mayebe'}) }}">klik hier</a> als je het nog niet zeker weet.</p>
+        {% else %}
+            <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Op dit moment hebben
+                {% set count = 1 %}
+                {% for attendee in event.attendees %}
+                    {% set count = count + 1 %}
+                    {{ attendee.user.firstName }}
+                    {% if countAttendees > count %}, {% elseif countAttendees == count %} en {% endif %}
+                {% endfor %}
+                zich aangemeld. Ga jij ook mee? <a href="{{ url('piwi_s2p_event_event_attend', {'slug': event.slug}) }}">Meld je nu aan</a> of <a href="{{ url('piwi_s2p_event_event_attend', {'slug': event.slug, 'status': 'mayebe'}) }}">klik hier</a> als je het nog niet zeker weet.</p>
+        {% endif %}
+    {% endif %}
+    <h3>Nogmaals de details!</h3>
+    {{ event.description|markdown }}
+    <h3>Neem jij je camera mee naar {{ event.title }}?</h3>
+    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Sense2Party biedt jouw de mogelijkheid om al jouw foto's te delen met al je vrienden! Wil je niet dat de foto's publiekelijk op het internet verschijnen? Zet het album dan om naar een privé album en de foto's zijn enkel zichtbaar voor ingelogde leden. <a href="{{ url('piwi_s2p_photo_photo_add') }}">Klik hier</a> om meteen al jouw party pics op de website te plaatsen.</p>
+    <h3>Meer informatie</h3>
+    <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;">Ga vliegensvlug naar de <a href="http://www.sense2party.nl">Sense2Party website</a> voor een overzicht van alle aankomende evenementen en geplaatste reacties!</p>
+{% endblock %}

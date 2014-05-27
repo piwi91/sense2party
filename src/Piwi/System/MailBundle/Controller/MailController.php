@@ -30,6 +30,12 @@ class MailController extends Controller
                     'user' => $user
                 ));
                 break;
+            case Mail::REMEMBER_EVENT:
+                return $this->render('PiwiSystemMailBundle:Mail:remember_event.html.twig', array(
+                    'event' => $mail,
+                    'user' => $user
+                ));
+                break;
             case Mail::MAIL:
                 return $this->render('PiwiSystemMailBundle:Mail:email.html.twig', array(
                     'mail' => $mail,

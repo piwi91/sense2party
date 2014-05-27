@@ -15,133 +15,141 @@
 
 {% block content %}
     <div class="col-md-12">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-header">
-                    <h1>{{ upcomingEvent.title }}</h1>
+        {% if upcomingEvent is not null %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header">
+                        <h1>{{ upcomingEvent.title }}</h1>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <a href="{{ path('piwi_s2p_event_event_index', {'slug': upcomingEvent.slug}) }}" title="{{ upcomingEvent.title }}" class="poster-link">
-                    <img src="{{ asset('uploads/events/posters/' ~ upcomingEvent.poster)|imagine_filter('poster_m') }}" alt="{{ upcomingEvent.title }}" class="img-responsive">
-                </a>
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="pull-left event-attendees">
-                            <ul class="list-inline" style="margin-bottom: 0px;">
-                                {% if upcomingEvent.attendees is not empty %}
-                                    {% for attendee in upcomingEvent.attendees %}
-                                        <li class="event-attendee">
-                                            <a href="{{ path('piwi_s2p_user_profile', {'username': attendee.user.username}) }}">
-                                                <img src="{{ asset('uploads/profile_pictures/' ~ attendee.user.username ~ '.jpg')|imagine_filter('profile_picture_s') }}" alt="{{ attendee.user }}" class="img-responsive img-circle">
-                                                {% if attendee.status == 'maybe' %}
-                                                    <img src="{{ asset('/bundles/piwis2pevent/img/asterisk.png') }}" class="maybe">
-                                                {% endif %}
-                                            </a>
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="{{ path('piwi_s2p_event_event_index', {'slug': upcomingEvent.slug}) }}" title="{{ upcomingEvent.title }}" class="poster-link">
+                        <img src="{{ asset('uploads/events/posters/' ~ upcomingEvent.poster)|imagine_filter('poster_m') }}" alt="{{ upcomingEvent.title }}" class="img-responsive">
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="pull-left event-attendees">
+                                <ul class="list-inline" style="margin-bottom: 0px;">
+                                    {% if upcomingEvent.attendees is not empty %}
+                                        {% for attendee in upcomingEvent.attendees %}
+                                            <li class="event-attendee">
+                                                <a href="{{ path('piwi_s2p_user_profile', {'username': attendee.user.username}) }}">
+                                                    <img src="{{ asset('uploads/profile_pictures/' ~ attendee.user.username ~ '.jpg')|imagine_filter('profile_picture_s') }}" alt="{{ attendee.user }}" class="img-responsive img-circle">
+                                                    {% if attendee.status == 'maybe' %}
+                                                        <img src="{{ asset('/bundles/piwis2pevent/img/asterisk.png') }}" class="maybe">
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li>
+                                            {{ 'piwi.s2p.event.event.index.no_attendees'|trans }}
                                         </li>
-                                    {% endfor %}
-                                {% else %}
-                                    <li>
-                                        {{ 'piwi.s2p.event.event.index.no_attendees'|trans }}
-                                    </li>
-                                {% endif %}
-                            </ul>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <div class="pull-right">
+                                <p class="event-resume">
+                                    {{ 'piwi.s2p.event.event.index.resume'|trans(
+                                    {
+                                    '%date%': upcomingEvent.date|localizeddate('full', 'none', app.request.locale),
+                                    '%venue%': upcomingEvent.venue
+                                    }
+                                    ) }}
+                                    {% if upcomingEvent.source %}
+                                        <br />{{ 'piwi.s2p.event.event.index.source'|trans }}: <a href="{{ upcomingEvent.source }}" target="_blank">{{ upcomingEvent.source }}</a>
+                                    {% endif %}
+                                </p>
+                            </div>
                         </div>
-                        <div class="pull-right">
-                            <p class="event-resume">
-                                {{ 'piwi.s2p.event.event.index.resume'|trans(
-                                {
-                                '%date%': upcomingEvent.date|localizeddate('full', 'none', app.request.locale),
-                                '%venue%': upcomingEvent.venue
-                                }
-                                ) }}
-                                {% if upcomingEvent.source %}
-                                    <br />{{ 'piwi.s2p.event.event.index.source'|trans }}: <a href="{{ upcomingEvent.source }}" target="_blank">{{ upcomingEvent.source }}</a>
-                                {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p>{{ upcomingEvent.description|markdown }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p>
+                                <a href="{{ path('piwi_s2p_event_event_index', {'slug': upcomingEvent.slug}) }}">
+                                    <span class="label label-default">
+                                        {{ 'piwi.s2p.dashboard.default.index.replies'|transchoice(upcomingEventComments) }}
+                                    </span>
+                                </a>
+                                &nbsp;
+                                <a href="{{ path('piwi_s2p_event_event_index', {'slug': upcomingEvent.slug}) }}">
+                                    <span class="label label-warning">
+                                        {{ 'piwi.s2p.dashboard.default.index.read_more'|trans }}
+                                    </span>
+                                </a>
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p>{{ upcomingEvent.description|markdown }}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p>
-                            <a href="{{ path('piwi_s2p_event_event_index', {'slug': upcomingEvent.slug}) }}">
-                                <span class="label label-default">
-                                    {{ 'piwi.s2p.dashboard.default.index.replies'|transchoice(upcomingEventComments) }}
-                                </span>
-                            </a>
-                            &nbsp;
-                            <a href="{{ path('piwi_s2p_event_event_index', {'slug': upcomingEvent.slug}) }}">
-                                <span class="label label-warning">
-                                    {{ 'piwi.s2p.dashboard.default.index.read_more'|trans }}
-                                </span>
-                            </a>
-                        </p>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 next-events-title">
+                    <h3>{{ 'piwi.s2p.dashboard.default.index.next_events'|trans }}</h3>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 next-events-title">
-                <h3>{{ 'piwi.s2p.dashboard.default.index.next_events'|trans }}</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                {% for event in events %}
-                    {% if event is not null %}
-                        <div class="col-md-3 event-container">
-                            <a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}">
-                                <div class="panel panel-default event">
-                                    <div class="panel-body">
-                                        <div class="col-md-12 event-poster">
-                                            <img src="{{ asset('uploads/events/posters/' ~ event.poster)|imagine_filter('poster_m_crop') }}" alt="{{ event.title }}" class="img-responsive">
-                                        </div>
-                                        <div class="col-md-12 event-label">
-                                            <p><span class="label label-warning label-date">{{ event.date|localizeddate('full', 'none', app.request.locale) }}</span></p>
-                                            <p><span class="label label-default label-title">{{ event.Title }}</span></p>
+            <div class="row">
+                <div class="col-md-12">
+                    {% for event in events %}
+                        {% if event is not null %}
+                            <div class="col-md-3 event-container">
+                                <a href="{{ path('piwi_s2p_event_event_index', {'slug': event.slug}) }}">
+                                    <div class="panel panel-default event">
+                                        <div class="panel-body">
+                                            <div class="col-md-12 event-poster">
+                                                <img src="{{ asset('uploads/events/posters/' ~ event.poster)|imagine_filter('poster_m_crop') }}" alt="{{ event.title }}" class="img-responsive">
+                                            </div>
+                                            <div class="col-md-12 event-label">
+                                                <p><span class="label label-warning label-date">{{ event.date|localizeddate('full', 'none', app.request.locale) }}</span></p>
+                                                <p><span class="label label-default label-title">{{ event.Title }}</span></p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    {% else %}
-                        <div class="col-md-3 event-container">
-                            {% if is_granted('ROLE_MEMBER') %}
-                                <a href="{{ path('piwi_s2p_event_event_add') }}">
-                            {% endif %}
-                                <div class="panel panel-default event">
-                                    <div class="panel-body">
-                                        <div class="col-md-12 event-poster">
-                                            <img src="{{ asset('/bundles/piwis2pevent/img/noevent.nl.png') }}" alt="No event" class="img-responsive">
-                                        </div>
-                                        <div class="col-md-12 event-label">
-                                            <p>&nbsp;</p>
-                                            <p>
-                                                <span class="label label-default label-title">
-                                                    {{ 'piwi.s2p.dashboard.default.index.plan_event'|trans }}
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% if is_granted('ROLE_MEMBER') %}
                                 </a>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="col-md-3 event-container">
+                                {% if is_granted('ROLE_MEMBER') %}
+                                    <a href="{{ path('piwi_s2p_event_event_add') }}">
+                                {% endif %}
+                                    <div class="panel panel-default event">
+                                        <div class="panel-body">
+                                            <div class="col-md-12 event-poster">
+                                                <img src="{{ asset('/bundles/piwis2pevent/img/noevent.nl.png') }}" alt="No event" class="img-responsive">
+                                            </div>
+                                            <div class="col-md-12 event-label">
+                                                <p>&nbsp;</p>
+                                                <p>
+                                                    <span class="label label-default label-title">
+                                                        {{ 'piwi.s2p.dashboard.default.index.plan_event'|trans }}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% if is_granted('ROLE_MEMBER') %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+        {% else %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>{{ 'piwi.s2p.dashboard.default.index.no_events'|trans }}</h3>
+                </div>
+            </div>
+        {% endif %}
         <div class="row">
             <div class="col-md-4 hidden-xs">
                 <h3>{{ 'piwi.s2p.dashboard.default.index.latest_photos'|trans }}</h3>

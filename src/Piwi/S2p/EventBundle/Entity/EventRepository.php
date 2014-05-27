@@ -13,6 +13,12 @@ use Piwi\System\UserBundle\Entity\User;
  */
 class EventRepository extends EntityRepository
 {
+    /**
+     * Find attended events by user
+     *
+     * @param User $user
+     * @return array
+     */
     public function findAttendedEventsByUser(User $user)
     {
         $qb = $this->createQueryBuilder('event');
@@ -25,13 +31,33 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findLatestEvents($limit = 10, $public = true)
+    /**
+     * Find latest events which can be limited by amount, start date and amount of days
+     *
+     * @param int $limit
+     * @param bool $public
+     * @param null $startDate
+     * @param null $days
+     * @return array
+     */
+    public function findLatestEvents($limit = 10, $public = true, $startDate = null, $days = null)
     {
         $qb = $this->createQueryBuilder('event');
 
-        $qb->where('event.date >= :date');
+        $qb->where('event.date >= :startDate');
         $qb->orderBy('event.date', 'ASC');
-        $qb->setParameter('date', date('Y-m-d'));
+        if (is_null($startDate) || \DateTime::createFromFormat('Y-m-d', $startDate) === false) {
+            $qb->setParameter('startDate', date('Y-m-d'));
+        } else {
+            $qb->setParameter('startDate', $startDate);
+        }
+        if (!is_null($days) && \DateTime::createFromFormat('Y-m-d', $startDate) !== false) {
+            $endDate = \DateTime::createFromFormat('Y-m-d', $startDate)
+                ->add(\DateInterval::createFromDateString('+ ' . $days . ' days'))
+                ->format('Y-m-d');
+            $qb->andWhere('event.date <= :endDate');
+            $qb->setParameter('endDate', $endDate);
+        }
         $qb->setMaxResults($limit);
         if ($public == true) {
             $qb->andWhere('event.public = 1');

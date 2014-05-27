@@ -17,7 +17,10 @@ class DefaultController extends Controller
         }
 
         $events = $em->getRepository('PiwiS2pEventBundle:Event')->findLatestEvents(5, $public);
-        $upcomingEvent = $events[0];
+        $upcomingEvent = null;
+        if (count($events) > 0) {
+            $upcomingEvent = $events[0];
+        }
 
         $nextEvents = array();
         foreach ($events as $event) {
@@ -33,17 +36,21 @@ class DefaultController extends Controller
             }
         }
 
+        $commentCount = null;
+        if (!is_null($upcomingEvent)) {
+            // Get comment thread
+            $commentService = $this->get('piwi_s2p_comment.comment');
+            $commentService->getThreadByEntityId('event', $upcomingEvent->getId());
+            $commentCount = count($commentService->getComments());
+        }
+
         $photos = $em->getRepository('PiwiS2pPhotoBundle:Photo')->findLatestPhotos(12, $public);
 
         $comments = $em->getRepository('PiwiS2pCommentBundle:Comment')->findLatestComments(10);
 
-        // Get comment thread
-        $commentService = $this->get('piwi_s2p_comment.comment');
-        $commentService->getThreadByEntityId('event', $upcomingEvent->getId());
-
         return $this->render('PiwiS2pDashboardBundle:Default:index.html.twig', array(
             'upcomingEvent' => $upcomingEvent,
-            'upcomingEventComments' => count($commentService->getComments()),
+            'upcomingEventComments' => $commentCount,
             'events' => $nextEvents,
             'photos' => $photos,
             'comments' => $comments
