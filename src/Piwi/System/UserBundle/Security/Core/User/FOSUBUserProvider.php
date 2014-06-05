@@ -15,8 +15,14 @@ class FOSUBUserProvider extends BaseClass
      */
     protected $filesystem;
 
-    public function __construct(FilesystemMap $filesystem, UserManagerInterface $userManager, array $properties)
+    /**
+     * Cache manager
+     */
+    protected $cacheManager;
+
+    public function __construct($cacheManager, FilesystemMap $filesystem, UserManagerInterface $userManager, array $properties)
     {
+        $this->cacheManager = $cacheManager;
         $this->filesystem = $filesystem;
         parent::__construct($userManager, $properties);
     }
@@ -95,7 +101,11 @@ class FOSUBUserProvider extends BaseClass
         $profilePictureFs->write($username . '.jpg', file_get_contents(
             $fullResponse['picture']['data']['url']
         ), true);
-        return $user;
+
+        // Remove cache!
+        $this->cacheManager->remove('uploads/profile_pictures/' . $username . '.jpg', 'profile_picture');
+        $this->cacheManager->remove('uploads/profile_pictures/' . $username . '.jpg', 'profile_picture_xs');
+        $this->cacheManager->remove('uploads/profile_pictures/' . $username . '.jpg', 'profile_picture_s');
 
         //if user exists - go with the HWIOAuth way
         $user = parent::loadUserByOAuthUserResponse($response);
