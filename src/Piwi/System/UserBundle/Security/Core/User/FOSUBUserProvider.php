@@ -86,14 +86,14 @@ class FOSUBUserProvider extends BaseClass
             $user->setLocale($fullResponse['locale']);
             $user->setEnabled(true);
             $this->userManager->updateUser($user);
-
-            // Save profile picture
-            $profilePictureFs = $this->filesystem->get('profile_pictures');
-            $profilePictureFs->write($username . '.jpg', file_get_contents(
-                $fullResponse['picture']['data']['url']
-            ), true);
-            return $user;
         }
+
+        // Save profile picture
+        $profilePictureFs = $this->filesystem->get('profile_pictures');
+        $profilePictureFs->write($username . '.jpg', file_get_contents(
+            $fullResponse['picture']['data']['url']
+        ), true);
+        return $user;
 
         //if user exists - go with the HWIOAuth way
         $user = parent::loadUserByOAuthUserResponse($response);
