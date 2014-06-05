@@ -67,7 +67,7 @@ class FOSUBUserProvider extends BaseClass
             $setter = 'set'.ucfirst($service);
             $setterId = $setter.'Id';
             $setterToken = $setter.'AccessToken';
-
+            
             // create new user here
             /** @var $user \Piwi\System\UserBundle\Entity\User */
             $user = $this->userManager->createUser();
@@ -82,7 +82,9 @@ class FOSUBUserProvider extends BaseClass
             $user->setFirstName($fullResponse['first_name']);
             $user->setLastName($fullResponse['last_name']);
             $user->setFacebookLink($fullResponse['link']);
-            $user->setBirthday(new \DateTime($fullResponse['birthday']));
+            if (!empty($fullResponse['birthday'])) {
+                $user->setBirthday(new \DateTime($fullResponse['birthday']));
+            }
             $user->setLocale($fullResponse['locale']);
             $user->setEnabled(true);
             $this->userManager->updateUser($user);
