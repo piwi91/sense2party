@@ -110,6 +110,14 @@
                                             <div class="col-md-12 event-label">
                                                 <p><span class="label label-warning label-date">{{ event.date|localizeddate('full', 'none', app.request.locale) }}</span></p>
                                                 <p><span class="label label-default label-title">{{ event.Title }}</span></p>
+                                                <p>
+                                                    <span class="label label-success label-present">
+                                                        {{ event.getAttendees('present')|length }}
+                                                    </span>
+                                                    <span class="label label-warning label-present">
+                                                        {{ event.getAttendees('maybe')|length }}
+                                                    </span>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

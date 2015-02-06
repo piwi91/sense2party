@@ -1,5 +1,5 @@
 set :application, "Sense2Party"
-set :domain,      "vps01.transip.piwi-web.com"
+set :domain,      "web.piwi-web.com"
 set :deploy_to,   "/home/s2p/domains/sense2party.nl/public_html"
 
 set :user,        "s2p"

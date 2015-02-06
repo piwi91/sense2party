@@ -2,6 +2,7 @@
 
 namespace Piwi\S2p\DashboardBundle\Controller;
 
+use Piwi\S2p\EventBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
@@ -22,6 +23,7 @@ class DefaultController extends Controller
             $upcomingEvent = $events[0];
         }
 
+        /** @var Event $nextEvents */
         $nextEvents = array();
         foreach ($events as $event) {
             if ($upcomingEvent !== $event) {
